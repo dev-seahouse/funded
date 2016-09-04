@@ -1,0 +1,22 @@
+{
+  "name": "htdocs",
+  "private": true,
+  "dependencies": {
+    "bootstrap": "^4.0.0",
+    "modernizr": "~2.8.1",
+    "PACE": "pace#^1.0.2"
+  },
+  "overrides": {
+    "bootstrap-sass": {
+      "main": [
+        "assets/stylesheets/_bootstrap.scss",
+        "assets/fonts/bootstrap/*",
+        "assets/javascripts/bootstrap.js"
+      ]
+    }
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2"
+  }
+}
