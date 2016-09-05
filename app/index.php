@@ -28,9 +28,12 @@ $currentPage = "browse"
           </li>
         </ul>
         <ul class="nav navbar-nav navbar-links pull-right">
-          <li class="nav-item"><a class="btn search-trigger"><i class="fa fa-search"> </i></a></li>
+          <li class="nav-item">
+            <a class="btn btn-link search-trigger" data-toggle="collapse" href="#search-bar"><i class="fa fa-search"> </i></a>
+          </li>
           <li class="nav-item"><a href="" class="nav-link">Log In</a></li>
         </ul>
+
       </nav>
       
     </header>
@@ -49,13 +52,9 @@ $currentPage = "browse"
           <div class="item"><img src="http://placehold.it/350x350"></div>
         </div>
       </div>
-
-      <div class="row">
-        <div class="container">
-          <p class="h2">Trending Projects</p>
-        </div>  
+      <div class="row p-y-1 p-x-1">
+        <p class="h3">Trending Projects</p>
       </div>
-
       
     </div>
     <!-- end main content -->

@@ -1,7 +1,7 @@
 $(document).ready(function(){
   $('.owl-carousel').owlCarousel({
-      items: 1,
-  	  autoplay: true,
+    items: 1,
+    autoplay: true,
   	  navigation : true, // Show next and prev buttons
       paginationSpeed : 400,
       singleItem:true,
@@ -14,5 +14,12 @@ $(document).ready(function(){
       // itemsDesktopSmall : false,
       // itemsTablet: false,
       // itemsMobile : false
+    });
+
+  $('#search-bar').on('show.bs.collapse', function () {
+    $('div').click(function(){
+      $("#search-bar").collapse('hide');
+    });
   });
+
 });
