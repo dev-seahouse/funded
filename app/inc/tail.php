@@ -6,6 +6,7 @@
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/bower_components/PACE/pace.js"></script>
 <script src="/bower_components/owl.carousel/dist/owl.carousel.js"></script>
+<script src="/bower_components/jquery-migrate/jquery-migrate.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

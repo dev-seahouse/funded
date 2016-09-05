@@ -13,7 +13,6 @@ $currentPage = "browse"
     <![endif]-->
     <header>
       
-      
       <nav class="navbar navbar-light bg-faded" role="navigation">
         <!--/.container-fluid start -->
         <a class="navbar-brand hidden-xs-down" href="index.php">Funded!</a>
@@ -32,29 +31,41 @@ $currentPage = "browse"
           <li class="nav-item"><a class="btn search-trigger"><i class="fa fa-search"> </i></a></li>
           <li class="nav-item"><a href="" class="nav-link">Log In</a></li>
         </ul>
-      </div>
-      <!--/.container-fluid -->
-    </nav>
-    
-    <div class="container">
-      <div class="main-contents">
+      </nav>
+      
+    </header>
+    <!-- start main content -->
+    <div class="container-fluid">
+      <div class="row gallery">
         <div class="owl-carousel owl-theme">
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
-          <div> Your Content </div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
+          <div class="item"><img src="http://placehold.it/350x350"></div>
         </div>
       </div>
-      <div class="footer">
-        <p>♥ from dev-seahouse</p>
+
+      <div class="row">
+        <div class="container">
+          <p class="h2">Trending Projects</p>
+        </div>  
       </div>
+
+      
     </div>
-    <!-- Google Analytics -->
-    <?php require('/inc/analytics.php'); ?>
-    <!-- Javascript builds -->
-    <?php require('/inc/tail.php'); ?>
-  </body>
+    <!-- end main content -->
+    <div class="footer">
+      <p>♥ from dev-seahouse</p>
+    </div>
+  </div>
+  <!-- Google Analytics -->
+  <?php require('/inc/analytics.php'); ?>
+  <!-- Javascript builds -->
+  <?php require('/inc/tail.php'); ?>
+</body>
 </html>

@@ -15,6 +15,9 @@
     <!-- pace loading theme -->
     <link rel="stylesheet" href="/bower_components/PACE/themes/green/pace-theme-center-simple.css">
     <!-- end pace loading theme -->
+    <!-- owl carousel theme -->
+    <link rel="stylesheet" href="/bower_components/owl.carousel/dist/assets/owl.theme.green.css">
+    <!-- end owl carousel theme -->
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
