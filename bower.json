@@ -4,7 +4,8 @@
   "dependencies": {
     "bootstrap": "^4.0.0",
     "modernizr": "~2.8.1",
-    "PACE": "pace#^1.0.2"
+    "PACE": "pace#^1.0.2",
+    "font-awesome": "^4.6.3"
   },
   "overrides": {
     "bootstrap-sass": {
