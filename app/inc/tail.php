@@ -5,6 +5,7 @@
 <script src="/bower_components/tether/dist/js/tether.js"></script>
 <script src="/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 <script src="/bower_components/PACE/pace.js"></script>
+<script src="/bower_components/owl.carousel/dist/owl.carousel.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 
