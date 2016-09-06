@@ -1,3 +1,30 @@
 .gallery-title {
 	
 }
+
+
+.carousel {
+  background: #EEE;
+  margin: $spacer-x;
+}
+
+.carousel-cell {
+  
+  text-align: center;
+  margin-right: 10px;
+  border-radius: 5px;
+  width: 100%; /* full width */
+  height: 300px;
+}
+
+
+/* fade in image when loaded */
+.carousel-cell-image {
+  transition: opacity 0.4s;
+  opacity: 0;
+}
+
+.carousel-cell-image.flickity-lazyloaded,
+.carousel-cell-image.flickity-lazyerror {
+  opacity: 1;
+}

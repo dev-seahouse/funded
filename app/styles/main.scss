@@ -1,11 +1,12 @@
 $icon-font-path: '../fonts/';
-
+@import "variables";
 // bower:scss
 @import "bower_components/bootstrap/scss/bootstrap.scss";
 @import "bower_components/font-awesome/scss/font-awesome.scss";
+@import "bower_components/sweetalert2/src/sweetalert2.scss";
 // endbower
 
-@import "variables";
+@import "globals";
 @import "nav";
 @import "gallery";
 
@@ -22,4 +23,3 @@ $icon-font-path: '../fonts/';
   color: #777;
   border-top: 1px solid #e5e5e5;
 }
-

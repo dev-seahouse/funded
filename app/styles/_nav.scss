@@ -2,6 +2,7 @@
 =            Navbar            =
 ==============================*/
 .navbar-light {
+  position: relative;
   .navbar-brand {
   		font-weight:700;
    		background-color:$brand-bg-color;
@@ -35,8 +36,108 @@
 
   .navbar-divider {
     background-color: rgba(0,0,0,.075);
-
   }
+}
+
+/*----------  Navbar search  ----------*/
+.search-bar {
+    top:0;
+    right:0;
+    letter-spacing: 1px;
+    min-height: 52px;
+    position: absolute;
+    text-align: right;
+    white-space: nowrap;
+    width: 100%;
+    z-index: 10;
+    overflow:hidden;
+    margin-left: 0;
+    background-color:white;
+    display:none;
+    &.is-active {
+      display:block;
+    }
+}
+
+.search-bar-form {
+    display: block;
+    text-align: right;
+}
+
+.search-bar-input {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 0 none;
+    color: #000;
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0;
+    outline: medium none;
+    text-align: right;
+    padding: 13px 0 13px 15px;
+    width: 100%;
+    max-width: 70%;
+}
+
+.search-bar-input::-webkit-input-placeholder {
+    color: rgba(111, 111, 111, 0.6);
+}
+
+.search-bar-input::-moz-input-placeholder {
+    color: rgba(111, 111, 111, 0.6);
+}
+
+.search-bar-input::-webkit-input-placeholder {
+    color: rgba(111, 111, 111, 0.6);
+}
+
+.search-bar-input::-moz-input-placeholder {
+    color: rgba(111, 111, 111, 0.6);
+}
+
+
+.search-bar-btn{
+    border: none;
+    padding: 0 10px 5px 0;
+    max-width: 34px;
+    color: $brand-bg-color;
+    transition: all 0.3s ease-out 0s;
+    -webkit-transition: all 0.3s ease-out 0s;
+    -moz-transition: all 0.3s ease-out 0s;
+    -ms-transition: all 0.3s ease-out 0s;
+    -o-transition: all 0.3s ease-out 0s;
+}
+
+.search-close {
+    color: $brand-fg-color;
+    background: $brand-bg-color;
+    display: table;
+    float: right;
+    font-size: 25px;
+    height: 51px;
+    padding: 0 16px;
+}
+
+.search-close i {
+    color: $brand-fg-color;
+    background: $brand-bg-color;
+    display: table-cell;
+    vertical-align: middle;
+    transition: all 0.5s ease 0s;
+    -moz-transition: all 0.5s ease 0s;
+    -webkit-transition: all 0.5s ease 0s;
+    -ms-transition: all 0.5s ease 0s;
+    -o-transition: all 0.5s ease 0s;
+}
+
+.search-close:hover i {
+    color: $brand-fg-color;
+    background: $brand-bg-color;
+    transform: scale(1.15) rotate(-180deg);
+    -webkit-transform: scale(1.1) rotate(-180deg);
+    -moz-transform: scale(1.1) rotate(-180deg);
+    -ms-transform: scale(1.1) rotate(-180deg);
+    -o-transform: scale(1.1) rotate(-180deg);
 }
 
 
