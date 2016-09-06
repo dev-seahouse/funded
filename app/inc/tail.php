@@ -17,6 +17,7 @@
 <script src="/bower_components/tap-listener/tap-listener.js"></script>
 <script src="/bower_components/unidragger/unidragger.js"></script>
 <script src="/bower_components/flickity/js/index.js"></script>
+<script src="/bower_components/iCheck/icheck.min.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

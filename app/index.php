@@ -18,7 +18,7 @@ $currentPage = "browse"
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-              <h3 class="modal-title text-center">Sign in now</h3>
+              <h3 class="modal-title text-xs-center">Sign in now</h3>
             </div>
             <div class="modal-body">
               <div class="form-group login-username">
@@ -33,14 +33,15 @@ $currentPage = "browse"
                   placeholder="Password" type="password">
                 </div>
               </div>
-              <div class="form-group">
-                <div>
-                  <div class="checkbox icheck-pumpkin login-remember">
-                    <input name="remember-me" id="remember-me"  value="forever" checked="checked" type="checkbox">
-                    <label for="remember-me">Remember Me</label>
-                  </div>
+                <div class="form-group">
+                    <div>
+                        <div class="checkbox login-remember">
+                           
+                                <input name="remember-me" id="remember-me" value="forever" checked="checked" type="checkbox">
+                                <label for="remember-me"> Remember Me </label>
+                        </div>
+                    </div>
                 </div>
-              </div>
               <div>
                 <div>
                   <input name="submit" class="btn btn-block btn-lg btn-primary" value="LOGIN" type="submit">
@@ -64,7 +65,7 @@ $currentPage = "browse"
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-              <h3 class="modal-title-site text-center"> REGISTER </h3>
+              <h3 class="modal-title text-xs-center"> REGISTER </h3>
             </div>
             <div class="modal-body">
               <div class="form-group reg-username">
@@ -92,7 +93,7 @@ $currentPage = "browse"
               <!--userForm-->
             </div>
             <div class="modal-footer">
-              <p class="text-center"> Already member? <a data-toggle="modal" data-dismiss="modal" href="#ModalLogin">
+              <p class="text-xs-center"> Already member? <a data-toggle="modal" data-dismiss="modal" href="#modal-login">
               Sign in </a></p>
             </div>
           </div>
@@ -102,7 +103,7 @@ $currentPage = "browse"
       </div>
       <! --/Modal Sign up -->
       <nav class="navbar navbar-light bg-faded" role="navigation">
-        <div class="container">
+        <div class="container-fluid">
           <!-- header banner -->
           <a class="navbar-brand hidden-xs-down" href="index.php">Funded!</a>
           <a href="index.php" class="navbar-brand hidden-sm-up"><i class="fa fa-dollar"></i>F</a>
@@ -110,15 +111,15 @@ $currentPage = "browse"
           <span class="navbar-divider"></span>
           <!-- header linkts -->
           <ul class="nav navbar-nav navbar-links">
-            <li class="nav-item m-r-1"> <?php //todo: switch active status depending on which page user is at ?>
+            <li class="nav-item"> <?php //todo: switch active status depending on which page user is at ?>
               <a class="nav-link" href="#">Browse<span class="sr-only">(current)</span></a>
             </li>
-            <li class="nav-item hidden-xs-down m-r-1">
+            <li class="nav-item hidden-xs-down">
               <a class="nav-link" href="#">About us</a>
             </li>
           </ul>
           <!-- end header linkts -->
-          <ul class="nav navbar-nav navbar-links pull-right">
+          <ul class="nav navbar-nav navbar-links pull-right ">
             
             <li class="nav-item">
               <a class="btn btn-link search-trigger" href="#"><i class="fa fa-search"> </i></a>
@@ -145,6 +146,7 @@ $currentPage = "browse"
     <!-- start main content -->
     <div class="container-fluid">
       <div class="row gallery">
+
         <div class="carousel" data-flickity='{ "autoPlay": 2500 , "wrapAround": true, "resize":true, "watchCSS" :false}'>
           <?php
           /* todo:
@@ -161,6 +163,8 @@ $currentPage = "browse"
           2. one click button to update all projects that does not have active status
           */
           ?>
+          
+      <div id="particles-js"></div>
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
             <div class="carousel-caption">Project Title</div>

@@ -33,6 +33,20 @@ $(document).ready(function() {
     $('.search-bar').removeClass('is-active');
   })
 
+  /*=======================================
+  =            checkbox script            =
+  =======================================*/
+
+  $('input').iCheck({
+    checkboxClass: 'icheckbox_square-orange',
+    radioClass: 'iradio_square-orange',
+    increaseArea: '20%' // optional
+  });
 
 
+particlesJS.load('particles-js', 'assets/particles.json', function() {
+  console.log('callback - particles.js config loaded');
 });
+
+
+}); // dont remove this closing tag!
