@@ -1,0 +1,42 @@
+/*=========================================================
+=            Customization for bootstrap modal            =
+=========================================================*/
+
+
+.modal-dialog {
+    background: $white;
+    max-width: map-get($grid-breakpoints,lg);
+    overflow: auto;
+    width: 100%;
+    &.small {
+    	@include rem(max-width, 460px);
+    }
+}
+
+.modal-header {
+    border-bottom: 1px solid $gray-lighter;
+    color: $brand-bg-color;
+    @include rem(padding,5px 15px);
+    margin-bottom: $spacer;
+}
+
+.modal-title {
+	color: $brand-primary;
+    font-size: $font-size-lg;
+    font-weight: lighter;
+    @include rem(padding, 13px 0);
+    text-transform: uppercase;
+}
+
+.modal-content {
+	border: 0 solid #ddd;
+    border-radius: 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+.modal-footer {
+    background: #eee;
+    border-top: 1px solid #E5E5E5;
+    padding: 10px 20px;
+}
+

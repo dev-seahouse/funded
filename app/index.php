@@ -13,12 +13,12 @@ $currentPage = "browse"
     <![endif]-->
     <header>
       <!-- Modal Sign in Begins -->
-      <div class="modal modal-login" id="modal-login" tabindex="-1" role="dialog">
-        <div class="modal-dialog ">
+      <div class="modal" id="modal-login" tabindex="-1" role="dialog">
+        <div class="modal-dialog small">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
-              <h3 class="modal-title-site text-center">Sign in now</h3>
+              <h3 class="modal-title text-center">Sign in now</h3>
             </div>
             <div class="modal-body">
               <div class="form-group login-username">
@@ -35,10 +35,9 @@ $currentPage = "browse"
               </div>
               <div class="form-group">
                 <div>
-                  <div class="checkbox login-remember">
-                    <label>
-                      <input name="rememberme" value="forever" checked="checked" type="checkbox">
-                    Remember Me </label>
+                  <div class="checkbox icheck-pumpkin login-remember">
+                    <input name="remember-me" id="remember-me"  value="forever" checked="checked" type="checkbox">
+                    <label for="remember-me">Remember Me</label>
                   </div>
                 </div>
               </div>
@@ -50,8 +49,8 @@ $currentPage = "browse"
               <!--userForm-->
             </div>
             <div class="modal-footer">
-              <p class="text-center"> Not here before? <a data-toggle="modal" data-dismiss="modal"
-              href="#modal-login"> Sign Up. </a> <br>
+              <p class="text-xs-center"> Not here before? <a data-toggle="modal" data-dismiss="modal"
+              href="#modal-sign-up"> Sign Up. </a> <br>
             </div>
           </div>
           <!-- /.modal-content -->
@@ -59,6 +58,49 @@ $currentPage = "browse"
         <!-- /.modal-dialog -->
       </div>
       <!-- Modal Sign in Ends -->
+      <!-- Modal Sign up begins -->
+      <div class="modal" id="modal-sign-up" tabindex="-1" role="dialog">
+        <div class="modal-dialog small">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+              <h3 class="modal-title-site text-center"> REGISTER </h3>
+            </div>
+            <div class="modal-body">
+              <div class="form-group reg-username">
+                <div>
+                  <input name="login" class="form-control input" size="20" placeholder="Enter Username"
+                  type="text">
+                </div>
+              </div>
+              <div class="form-group reg-email">
+                <div>
+                  <input name="reg" class="form-control input" size="20" placeholder="Enter Email" type="text">
+                </div>
+              </div>
+              <div class="form-group reg-password">
+                <div>
+                  <input name="password" class="form-control input" size="20" placeholder="Password"
+                  type="password">
+                </div>
+              </div>
+              <div>
+                <div>
+                  <input name="submit" class="btn btn-block btn-lg btn-primary" value="REGISTER" type="submit">
+                </div>
+              </div>
+              <!--userForm-->
+            </div>
+            <div class="modal-footer">
+              <p class="text-center"> Already member? <a data-toggle="modal" data-dismiss="modal" href="#ModalLogin">
+              Sign in </a></p>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+      </div>
+      <! --/Modal Sign up -->
       <nav class="navbar navbar-light bg-faded" role="navigation">
         <div class="container">
           <!-- header banner -->
@@ -103,7 +145,7 @@ $currentPage = "browse"
     <!-- start main content -->
     <div class="container-fluid">
       <div class="row gallery">
-        <div class="carousel" data-flickity='{ "autoPlay": 2500 , "wrapAround": true}'>
+        <div class="carousel" data-flickity='{ "autoPlay": 2500 , "wrapAround": true, "resize":true, "watchCSS" :false}'>
           <?php
           /* todo:
           -Tip: views can be created to simply sql statements
@@ -122,27 +164,27 @@ $currentPage = "browse"
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
             <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/350/500/?<?php echo date('H:i:s'); ?>">
+            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
           </div>
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
             <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/350/500/?<?php echo date('H:i:s'); ?>">
+            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
           </div>
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
             <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/350/500/?<?php echo date('H:i:s'); ?>">
+            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
           </div>
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
             <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/350/500/?<?php echo date('H:i:s'); ?>">
+            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
           </div>
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
             <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/350/500/?<?php echo date('H:i:s'); ?>">
+            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
           </div>
         </div>
       </div>

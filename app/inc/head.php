@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="/bower_components/owl.carousel/dist/assets/owl.carousel.css" />
     <link rel="stylesheet" href="/bower_components/sweetalert2/dist/sweetalert2.css" />
     <link rel="stylesheet" href="/bower_components/flickity/css/flickity.css" />
+    <link rel="stylesheet" href="/bower_components/icheck-bootstrap/icheck-bootstrap.css" />
     <!-- endbower -->
     <!-- endbuild -->
     

@@ -1,20 +1,34 @@
-.gallery-title {
-	
+/*======================================
+=            Gallery Module            =
+======================================*/
+
+
+
+.gallery {
+    margin-bottom: $spacer;
 }
 
-
 .carousel {
-  background: #EEE;
-  margin: $spacer-x;
+  background: $gray-lighter;
 }
 
 .carousel-cell {
-  
   text-align: center;
-  margin-right: 10px;
+  margin-right: $spacer;
   border-radius: 5px;
   width: 100%; /* full width */
-  height: 300px;
+  @include rem(max-height, 350px);
+  @include rem(height, 250px);
+
+  @include media-breakpoint-up(sm){
+    @include rem(max-height, 500px);
+    @include rem(height, 400px); 
+  }
+
+  @include media-breakpoint-up(md){
+    @include rem(max-height, 600px);
+    @include rem(height, 500px); 
+  }
 }
 
 

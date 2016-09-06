@@ -5,21 +5,26 @@ $icon-font-path: '../fonts/';
 @import "bower_components/font-awesome/scss/font-awesome.scss";
 @import "bower_components/sweetalert2/src/sweetalert2.scss";
 // endbower
-
+@import "mixins";
 @import "globals";
 @import "nav";
 @import "gallery";
+@import "modals";
+@import "buttons";
+@import "forms";
+
 
 .browserupgrade {
   margin: 0.2em 0;
-  background: #ccc;
-  color: #000;
+  background: $gray-light;
+  color: $black;
   padding: 0.2em 0;
 }
 
 /* Custom page footer */
 .footer {
   padding-top: 19px;
-  color: #777;
-  border-top: 1px solid #e5e5e5;
+  color: $gray-dark;
+  border-top: 1px solid $brand-bg-color;
+
 }
