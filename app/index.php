@@ -33,15 +33,15 @@ $currentPage = "browse"
                   placeholder="Password" type="password">
                 </div>
               </div>
-                <div class="form-group">
-                    <div>
-                        <div class="checkbox login-remember">
-                           
-                                <input name="remember-me" id="remember-me" value="forever" checked="checked" type="checkbox">
-                                <label for="remember-me"> Remember Me </label>
-                        </div>
-                    </div>
+              <div class="form-group">
+                <div>
+                  <div class="checkbox login-remember">
+                    
+                    <input name="remember-me" id="remember-me" value="forever" checked="checked" type="checkbox">
+                    <label for="remember-me"> Remember Me </label>
+                  </div>
                 </div>
+              </div>
               <div>
                 <div>
                   <input name="submit" class="btn btn-block btn-lg btn-primary" value="LOGIN" type="submit">
@@ -146,7 +146,6 @@ $currentPage = "browse"
     <!-- start main content -->
     <div class="container-fluid">
       <div class="row gallery">
-
         <div class="carousel" data-flickity='{ "autoPlay": 2500 , "wrapAround": true, "resize":true, "watchCSS" :false}'>
           <?php
           /* todo:
@@ -164,7 +163,6 @@ $currentPage = "browse"
           */
           ?>
           
-      <div id="particles-js"></div>
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
             <div class="carousel-caption">Project Title</div>
