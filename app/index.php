@@ -68,28 +68,30 @@ $currentPage = "browse"
               <h3 class="modal-title text-xs-center"> REGISTER </h3>
             </div>
             <div class="modal-body">
-              <div class="form-group reg-username">
-                <div>
-                  <input name="login" class="form-control input" size="20" placeholder="Enter Username"
-                  type="text">
+              <form id="form-signup" method="post">
+                <div class="form-group reg-username">
+                  <div>
+                    <input name="login" class="form-control input" size="20" placeholder="Enter Username"
+                    type="text">
+                  </div>
                 </div>
-              </div>
-              <div class="form-group reg-email">
-                <div>
-                  <input name="reg" class="form-control input" size="20" placeholder="Enter Email" type="text">
+                <div class="form-group reg-email">
+                  <div>
+                    <input name="reg" class="form-control input" size="20" placeholder="Enter Email" type="text">
+                  </div>
                 </div>
-              </div>
-              <div class="form-group reg-password">
-                <div>
-                  <input name="password" class="form-control input" size="20" placeholder="Password"
-                  type="password">
+                <div class="form-group reg-password">
+                  <div>
+                    <input name="password" class="form-control input" size="20" placeholder="Password"
+                    type="password">
+                  </div>
                 </div>
-              </div>
-              <div>
                 <div>
-                  <input name="submit" class="btn btn-block btn-lg btn-primary" value="REGISTER" type="submit">
+                  <div>
+                    <input name="submit" class="btn btn-block btn-lg btn-primary" value="REGISTER" type="submit" id="submit-signup">
+                  </div>
                 </div>
-              </div>
+              </form>
               <!--userForm-->
             </div>
             <div class="modal-footer">

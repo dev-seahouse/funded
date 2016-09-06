@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * $pdo = DbConnection::instance();
+ * $pdo = DbConnection::getInstance();
  * $conn = $pdo->getConnection( dsn, username, password );
  * $results = $conn->query("SELECT * FROM Table");
  *
