@@ -96,6 +96,7 @@
     <!-- /.modal-dialog -->
   </div>
   <! --/Modal Sign up -->
+
   <nav class="navbar navbar-light bg-faded" role="navigation">
     <div class="container-fluid">
       <!-- header banner -->
@@ -119,7 +120,8 @@
           <a class="btn btn-link search-trigger" href="#"><i class="fa fa-search"> </i></a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-login">Sign in</a>
+          <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-login">Sign in | Register</a>
+          <!-- Todo:  at small screen, show icon dropdown instead of text -->
         </li>
       </ul>
       <div class="search-bar text-right" id="#search-bar">

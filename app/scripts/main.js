@@ -13,7 +13,7 @@ $(document).ready(function() {
     autoWidth: true,
     loop: true
       // "singleItem:true" is a shortcut for:
-      // items : 1, 
+      // items : 1,
       // itemsDesktop : false,
       // itemsDesktopSmall : false,
       // itemsTablet: false,
@@ -43,7 +43,4 @@ $(document).ready(function() {
     increaseArea: '20%' // optional
   });
 
-
-
-
-}); // dont remove this closing tag!
+}); // do not remove this closing tag!
