@@ -44,28 +44,6 @@ $(document).ready(function() {
   });
 
 
-particlesJS.load('particles-js', 'assets/particles.json', function() {
-  console.log('callback - particles.js config loaded');
-});
-
-
-var signup = function(){
-  var data = $("#form-signup").serialize();
-  $.ajax(){
-    type : 'POST',
-    url  : 'register.php',
-    data : data,
-    success :  function(data){
-      if (data == 200){
-        swal("Register Success");
-      }else{
-        swal("Register failed");
-      }
-    }
-  }
-}
-
-
 
 
 }); // dont remove this closing tag!
