@@ -29,5 +29,5 @@
 <!-- endbuild -->
 
 <!-- build:js scripts/main.js -->
-<script src="scripts/main.js"></script>
+<script src="/scripts/main.js"></script>
 <!-- endbuild -->
