@@ -25,13 +25,13 @@ Class DbConnection{
     }
 
     // 'mysql:host=localhost;dbname=test', root,'' 
-    public function getConnection($dsn = _HOST, $uname = _USER, $passwd = _DB_NAME){
+    public function getConnection($dsn = _HOST, $uname = _USER, $passwd = _PASSWD){
     	$conn = NULL;
 
     	try{
     		 $conn = new \PDO($dsn, $uname, $passwd);
     		 $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-    		 return $con;
+    		 return $conn;
     	}catch(PDOException $pdoe){
     		echo $pdoe->getMessage(); // in real life never do this
     	}catch(Exception $e){

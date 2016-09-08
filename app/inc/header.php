@@ -1,7 +1,7 @@
 <?php
 /* Todos
 1. Indicate that user is on certain a page by adding active class on the page
-*/
+ */
 ?>
 <header>
   <!-- Modal Sign in Begins -->
@@ -13,13 +13,13 @@
           <h3 class="modal-title text-xs-center">Sign in now</h3>
         </div>
         <div class="modal-body">
-          <div class="form-group login-username">
+          <div class="form-group">
             <div>
               <input name="log" id="login-user" class="form-control input" size="20"
               placeholder="Enter Username" type="text">
             </div>
           </div>
-          <div class="form-group login-password">
+          <div class="form-group">
             <div>
               <input name="Password" id="login-password" class="form-control input" size="20"
               placeholder="Password" type="password">
@@ -28,13 +28,12 @@
           <div class="form-group">
             <div>
               <div class="checkbox login-remember">
-
                 <input name="remember-me" id="remember-me" value="forever" checked="checked" type="checkbox">
                 <label for="remember-me"> Remember Me </label>
               </div>
             </div>
           </div>
-          <div>
+          <div class="form-group">
             <div>
               <input name="submit" class="btn btn-block btn-lg btn-primary" value="LOGIN" type="submit">
             </div>
@@ -60,27 +59,41 @@
           <h3 class="modal-title text-xs-center"> REGISTER </h3>
         </div>
         <div class="modal-body">
-          <form id="form-signup" method="post">
-            <div class="form-group reg-username">
+          <form id="form-user-signup" type="POST" action="#">
+            <div class="form-group">
               <div>
-                <input name="login" class="form-control input" size="20" placeholder="Enter Username"
+                <input name="first_name" class="form-control" size="20" placeholder="First Name"
                 type="text">
               </div>
             </div>
-            <div class="form-group reg-email">
+            <div class="form-group">
               <div>
-                <input name="reg" class="form-control input" size="20" placeholder="Enter Email" type="text">
+                <input name="last_name" class="form-control" size="20" placeholder="Last Name"
+                type="text">
               </div>
             </div>
-            <div class="form-group reg-password">
+            <div class="form-group">
               <div>
-                <input name="password" class="form-control input" size="20" placeholder="Password"
+                <input name="user_name" class="form-control" size="20" placeholder="Enter Username"
+                type="text">
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <input name="password" class="form-control" size="20" placeholder="Password"
                 type="password">
               </div>
             </div>
-            <div>
+            <div class="form-group">
               <div>
-                <input name="submit" class="btn btn-block btn-lg btn-primary" value="REGISTER" type="submit" id="submit-signup">
+                <input name="email" class="form-control" size="20" placeholder="Enter Email" type="text">
+              </div>
+            </div>
+
+            <?php // todo:honey pot for spam protection?>
+            <div class="form-group">
+              <div>
+                <input class="btn btn-block btn-lg btn-primary" value="REGISTER" type="submit" id="submit-signup">
               </div>
             </div>
           </form>
@@ -96,7 +109,6 @@
     <!-- /.modal-dialog -->
   </div>
   <! --/Modal Sign up -->
-
   <nav class="navbar navbar-light bg-faded" role="navigation">
     <div class="container-fluid">
       <!-- header banner -->
@@ -115,7 +127,6 @@
       </ul>
       <!-- end header linkts -->
       <ul class="nav navbar-nav navbar-links pull-right ">
-
         <li class="nav-item">
           <a class="btn btn-link search-trigger" href="#"><i class="fa fa-search"> </i></a>
         </li>
@@ -137,5 +148,4 @@
       </div>
     </div>
   </nav>
-
 </header>
