@@ -1,6 +1,6 @@
 <?php
-const HOST = "localhost";
-const USER = "root";
-const PASSWD = "";
-const DB_NAME = "test";
+const _HOST = "localhost";
+const _USER = "root";
+const _PASSWD = "";
+const _DB_NAME = "test";
 

@@ -1,3 +1,5 @@
 <?php
-require_once("./_config/config.php");
+include("../data/DbConnection.php");
+
 $pdo = DbConnection::getInstance();
+var_dump($pdo);

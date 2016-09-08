@@ -1,3 +1,7 @@
+/*==============================================
+=            Document.ready            =
+==============================================*/
+
 $(document).ready(function() {
   /*==============================================
   =            Carousel configuration            =
@@ -44,3 +48,5 @@ $(document).ready(function() {
   });
 
 }); // do not remove this closing tag!
+
+

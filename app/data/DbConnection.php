@@ -6,14 +6,15 @@
  * $results = $conn->query("SELECT * FROM Table");
  *
  */
+require_once("../_config/config.php");
 
 Class DbConnection{
 
 	private static $_instance = NULL;
 
- 	private function __construct(); 
- 	private function __clone() {};
- 	private function __wakeup(){};
+ 	private function __construct() {} 
+ 	private function __clone() {}
+ 	private function __wakeup() {}
 	function __destruct(){}
 	
 	public static function getInstance() {
@@ -24,11 +25,11 @@ Class DbConnection{
     }
 
     // 'mysql:host=localhost;dbname=test', root,'' 
-    public function getConnection($dsn, $uname, $passwd){
+    public function getConnection($dsn = _HOST, $uname = _USER, $passwd = _DB_NAME){
     	$conn = NULL;
 
     	try{
-    		$conn = new \PDO($dsn, $uname, $passwd);
+    		 $conn = new \PDO($dsn, $uname, $passwd);
     		 $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     		 return $con;
     	}catch(PDOException $pdoe){
