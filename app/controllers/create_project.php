@@ -4,6 +4,7 @@ include "../inc/head.php";
 include "../data/DbConnection.php";
 ?>
 
+//Having difficulty connecting localhost, but works with 127.0.0.1
 <?php 
 $dsn = "mysql:dbname=funded_db;host=127.0.0.1";
 $user = "root";
@@ -20,6 +21,8 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 ?>
 
+
+//Simple form that sends data to the database
 <form action='create_project.php' method = 'post'>
 <table class='table table-hover table-responsive table-bordered'>
         <tr>
@@ -75,6 +78,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 </form>
 
 
+//Pass control to the Project class 
 <?php
 if($_POST){
 	include '../objects/project.php';

@@ -1,9 +1,15 @@
+/**
+ * Project class which represents a single project
+ * It is exported to ../controllers/create_project.php
+ *
+ */
+
 <?php 
 class Project{
 	/*************
 	* Variables 
 	*************/
-
+	//TODO : It can be imporved with use of array
 	private $conn;
 	private $tableName = 'project';
 
