@@ -43,6 +43,13 @@ INSERT INTO `project_status` (`id`, `name`, `description`) VALUES
 (3, 'active', 'Project can still be backed and not expired');
 
 --
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`user_name`, `password`) VALUES
+('xuchen', 'abcde');
+
+--
 -- Dumping data for table `role`
 --
 

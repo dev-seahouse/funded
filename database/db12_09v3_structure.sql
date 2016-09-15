@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `pledge_goal` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'fundraising goal amount',
   `status` tinyint(4) DEFAULT '3' COMMENT 'status code for project :0 = deleted, 1. cancelled, 2= funded , 3 = active  if status < 3, do not show project for landing page, if status < 2, do not show in browse project list. In view all project list sort desc where status > 0 because only admin can see deleted projects',
   `suml_pledged` decimal(10,2) DEFAULT '0.00',
-  `category_id` tinyint(4) DEFAULT '0' COMMENT 'default = 0 which is general. Technology, Art etc',
+  `category` varchar(50) DEFAULT 'General' COMMENT 'default = 0 which is general. Technology, Art etc',
   `backer_count` int(11) DEFAULT '0' COMMENT 'number of people who pledged, this should be somehow generate dynamically, select count(backer) from backer_project',
   `like_count` int(11) DEFAULT '0' COMMENT 'number of people who clicked on like',
   `creator_id` int(11) NOT NULL,
@@ -145,7 +145,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `challenges` varchar(255) DEFAULT NULL COMMENT 'describe possible challenge/risk of project',
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`),
-  KEY `FK_project_category_id` (`category_id`),
+  KEY `FK_project_category` (`category`),
   KEY `FK_project_status_id` (`status`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -291,11 +291,7 @@ CREATE TABLE IF NOT EXISTS `user_role` (
 --
 
 
---
--- Constraints for table `backer_project`
---
-ALTER TABLE `project`
-  ADD CONSTRAINT `FK_project_creator_id` FOREIGN KEY (`creator_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
 
 --
 -- Constraints for table `backer_project`
@@ -321,9 +317,9 @@ ALTER TABLE `like`
 -- Constraints for table `project`
 --
 ALTER TABLE `project`
-  ADD CONSTRAINT `FK_project_category_id` FOREIGN KEY (`category_id`) REFERENCES `category` (`id`) ON DELETE SET NULL ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_project_status_id` FOREIGN KEY (`status`) REFERENCES `project_status` (`id`) ON UPDATE CASCADE;
-
+  ADD CONSTRAINT `FK_project_category` FOREIGN KEY (`category`) REFERENCES `category` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_project_status_id` FOREIGN KEY (`status`) REFERENCES `project_status` (`id`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `FK_project_creator_id` FOREIGN KEY (`creator_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 --
 -- Constraints for table `project_tag`
 --

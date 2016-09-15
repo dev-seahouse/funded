@@ -40,6 +40,12 @@ $category = new Category($conn);
             <td><input type='text' name='pledge_goal' class='form-control' /></td>
         </tr>
 
+
+        <tr>
+            <td>Creator</td>
+            <td><input type='text' name='creator_id' class='form-control' /></td>
+        </tr>
+
         <tr>
             <td>Country</td>
             <td><input type='text' name='country' class='form-control' /></td>
@@ -82,12 +88,19 @@ if($_POST){
 	include '../objects/project.php';
 	$project = new Project($conn);
 
-	$project->id = $_POST['id'];
-	$project->title = $_POST['title'];
-	$project->founderName = $_POST['founder_name'];
-	$project->pledgeGoal = $_POST['pledge_goal'];
-	$project->email = $_POST['email'];
-	$project->country = $_POST['country'];
+    $fields = &$project->getFields();
+    
+    //set the values
+    foreach ($fields as $key => $value) {
+        $fields[$key] = $_POST[$key];
+    }
+
+	// $project->id = $_POST['id'];
+	// $project->title = $_POST['title'];
+	// $project->founderName = $_POST['founder_name'];
+	// $project->pledgeGoal = $_POST['pledge_goal'];
+	// $project->email = $_POST['email'];
+	// $project->country = $_POST['country'];
 
 	if($project->create()){
 		echo "<div class=\"alert alert-success alert-dismissable\">";
