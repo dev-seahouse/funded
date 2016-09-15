@@ -4,7 +4,7 @@ include "../inc/head.php";
 include "../data/DbConnection.php";
 ?>
 
-//Having difficulty connecting localhost, but works with 127.0.0.1
+<!-- Having difficulty connecting localhost, but works with 127.0.0.1 -->
 <?php 
 $dsn = "mysql:dbname=funded_db;host=127.0.0.1";
 $user = "root";
@@ -19,10 +19,15 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
 			echo $e->getMessage();
 }
+
+//get categories
+include '../objects/category.php';
+$category = new Category($conn);
+
 ?>
 
 
-//Simple form that sends data to the database
+<!-- //Simple form that sends data to the database -->
 <form action='create_project.php' method = 'post'>
 <table class='table table-hover table-responsive table-bordered'>
         <tr>
@@ -34,38 +39,31 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             <td>Target Amount</td>
             <td><input type='text' name='pledge_goal' class='form-control' /></td>
         </tr>
- 
-        <tr>
-            <td>ID</td>
-            <td><textarea name='id' class='form-control'></textarea></td>
-        </tr>
 
         <tr>
             <td>Country</td>
-            <td><textarea name='country' class='form-control'></textarea></td>
+            <td><input type='text' name='country' class='form-control' /></td>
         </tr>
 
         <tr>
-            <td>Email</td>
-            <td><textarea name='email' class='form-control'></textarea></td>
+            <td>Contact Email</td>
+            <td><input type='text' name='email' class='form-control' /></td>
+        </tr>
+
+        <tr>
+            <td>Category</td>
+            <td><select name='category' class= 'form-control'>
+            <?php $category->getCategories()?>
+            </select>
+            </td>
         </tr>
 
         <tr>
             <td>Description</td>
-            <td><textarea name='description' class='form-control'></textarea></td>
-        </tr>
-
-        <tr>
-            <td>Founder </td>
-            <td><textarea name='founder' class='form-control'></textarea></td>
-        </tr>
- 
-        <!-- <tr>
-            <td>Category</td>
             <td>
-            categories from database will be here
+            <textarea name="overview" class="form-control"></textarea>
             </td>
-        </tr> -->
+        </tr>
  
         <tr>
             <td></td>
@@ -78,7 +76,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 </form>
 
 
-//Pass control to the Project class 
+<!-- //Pass control to the Project class  -->
 <?php
 if($_POST){
 	include '../objects/project.php';
@@ -94,7 +92,7 @@ if($_POST){
 	if($project->create()){
 		echo "<div class=\"alert alert-success alert-dismissable\">";
             echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
-            echo "Product was created.";
+            echo "Project was created.";
         echo "</div>";
 	} else {
 		echo "<div class=\"alert alert-danger alert-dismissable\">";
