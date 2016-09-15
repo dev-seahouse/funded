@@ -44,4 +44,5 @@ jspm_packages
 **/*.desktop
 .desktop
 *.desktop
-
+.vscode
+.phpintel
