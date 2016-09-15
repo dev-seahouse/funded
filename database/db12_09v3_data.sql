@@ -47,8 +47,7 @@ INSERT INTO `project_status` (`id`, `name`, `description`) VALUES
 --
 
 INSERT INTO `role` (`id`, `name`) VALUES
-(3, 'admin'),
-(2, 'entrepreneur'),
+(2, 'admin'),
 (1, 'user');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

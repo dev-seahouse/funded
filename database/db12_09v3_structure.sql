@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `category_id` tinyint(4) DEFAULT '0' COMMENT 'default = 0 which is general. Technology, Art etc',
   `backer_count` int(11) DEFAULT '0' COMMENT 'number of people who pledged, this should be somehow generate dynamically, select count(backer) from backer_project',
   `like_count` int(11) DEFAULT '0' COMMENT 'number of people who clicked on like',
-  `founder_name` varchar(50) NOT NULL,
+  `creator_id` int(11) NOT NULL,
   `country` varchar(100) NOT NULL COMMENT 'country that the project originated from',
   `web_link` varchar(255) DEFAULT NULL,
   `email` varchar(50) NOT NULL COMMENT 'email of founder',
@@ -289,6 +289,13 @@ CREATE TABLE IF NOT EXISTS `user_role` (
 --
 -- Constraints for dumped tables
 --
+
+
+--
+-- Constraints for table `backer_project`
+--
+ALTER TABLE `project`
+  ADD CONSTRAINT `FK_project_creator_id` FOREIGN KEY (`creator_id`) REFERENCES `user` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `backer_project`
