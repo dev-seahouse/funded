@@ -1,8 +1,14 @@
 <?php
 /* Page specific variables */
 $pageTitle = "Home";
-$currentPage = "browse"
+$currentPage = "browse";
 /* End page specific variables */
+
+include "./data/DbConnection.php";
+
+$pdo = DbConnection::getInstance();
+$conn = $pdo->getConnection();
+
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -58,11 +64,17 @@ $currentPage = "browse"
             <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
           </div>
         </div>
-      </div>
+      </div> <!--  gcarousel allary ends -->
+      
+
       <div class="row p-y-1 p-x-1">
         <p class="h3">Trending projects</p>
       </div>
-
+      <?php 
+        include "./objects/gallery.php";
+        $gallery = new Gallery($conn);
+        $gallery->prepare();
+      ?>
     </div>
     <!-- end main content -->
     <div class="footer">

@@ -95,13 +95,6 @@ if($_POST){
         $fields[$key] = $_POST[$key];
     }
 
-	// $project->id = $_POST['id'];
-	// $project->title = $_POST['title'];
-	// $project->founderName = $_POST['founder_name'];
-	// $project->pledgeGoal = $_POST['pledge_goal'];
-	// $project->email = $_POST['email'];
-	// $project->country = $_POST['country'];
-
 	if($project->create()){
 		echo "<div class=\"alert alert-success alert-dismissable\">";
             echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";

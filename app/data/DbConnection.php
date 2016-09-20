@@ -6,7 +6,7 @@
  * $results = $conn->query("SELECT * FROM Table");
  *
  */
-require_once "../_config/config.php";
+require_once "./_config/config.php";
 
 Class DbConnection {
 
