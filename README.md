@@ -5,6 +5,10 @@
 
 
 ###Change Logs###
+**20 September 2016**
+1. Retrive proejcts information from database and display in index.php.
+
+
 **15 Septermber 2016**
 1. Make creator constrain in the project table. Now each project will have a one-to-many relationships with users.
 2. Delete the entrepreur role
