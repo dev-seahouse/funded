@@ -124,6 +124,10 @@
         <li class="nav-item hidden-xs-down">
           <a class="nav-link" href="#">About us</a>
         </li>
+
+        <li class="nav-item hidden-xs-down">
+          <a class="nav-link" href="../controllers/create_project.php">Create Projects</a>
+        </li>
       </ul>
       <!-- end header linkts -->
       <ul class="nav navbar-nav navbar-links pull-right ">
