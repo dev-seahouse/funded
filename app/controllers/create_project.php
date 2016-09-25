@@ -1,11 +1,11 @@
-<?php 
+<?php
 $pageTitle = "Create Project";
 include "../inc/head.php";
 include "../data/DbConnection.php";
 ?>
 
 <!-- Having difficulty connecting localhost, but works with 127.0.0.1 -->
-<?php 
+<?php
 $dsn = "mysql:dbname=funded_db;host=127.0.0.1";
 $user = "root";
 $pass = "";
@@ -32,28 +32,28 @@ $category = new Category($conn);
 <table class='table table-hover table-responsive table-bordered'>
         <tr>
             <td>Title</td>
-            <td><input type='text' name='title' class='form-control' /></td>
+            <td><input type='text' name='title' class='form-control' 	 required="true"/></td>
         </tr>
- 
+
         <tr>
             <td>Target Amount</td>
-            <td><input type='text' name='pledge_goal' class='form-control' /></td>
+            <td><input type='text' name='pledge_goal' class='form-control' required="true"/></td>
         </tr>
 
 
         <tr>
             <td>Creator</td>
-            <td><input type='text' name='creator_id' class='form-control' /></td>
+            <td><input type='text' name='creator_id' class='form-control' required="true"/></td>
         </tr>
 
         <tr>
             <td>Country</td>
-            <td><input type='text' name='country' class='form-control' /></td>
+            <td><input type='text' name='country' class='form-control' required="true"/></td>
         </tr>
 
         <tr>
             <td>Contact Email</td>
-            <td><input type='text' name='email' class='form-control' /></td>
+            <td><input type='email' name='email' class='form-control' required="true" placeholder="Enter a valid email address"/></td>
         </tr>
 
         <tr>
@@ -70,14 +70,14 @@ $category = new Category($conn);
             <textarea name="overview" class="form-control"></textarea>
             </td>
         </tr>
- 
+
         <tr>
             <td></td>
             <td>
                 <button type="submit" class="btn btn-primary">Create</button>
             </td>
         </tr>
- 
+
     </table>
 </form>
 
@@ -89,7 +89,7 @@ if($_POST){
 	$project = new Project($conn);
 
     $fields = &$project->getFields();
-    
+
     //set the values
     foreach ($fields as $key => $value) {
         $fields[$key] = $_POST[$key];
@@ -107,6 +107,6 @@ if($_POST){
         echo "</div>";
 	}
 }
- 
+
 include '../inc/footer.php'
 ?>

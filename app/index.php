@@ -65,12 +65,12 @@ $conn = $pdo->getConnection();
           </div>
         </div>
       </div> <!--  gcarousel allary ends -->
-      
+
 
       <div class="row p-y-1 p-x-1">
         <p class="h3">Trending projects</p>
       </div>
-      <?php 
+      <?php
         include "./objects/gallery.php";
         $gallery = new Gallery($conn);
         $gallery->prepare();
