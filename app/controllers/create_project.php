@@ -1,11 +1,7 @@
 <?php 
 $pageTitle = "Create Project";
-include "../inc/head.php";
-include "../data/DbConnection.php";
-?>
+require "../inc/head.php";
 
-<!-- Having difficulty connecting localhost, but works with 127.0.0.1 -->
-<?php 
 $dsn = "mysql:dbname=funded_db;host=127.0.0.1";
 $user = "root";
 $pass = "";
@@ -19,6 +15,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (Exception $e) {
 			echo $e->getMessage();
 }
+
 
 //get categories
 include '../objects/category.php';
