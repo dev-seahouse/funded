@@ -14,7 +14,7 @@ class Gallery {
 	* generate project card
 	*/
 	public function prepare(){
-		$query = "SELECT title, pledge_goal, end_date, suml_pledged FROM project WHERE status = 3";
+		$query = "SELECT title, pledge_goal, DATE(end_date) AS end_date, suml_pledged FROM project WHERE status = 3";
 		$stmt = $this->conn->query($query);
 
 		while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {

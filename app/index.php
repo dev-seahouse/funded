@@ -4,10 +4,19 @@ $pageTitle = "Home";
 $currentPage = "browse";
 /* End page specific variables */
 
-include "./data/DbConnection.php";
+require_once(__DIR__.'/./objects/pdo.php');
+require_once(__DIR__.'/./objects/client.php');
 
-$pdo = DbConnection::getInstance();
-$conn = $pdo->getConnection();
+
+$conn = PDOConn::getPDO();
+
+//fake data
+$userName = 'xuchen';
+$password = 'abcde';
+
+$clientFac = new Client($conn);
+$client = &$clientFac->getClient($userName, $password);
+
 
 ?>
 <!doctype html>

@@ -20,6 +20,9 @@ class Project{
 	public $founderName;
 	public $country;
 	public $email;
+	public $start_date;
+	public $end_date;
+
 
 	public $fields;
 
@@ -32,6 +35,8 @@ class Project{
 		$this->conn = $db;
 		$this->fields = array(
 		"title" => NULL,
+		"start_date" => NULL,
+		"end_date" => NULL,
 		"pledge_goal" => NULL,
 		"creator_id" => NULL,
 		"country" => NULL,
@@ -50,7 +55,7 @@ class Project{
 		// $fields['creator_id'] = getUserID();
 		// echo var_dump($this->fields);
 
-		$query = "INSERT into " .$this->tableName ."(title, pledge_goal,creator_id, country, email,category,overview) VALUES (:title,:pledge_goal,:creator_id,:country,:email,:category,:overview)";
+		$query = "INSERT into " .$this->tableName ."(title, pledge_goal,creator_id, country, email,category,overview, start_date, end_date) VALUES (:title,:pledge_goal,:creator_id,:country,:email,:category,:overview, :start_date, :end_date)";
 
 
 

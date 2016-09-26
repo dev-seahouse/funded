@@ -5,6 +5,7 @@ require "../inc/head.php";
 $dsn = "mysql:dbname=funded_db;host=127.0.0.1";
 $user = "root";
 $pass = "";
+$client = NULL;
 
 try{
 $conn = new PDO($dsn, $user, $pass);
@@ -31,7 +32,19 @@ $category = new Category($conn);
             <td>Title</td>
             <td><input type='text' name='title' class='form-control' /></td>
         </tr>
- 
+        
+
+        <tr>
+            <td>Project Start Date</td>
+            <td><input type='text' name='start_date' class='form-control' /></td>
+        </tr>
+
+        <tr>
+            <td>Project End Date</td>
+            <td><input type='text' name='end_date' class='form-control' /></td>
+        </tr>
+
+
         <tr>
             <td>Target Amount</td>
             <td><input type='text' name='pledge_goal' class='form-control' /></td>

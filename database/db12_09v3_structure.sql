@@ -122,8 +122,8 @@ DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(100) NOT NULL COMMENT 'Do not allow projects with same name to be created',
-  `start_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'timestamp needed for LOCALE TIME',
-  `end_date` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT 'timestamp needed for locale time',
+  `start_date` Date NOT NULL COMMENT 'date needed for LOCALE TIME',
+  `end_date` Date NOT NULL COMMENT 'date needed for locale time',
   `created_on` datetime DEFAULT CURRENT_TIMESTAMP,
   `pledge_goal` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT 'fundraising goal amount',
   `status` tinyint(4) DEFAULT '3' COMMENT 'status code for project :0 = deleted, 1. cancelled, 2= funded , 3 = active  if status < 3, do not show project for landing page, if status < 2, do not show in browse project list. In view all project list sort desc where status > 0 because only admin can see deleted projects',
@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(50) NOT NULL,
+  `user_name` varchar(50) UNIQUE NOT NULL ,
   `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,

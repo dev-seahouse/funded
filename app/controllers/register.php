@@ -3,6 +3,7 @@ const SUCCESS = 1;
 const DUPLICATE = 0;
 const EXCEPTION = -2;
 const ERR_EXECUTION = -1;
+session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST) {
 
 	$user_name = trim(filter_input(INPUT_POST, "user_name", FILTER_SANITIZE_STRING));
@@ -19,12 +20,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST) {
 	// todo: check for empty strings for each variable
 	//
 	try {
-		// include db connection class
-		include "../data/DbConnection.php";
+		
+		// there is always problem with the require "../_config/config.php"
+		// include "../data/DbConnection.php";
 
 		// get instance of db connection
-		$pdo = DbConnection::getInstance();
-		$conn = $pdo->getConnection();
+		require_once(__DIR__.'/../objects/pdo.php');
+		$conn = PDOConn::getPDO();
 
 		// check whether user name or email exist
 		$sql = "SELECT * FROM user
@@ -53,11 +55,13 @@ VALUES (?, ?, ?, ? , ?);";
 			$stmt->bindParam(5, $email, PDO::PARAM_STR);
 
 			if ($stmt->execute()) {
-				echo SUCCESS;
 				// if sucess, echo sucess code
 				// start session
-				// echo session[last_name]
-				// user js to extract from response and display
+				require "../objects/client.php";
+				$clientFact = new Client($conn);
+				$client = &$clientFact->getClient($user_name,$password);
+				$_SESSION['client'] = $client;
+				echo SUCCESS;
 			} else {
 				echo ERR_EXECUTION;
 			}
