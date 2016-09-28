@@ -102,10 +102,24 @@ $(document).ready(function() {
     }
   }
 
+  var display_login_result = function(data) {
+    console.log("Response data : \n" + data);
+  }
+
   $("#form-user-signup").submit(function(event) {
     event.preventDefault();
     ADD_USER.submit(this, {
       success: display_signup_result
+    });
+  });
+
+  $("#form-user-login").submit(function(event) {
+    event.preventDefault();
+    $.ajax({
+      type: 'POST',
+      url: './controllers/login.php',
+      data: $ ('#form-user-login').serialize(),
+      success: display_login_result
     });
   });
 

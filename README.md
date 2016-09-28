@@ -5,6 +5,16 @@
 
 
 ###Change Logs###
+**30 September 2016**
+1. Enable log in, can retrieve user infor from database using ajax.
+
+
+**26 September 2016**
+1. Fix relative paths problems in nested directory
+2. Change end_date, start_date domain in table project to DATE
+3. Add start_date, end_date in create_project form
+4. Create object client.php for user session
+
 **20 September 2016**
 1. Retrive proejcts information from database and display in index.php.
 

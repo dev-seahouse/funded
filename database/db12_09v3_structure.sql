@@ -242,7 +242,7 @@ CREATE TABLE IF NOT EXISTS `tag` (
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(50) UNIQUE NOT NULL ,
+  `user_name` varchar(50) NOT NULL ,
   `password` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_cs NOT NULL,
   `first_name` varchar(50) DEFAULT NULL,
   `last_name` varchar(50) DEFAULT NULL,

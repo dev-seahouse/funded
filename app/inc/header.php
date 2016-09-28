@@ -1,7 +1,4 @@
 <?php
-/* Todos
-1. Indicate that user is on certain a page by adding active class on the page
- */
 ?>
 <header>
   <!-- Modal Sign in Begins -->
@@ -12,16 +9,17 @@
           <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
           <h3 class="modal-title text-xs-center">Sign in now</h3>
         </div>
+        <form id = "form-user-login" method="post">
         <div class="modal-body">
           <div class="form-group">
             <div>
-              <input name="log" id="login-user" class="form-control input" size="20"
+              <input name="username" id="login-user" class="form-control input" size="20"
               placeholder="Enter Username" type="text">
             </div>
           </div>
           <div class="form-group">
             <div>
-              <input name="Password" id="login-password" class="form-control input" size="20"
+              <input name="password" id="login-password" class="form-control input" size="20"
               placeholder="Password" type="password">
             </div>
           </div>
@@ -35,11 +33,12 @@
           </div>
           <div class="form-group">
             <div>
-              <input name="submit" class="btn btn-block btn-lg btn-primary" value="LOGIN" type="submit">
+            <button type="submit" class="btn btn-block btn-lg btn-primary" name="login" method="post">LOGIN</button>
             </div>
           </div>
           <!--userForm-->
         </div>
+        </form>
         <div class="modal-footer">
           <p class="text-xs-center"> Not here before? <a data-toggle="modal" data-dismiss="modal"
           href="#modal-sign-up"> Sign Up. </a> <br>

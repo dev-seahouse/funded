@@ -3,10 +3,17 @@ dist
 .tmp
 bower_components
 test/bower_components
+img/
+dashboard/
+
 # Logs
 logs
 *.log
 npm-debug.log*
+
+# HTML
+.html
+
 
 # Runtime data
 pids

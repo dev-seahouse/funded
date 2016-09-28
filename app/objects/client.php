@@ -1,20 +1,20 @@
 <?php
 class Client{
-	private $conn;
-	private $client;
-	public function __construct($db) {
-		$this->conn = $db;
-	}
 
-	public function &getClient($userName, $password){
+	public static function getClient($userName, $password){
+		require_once (__DIR__."/./pdo.php");
+		$conn = PDOConn::getPDO();
+
 		$query = "SELECT * from user WHERE user_name= ? AND password = ?";
 
-		$stmt = $this->conn->prepare($query);
+		$stmt = $conn->prepare($query);
 		$stmt->execute([$userName, $password]);
 
-		$this->client = $stmt->fetch(PDO::FETCH_ASSOC);
-
-		return $this->client;
+		$client = $stmt->fetch(PDO::FETCH_ASSOC);
+		if($client == null) {
+			throw new Exception("No such user exists.");
+		}
+		return $client;
 	}
 
 }
