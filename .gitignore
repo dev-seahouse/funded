@@ -46,3 +46,6 @@ jspm_packages
 *.desktop
 .vscode
 .phpintel
+workspace.xml
+.idea/
+.idea/*

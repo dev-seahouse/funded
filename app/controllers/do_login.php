@@ -1,8 +1,6 @@
 <?php
-include("../data/DbConnection.php");
-
+require_once("../_config/autoloader.php");
 try {
-
 $pdo = DbConnection::getInstance();
 
 $sql = 'INSERT into user (user_name,password,first_name,last_name,email) 

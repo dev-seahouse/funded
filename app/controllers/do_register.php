@@ -3,24 +3,19 @@ const SUCCESS = 1;
 const DUPLICATE = 0;
 const EXCEPTION = -2;
 const ERR_EXECUTION = -1;
+require_once("../_config/autoloader.php");
 if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST) {
-
 	$user_name = trim(filter_input(INPUT_POST, "user_name", FILTER_SANITIZE_STRING));
-
-	// todo: password should be stored as hash
-	$password = trim(filter_input(INPUT_POST, "password", FILTER_UNSAFE_RAW));
-
-	$email = trim(filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL));
-
-	$first_name = trim(filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_STRING));
-
-	$last_name = trim(filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_STRING));
+    // todo: password should be stored as hash
+    $password = trim(filter_input(INPUT_POST, "password", FILTER_UNSAFE_RAW));
+    $email = trim(filter_input(INPUT_POST, "email", FILTER_SANITIZE_EMAIL));
+    $first_name = trim(filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_STRING));
+    $last_name = trim(filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_STRING));
 
 	// todo: check for empty strings for each variable
-	//
 	try {
-		// include db connection class
-		include "../data/DbConnection.php";
+		// include db connection classes
+		include dirname(__DIR__ )."../data/DbConnection.php";
 
 		// get instance of db connection
 		$pdo = DbConnection::getInstance();
