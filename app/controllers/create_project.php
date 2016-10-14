@@ -21,7 +21,7 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 }
 
 //get categories
-include '../objects/category.php';
+include '../classes/category.php';
 $category = new Category($conn);
 
 ?>
@@ -85,7 +85,7 @@ $category = new Category($conn);
 <!-- //Pass control to the Project class  -->
 <?php
 if($_POST){
-	include '../objects/project.php';
+	include '../classes/project.php';
 	$project = new Project($conn);
 
     $fields = &$project->getFields();
@@ -103,13 +103,13 @@ if($_POST){
 	// $project->country = $_POST['country'];
 
 	if($project->create()){
-		echo "<div class=\"alert alert-success alert-dismissable\">";
-            echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
+		echo "<div classes=\"alert alert-success alert-dismissable\">";
+            echo "<button type=\"button\" classes=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
             echo "Project was created.";
         echo "</div>";
 	} else {
-		echo "<div class=\"alert alert-danger alert-dismissable\">";
-            echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
+		echo "<div classes=\"alert alert-danger alert-dismissable\">";
+            echo "<button type=\"button\" classes=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
             echo "Unable to create product.";
         echo "</div>";
 	}

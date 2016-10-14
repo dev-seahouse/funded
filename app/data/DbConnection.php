@@ -33,7 +33,7 @@ Class DbConnection {
 			$conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
 			return $conn;
 		} catch (PDOException $pdoe) {
-			echo $pdoe->getMessage(); // in real life never do this
+			echo $pdoe->getMessage();
 		} catch (Exception $e) {
 			echo $e->getMessage();
 		}
