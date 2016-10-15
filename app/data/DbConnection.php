@@ -6,35 +6,43 @@
  * $results = $conn->query("SELECT * FROM Table");
  *
  */
-require_once dirname(__DIR__)."/_config/config.php";
+require_once dirname(__DIR__) . "/_config/config.php";
 
 Class DbConnection {
 
-	private static $_instance = NULL;
+    private static $_instance = NULL;
 
-	private function __construct() {}
-	private function __clone() {}
-	public function __wakeup() {}
-	public function __destruct() {}
+    private function __construct() {
+    }
 
-	public static function getInstance() {
-		if (!isset(self::$_instance)) {
-			self::$_instance = new DbConnection;
-		}
-		return self::$_instance;
-	}
+    private function __clone() {
+    }
 
-	// 'mysql:host=localhost;dbname=funded_db', root,''
-	public function getConnection($dsn = _HOST, $uname = _USER, $passwd = _PASSWD) {
-		$conn = NULL;
-		try {
-			$conn = new \PDO($dsn, $uname, $passwd);
-			$conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
-			return $conn;
-		} catch (PDOException $pdoe) {
-			echo $pdoe->getMessage();
-		} catch (Exception $e) {
-			echo $e->getMessage();
-		}
-	}
+    public function __wakeup() {
+    }
+
+    public function __destruct() {
+    }
+
+    public static function getInstance() {
+        if (!isset(self::$_instance)) {
+            self::$_instance = new DbConnection;
+        }
+        return self::$_instance;
+    }
+
+    // 'mysql:host=localhost;dbname=funded_db', root,''
+    public function getConnection($dsn = _HOST, $uname = _USER, $passwd = _PASSWD) {
+        $conn = NULL;
+        try {
+            $conn = new \PDO($dsn, $uname, $passwd);
+            //TODO: turn this off
+            $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING); // remember to turn this off during production
+            return $conn;
+        } catch (PDOException $pdoe) {
+            echo $pdoe->getMessage();
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+    }
 }

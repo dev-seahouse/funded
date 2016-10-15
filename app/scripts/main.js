@@ -74,7 +74,7 @@ $(document).ready(function() {
 
   $('.search-close').click(function(e) {
     $('.search-bar').removeClass('is-active');
-  })
+  });
 
   /* Checkbox theme configuration */
   $('input').iCheck({
@@ -89,18 +89,15 @@ $(document).ready(function() {
 
   var display_signup_result = function(data) {
     console.log("Response data : \n" + data);
-
     if (data.trim() == 0) {
       console.log("duplicate record on insert "); // NOTE: REMOVE THIS ON PRODUCTION!
-
-
     } else if (data.trim() == 1) {
       console.log("registered");
       $("#modal-sign-up").modal('hide');
     } else {
       console.log("failed");
     }
-  }
+  };
 
   $("#form-user-signup").submit(function(event) {
     event.preventDefault();
@@ -108,6 +105,5 @@ $(document).ready(function() {
       success: display_signup_result
     });
   });
-
 
 }); // do not remove this closing tag!
