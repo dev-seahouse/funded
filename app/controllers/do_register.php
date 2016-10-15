@@ -12,16 +12,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST) {
     $first_name = trim(filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_STRING));
     $last_name = trim(filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_STRING));
 
-	// todo: check for empty strings for each variable
-	try {
-		// include db connection classes
-		include dirname(__DIR__ )."../data/DbConnection.php";
 
-		// get instance of db connection
+	try {
 		$pdo = DbConnection::getInstance();
 		$conn = $pdo->getConnection();
 
-		// check whether user name or email exist
 		$sql = "SELECT * FROM user
 		WHERE user_name = ? OR email=?";
 

@@ -14,7 +14,7 @@ var ADD_USER = (function(self, $) {
     $.ajax({
 
       type: 'POST',
-      url: './controllers/register.php',
+      url: './controllers/do_register.php',
       data: data,
       beforeSend: function() {
         if (callbacks.beforeSend) callbacks.beforeSend();

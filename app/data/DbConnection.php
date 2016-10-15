@@ -6,7 +6,7 @@
  * $results = $conn->query("SELECT * FROM Table");
  *
  */
-require_once "../_config/config.php";
+require_once dirname(__DIR__)."/_config/config.php";
 
 Class DbConnection {
 
@@ -14,8 +14,8 @@ Class DbConnection {
 
 	private function __construct() {}
 	private function __clone() {}
-	private function __wakeup() {}
-	function __destruct() {}
+	public function __wakeup() {}
+	public function __destruct() {}
 
 	public static function getInstance() {
 		if (!isset(self::$_instance)) {
@@ -27,7 +27,6 @@ Class DbConnection {
 	// 'mysql:host=localhost;dbname=funded_db', root,''
 	public function getConnection($dsn = _HOST, $uname = _USER, $passwd = _PASSWD) {
 		$conn = NULL;
-
 		try {
 			$conn = new \PDO($dsn, $uname, $passwd);
 			$conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);

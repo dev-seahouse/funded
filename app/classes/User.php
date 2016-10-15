@@ -6,16 +6,19 @@ class User {
     private $password;
     private $fname;
     private $lname;
-    private $conn;
 
-    public function __construct($name, $email, $password, $fname, $lname) {
-        $this->conn = null;
-        $this->name = $name;
-        $this->email = $email;
-        $this->password = $password;
-        $this->fname = $fname;
-        $this->lname = $lname;
+
+public function __construct($data = null)
+{
+    if (is_array($data)) {
+        if (isset($data['id'])) $this->id = $data['id'];
+
+        $this->username = $data['username'];
+        $this->firstname = $data['firstname'];
+        $this->lastname = $data['lastname'];
+        $this->email = $data['email'];
     }
+}
 
     public function setName($name) {
         $this->name = $name;
