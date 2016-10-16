@@ -37,7 +37,6 @@ $conn = $pdo->getConnection();
           2. one click button to update all projects that does not have active status
           */
           ?>
-
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
             <div class="carousel-caption">Project Title</div>

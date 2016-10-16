@@ -1,9 +1,6 @@
 /*======================================
 =            Gallery Module            =
 ======================================*/
-
-
-
 .gallery {
     margin-bottom: $spacer;
 }
@@ -30,7 +27,6 @@
     @include rem(height, 500px); 
   }
 }
-
 
 /* fade in image when loaded */
 .carousel-cell-image {

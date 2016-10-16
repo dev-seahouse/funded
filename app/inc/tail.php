@@ -7,7 +7,7 @@
 <script src="/bower_components/PACE/pace.js"></script>
 <script src="/bower_components/owl.carousel/dist/owl.carousel.js"></script>
 <script src="/bower_components/jquery-migrate/jquery-migrate.js"></script>
-<script src="/bower_components/es6-promise/promise.js"></script>
+<script src="/bower_components/es6-promise/es6-promise.js"></script>
 <script src="/bower_components/sweetalert2/dist/sweetalert2.js"></script>
 <script src="/bower_components/desandro-matches-selector/matches-selector.js"></script>
 <script src="/bower_components/ev-emitter/ev-emitter.js"></script>
