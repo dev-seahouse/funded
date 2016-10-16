@@ -39,25 +39,6 @@ abstract class BaseDAO {
         return $stmt->fetchAll(PDO::FETCH_CLASS,$this->DVO_name);
     }
 
-    // TBD
-/*    public function count($key,$value, $fields = "*"){
-        $sql = "SELECT ";
-
-        if (!empty($fields) && is_array($fields)){
-            $sql.= implode(", ", $fields);
-         } else{
-             $sql.= $fields;
-        }
-
-        $sql .="FROM {$this->table_name} 
-               WHERE :key = :value";
-
-        $stmt = $this->con->prepare($sql);
-        $stmt->bindParam(':key', $key);
-        $stmt->bindParam(':value',$value);
-        $stmt->execute();
-        return $stmt->rowCount();
-    }*/
 
     public function update($arr_key_val) {
         $sql = "update {$this->table_name} set  ";
@@ -74,4 +55,24 @@ abstract class BaseDAO {
         $stmt->execute();
         return ($stmt->rowCount());//  ? "Update sucess" : "Update failed";
     }
+
+        // TBD
+    /*    public function count($key,$value, $fields = "*"){
+            $sql = "SELECT ";
+
+            if (!empty($fields) && is_array($fields)){
+                $sql.= implode(", ", $fields);
+             } else{
+                 $sql.= $fields;
+            }
+
+            $sql .="FROM {$this->table_name}
+                   WHERE :key = :value";
+
+            $stmt = $this->con->prepare($sql);
+            $stmt->bindParam(':key', $key);
+            $stmt->bindParam(':value',$value);
+            $stmt->execute();
+            return $stmt->rowCount();
+        }*/
 }

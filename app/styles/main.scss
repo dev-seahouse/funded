@@ -1,9 +1,9 @@
 $icon-font-path: '../fonts/';
 @import "variables";
 // bower:scss
+@import "bower_components/sweetalert2/src/sweetalert2.scss";
 @import "bower_components/bootstrap/scss/bootstrap.scss";
 @import "bower_components/font-awesome/scss/font-awesome.scss";
-@import "bower_components/sweetalert2/src/sweetalert2.scss";
 // endbower
 @import "mixins";
 @import "globals";
@@ -29,10 +29,7 @@ $icon-font-path: '../fonts/';
 
 }
 
-/* Custom Gallery Block */
-.gallery-project {
-	float:left;
-	border: 1px solid black;
-	margin: 5px;
+.swal2-container.fade{
+  opacity: 1;
 }
 

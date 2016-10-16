@@ -22,7 +22,7 @@
 <!-- endbuild -->
 
 <!-- manually added scripts -->
-<script src="/bower_components/flickity/dist/flickity.pkgd.js"></script> 
+<script src="/bower_components/flickity/dist/flickity.pkgd.js"></script>
 <!-- end manually added scripts -->
 
 <!-- build:js scripts/plugins.js -->
