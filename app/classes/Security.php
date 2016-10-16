@@ -1,4 +1,5 @@
 <?php
+require_once("../_config/autoloader.php");
 
 class Security {
     public function sec_session_start(){

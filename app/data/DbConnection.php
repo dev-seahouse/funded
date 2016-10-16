@@ -1,6 +1,6 @@
 <?php
 /**
- *
+ * Usage:
  * $pdo = DbConnection::getInstance();
  * $conn = $pdo->getConnection( dsn, username, password );
  * $results = $conn->query("SELECT * FROM Table");
@@ -38,11 +38,13 @@ Class DbConnection {
             $conn = new \PDO($dsn, $uname, $passwd);
             //TODO: turn this off
             $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING); // remember to turn this off during production
-            return $conn;
         } catch (PDOException $pdoe) {
+            //TODO: remove debug codes
             echo $pdoe->getMessage();
         } catch (Exception $e) {
+            //TODO: remove debug codes
             echo $e->getMessage();
         }
+        return $conn;
     }
 }

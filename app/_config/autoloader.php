@@ -2,7 +2,9 @@
 //Define the paths to the directories holding class files
 $paths = array(
     '../classes/',
-    '../data/'
+    '../data/',
+    '../models',
+    '../exceptions'
 );
 //Add the paths to the class directories to the include path.
 set_include_path(get_include_path() . PATH_SEPARATOR . implode(PATH_SEPARATOR, $paths));

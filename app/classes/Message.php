@@ -10,7 +10,8 @@
 class Message {
 
     private $infos;
-    private $errors;
+    private $errs;
+    private $hidden_err; // internal errs not meant to show client
     private $data;
     private $status;
 
@@ -19,7 +20,8 @@ class Message {
 
     public function __construct() {
         $this->infos = array();
-        $this->errors = array();
+        $this->errs = array();
+        $this->hidden_err = array();
         $this->data = array();
         $this->status = self::SUCCESS;
     }
@@ -31,14 +33,17 @@ class Message {
     public function putErr($msg) {
         // as soon as an error msg is encountered, auto change error status
         // violates SRP ? sometimes need to break rule for greater good
-        if ($this->status == self::SUCCESS){
-            $this->status = self::FAILURE;
-        }
-        array_push($this->infos, $msg);
+        $this->setStatusFailure();
+        array_push($this->errs, $msg);
+    }
+
+    public function putHiddenErr($msg){
+        $this->setStatusFailure();
+        array_push($this->hidden_err);
     }
 
     public function hasErr(){
-        return !($this->errors);
+        return !($this->errs);
     }
 
     public function getInfoAsArray() {
@@ -46,7 +51,7 @@ class Message {
     }
 
     public function getErrorAsArray() {
-        return $this->errors;
+        return $this->errs;
     }
 
     public function getData(){
@@ -61,8 +66,14 @@ class Message {
         $this->messages = array(
             "status" => self::FAILURE,
             "info" => $this->infos,
-            'err' => $this->errors,
+            'err' => $this->errs,
             'data' => $this->data
         );
+    }
+
+    private function setStatusFailure() {
+        if ($this->status == self::SUCCESS) {
+            $this->status = self::FAILURE;
+        }
     }
 }

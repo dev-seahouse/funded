@@ -1,5 +1,7 @@
 <?php
 require dirname(__DIR__)."/inc/utility.php";
+require_once("../_config/autoloader.php");
+
 class UserDAO extends BaseDAO {
     private $conn;
     protected $p_k;
@@ -17,8 +19,7 @@ class UserDAO extends BaseDAO {
     public function create(User $user) {
 
         if ($this->isUserExit($user)) {
-            echo "The Username or Email has already been taken.";
-            return false;
+            throw new DuplicateUserException("The Username or Email has already been taken.");
         }
 
         $field_list = array("user_name", "password", "first_name","last_name","email");
