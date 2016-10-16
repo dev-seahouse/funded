@@ -25,10 +25,11 @@
               placeholder="Password" type="password">
             </div>
           </div>
+
           <div class="form-group">
             <div>
               <div class="checkbox login-remember">
-                <input name="remember-me" id="remember-me" value="forever" checked="checked" type="checkbox">
+                <input name="icheck remember-me" id="remember-me" value="forever" checked="checked" type="checkbox">
                 <label for="remember-me"> Remember Me </label>
               </div>
             </div>
@@ -86,6 +87,12 @@
             </div>
             <div class="form-group">
               <div>
+                <input name="PasswordRepeat" id="login-password-repeat" class="form-control input" size="20"
+                       placeholder="Please retype password" type="password">
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
                 <input name="email" class="form-control" size="20" placeholder="Enter Email" type="text">
               </div>
             </div>
@@ -135,9 +142,13 @@
           <a class="btn btn-link search-trigger" href="#"><i class="fa fa-search"> </i></a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-login">Sign in | Register</a>
+          <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-sign-up">Register</a>
+        </li>
+        <li class="nav-item hidden-xs-down">
+          <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-login">Sign in</a>
           <!-- Todo:  at small screen, show icon dropdown instead of text -->
         </li>
+
       </ul>
       <div class="search-bar text-right" id="#search-bar">
         <a class="pull-right search-close" href="#">

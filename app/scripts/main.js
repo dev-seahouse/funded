@@ -40,8 +40,7 @@ var ADD_USER = (function (self, $) {
  =            Document.ready            =
  ==============================================*/
 
-$(document).ready(function () {
-    swal('hi');
+$(function () {
     /*========================================
      =            Global functions            =
      ========================================*/
@@ -79,7 +78,7 @@ $(document).ready(function () {
     $('input').iCheck({
         checkboxClass: 'icheckbox_square-orange',
         radioClass: 'iradio_square-orange',
-        increaseArea: '20%' // optional
+        increaseArea: '25%' // optional
     });
 
     /*=====================================
@@ -89,22 +88,16 @@ $(document).ready(function () {
     var display_signup_result = function (data) {
         console.log('Response data : \n' + data);
         if(data.status){
+            console.log(data);
             $('#modal-sign-up').modal('hide');
-            swal('Registered Successfully!')
-        }else{
-            console.log('Some error ')
+            swal('Huray ..!', 'You are now a proud backer', 'success');
+        }else {
+            swal(
+                'Oops...',
+                data.err[0],
+                'error'
+            )
         }
-
-        // ============old =============
-        if (data.trim() == 0) {
-            console.log('duplicate record on insert '); // NOTE: REMOVE THIS ON PRODUCTION!
-        } else if (data.trim() == 1) {
-            console.log('registered');
-            $('#modal-sign-up').modal('hide');
-        } else {
-            console.log('failed');
-        }
-        // ===========old =============
     };
 
     $('#form-user-signup').submit(function (event) {

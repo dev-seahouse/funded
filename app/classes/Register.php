@@ -46,8 +46,9 @@ class Register {
         // filter_input returns
         $isValid = true;
         foreach ($data as $row => $val) {
-            if ($val === null || $val === false) {
-                $output->putErr($row . " contains invalid characters.");
+            if ($val === "") $output-> putErr("Did you forget to fill in something?");
+            else if ($val === null || $val === false) {
+                $output->putErr("We detected some naughty characters in the form. hmmm...");
                 $isValid = false;
             }
         }

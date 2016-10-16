@@ -20,15 +20,17 @@
     <!-- owl carousel theme -->
     <link rel="stylesheet" href="/bower_components/owl.carousel/dist/assets/owl.theme.green.css"/>
     <!-- end owl carousel theme -->
-    <!-- icheck theme -->
-    <link rel="stylesheet" href="/bower_components/iCheck/skins/square/orange.css"/>
-    <!-- /icheck theme -->
+
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css"/>
     <!-- endbuild -->
     <!-- build:js scripts/vendor/modernizr.js -->
     <script src="/bower_components/modernizr/modernizr.js"></script>
     <!-- endbuild -->
+
+    <!-- icheck theme -->
+    <link rel="stylesheet" href="/bower_components/iCheck/skins/square/orange.css"/>
+    <!-- /icheck theme -->
     <script>
         paceOptions = {
         elements: true
