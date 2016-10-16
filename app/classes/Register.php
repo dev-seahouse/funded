@@ -8,6 +8,8 @@ the rationale for choosing such design is to
 solve the problem that client side
 does not have common communication channel with server
 in ajax applications.
+all expected exceptions are caught in custom defined exception class with
+user-oriented messages for direct display
 */
 
 class Register {
@@ -29,6 +31,8 @@ class Register {
                 $new_user = new User($data);
                 $user_db_access = new UserDAO();
                 $user_db_access->create($new_user);
+            }catch(DatabaseException $dbe){
+               $this->output->putErr($dbe);
             }catch (DuplicateUserException $due){
                 $this->output->putErr($due->getMessage());
             }catch (Exception $e){

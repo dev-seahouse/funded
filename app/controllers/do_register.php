@@ -3,3 +3,4 @@ require_once("../_config/autoloader.php");
 $reg = new Register();
 $output = $reg->register();
 
+
