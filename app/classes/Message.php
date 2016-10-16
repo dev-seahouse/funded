@@ -15,8 +15,8 @@ class Message {
     private $data;
     private $status;
 
-    const FAILURE = 400;
-    const SUCCESS = 200;
+    const FAILURE = false;
+    const SUCCESS = true;
 
     public function __construct() {
         $this->infos = array();
@@ -42,10 +42,6 @@ class Message {
         array_push($this->hidden_err);
     }
 
-    public function hasErr(){
-        return !($this->errs);
-    }
-
     public function getInfoAsArray() {
         return $this->infos;
     }
@@ -58,22 +54,24 @@ class Message {
         return $this->data;
     }
 
-    public function getAllAsArray(){
-
-    }
-
-    public function makeMsgArr() {
-        $this->messages = array(
-            "status" => self::FAILURE,
+    private function makeMsgArr() {
+        $messages = array(
+            "status" => $this->status,
             "info" => $this->infos,
             'err' => $this->errs,
             'data' => $this->data
         );
+        return $messages;
     }
 
     private function setStatusFailure() {
         if ($this->status == self::SUCCESS) {
             $this->status = self::FAILURE;
         }
+    }
+
+    public function toJson() {
+        $out = $this->makeMsgArr();
+        return json_encode($out);
     }
 }
