@@ -9,20 +9,20 @@ var ADD_USER = (function (self, $) {
     // submit form function
     submit_form = function ($form, callbacks) {
         data = $($form).serialize();
-        console.log("sending from javascript {" + data + "}");
+        console.log('sending from javascript {' + data + '}');
         $.ajax({
             type: 'POST',
             url: './controllers/do_register.php',
             data: data,
             beforeSend: function () {
                 if (callbacks.beforeSend) callbacks.beforeSend();
-                else console.log("sending ......");
+                else console.log('sending ......');
             },
             success: function (data) {
                 if (callbacks.success) {
                     callbacks.success(data);
                 } else {
-                    console.log("Response data: {\n" + data + "}\n");
+                    console.log('Response data: {\n' + data + '}\n');
                 }
             }
         });
@@ -41,6 +41,7 @@ var ADD_USER = (function (self, $) {
  ==============================================*/
 
 $(document).ready(function () {
+    swal('hi');
     /*========================================
      =            Global functions            =
      ========================================*/
@@ -86,22 +87,27 @@ $(document).ready(function () {
      =====================================*/
 
     var display_signup_result = function (data) {
-        console.log("Response data : \n" + data);
-
+        console.log('Response data : \n' + data);
+        if(data.status){
+            $('#modal-sign-up').modal('hide');
+            swal('Registered Successfully!')
+        }else{
+            console.log('Some error ')
+        }
 
         // ============old =============
         if (data.trim() == 0) {
-            console.log("duplicate record on insert "); // NOTE: REMOVE THIS ON PRODUCTION!
+            console.log('duplicate record on insert '); // NOTE: REMOVE THIS ON PRODUCTION!
         } else if (data.trim() == 1) {
-            console.log("registered");
-            $("#modal-sign-up").modal('hide');
+            console.log('registered');
+            $('#modal-sign-up').modal('hide');
         } else {
-            console.log("failed");
+            console.log('failed');
         }
         // ===========old =============
     };
 
-    $("#form-user-signup").submit(function (event) {
+    $('#form-user-signup').submit(function (event) {
         event.preventDefault();
         ADD_USER.submit(this, {
             success: display_signup_result

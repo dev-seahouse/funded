@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="/bower_components/flickity/css/flickity.css" />
     <!-- endbower -->
     <!-- endbuild -->
-    
+
     <!-- pace loading theme -->
     <link rel="stylesheet" href="/bower_components/PACE/themes/green/pace-theme-center-simple.css"/>
     <!-- end pace loading theme -->

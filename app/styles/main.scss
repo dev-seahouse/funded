@@ -1,9 +1,9 @@
 $icon-font-path: '../fonts/';
 @import "variables";
 // bower:scss
+@import "bower_components/sweetalert2/src/sweetalert2.scss";
 @import "bower_components/bootstrap/scss/bootstrap.scss";
 @import "bower_components/font-awesome/scss/font-awesome.scss";
-@import "bower_components/sweetalert2/src/sweetalert2.scss";
 // endbower
 @import "mixins";
 @import "globals";
@@ -27,5 +27,9 @@ $icon-font-path: '../fonts/';
   color: $gray-dark;
   border-top: 1px solid $brand-bg-color;
 
+}
+
+.swal2-container.fade{
+  opacity: 1;
 }
 
