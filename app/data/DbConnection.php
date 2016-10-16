@@ -34,17 +34,17 @@ Class DbConnection {
     // 'mysql:host=localhost;dbname=funded_db', root,''
     public function getConnection($dsn = _HOST, $uname = _USER, $passwd = _PASSWD) {
         $conn = NULL;
-        try {
+        //try {
             $conn = new \PDO($dsn, $uname, $passwd);
             //TODO: turn this off
             $conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_WARNING); // remember to turn this off during production
-        } catch (PDOException $pdoe) {
+        //} catch (PDOException $pdoe) {
             //TODO: remove debug codes
-            echo $pdoe->getMessage();
-        } catch (Exception $e) {
+          //  echo $pdoe->getMessage();
+        //} catch (Exception $e) {
             //TODO: remove debug codes
-            echo $e->getMessage();
-        }
+          //  echo $e->getMessage();
+        //}
         return $conn;
     }
 }
