@@ -16,7 +16,7 @@ class UserDAO extends BaseDAO {
 
     public function create(User $user) {
 
-        if ($this->is_user_exit($user)) {
+        if ($this->isUserExit($user)) {
             echo "The Username or Email has already been taken.";
             return false;
         }
@@ -30,7 +30,7 @@ class UserDAO extends BaseDAO {
             $user->getEmail()
         );
 
-        $place_holders = $this->make_place_holders($field_list);
+        $place_holders = $this->makePlaceHolders($field_list);
         $placeholder_value_pairs = array_combine($place_holders,$values);
 
         $sql = "INSERT INTO {$this->table_name}" .
@@ -38,10 +38,10 @@ class UserDAO extends BaseDAO {
                 "VALUES (".implode(',',$place_holders).")";
 
         $stmt = $this->conn->prepare($sql);
-        $this->bind_values($stmt, $placeholder_value_pairs);
-        $is_query_success = $stmt->execute();
+        $this->bindValues($stmt, $placeholder_value_pairs);
+        $isQuerySuccess = $stmt->execute();
 
-        if($is_query_success){
+        if($isQuerySuccess){
             $inserted_uid = $this->conn->lastInsertId();
             $sql = "INSERT INTO user_role 
                     (user_id, role_id) 
@@ -55,9 +55,9 @@ class UserDAO extends BaseDAO {
         $stmt->bindParam(":uid",$inserted_uid ,PDO::PARAM_INT);
         $stmt->bindValue(":rid",$user->getRoleId(), PDO::PARAM_INT);
 
-        $is_query_success = $stmt->execute();
+        $isQuerySuccess = $stmt->execute();
 
-        if ($is_query_success) {
+        if ($isQuerySuccess) {
             echo SUCCESS;
             return true;
         } else {
@@ -66,7 +66,7 @@ class UserDAO extends BaseDAO {
         }
     }
 
-    private function is_user_exit(User $user) {
+    private function isUserExit(User $user) {
         $uname = $user->getUserName();
         $email = $user->getEmail();
         $sql = "SELECT COUNT(*)
@@ -79,7 +79,7 @@ class UserDAO extends BaseDAO {
         return ($stmt->fetchColumn() > 0);
     }
 
-    private static function make_place_holders($field_list) {
+    private static function makePlaceHolders($field_list) {
         $place_holders= array();
         foreach ($field_list as $item){
            $place_holders[] = ":{$item}";
@@ -87,7 +87,7 @@ class UserDAO extends BaseDAO {
         return $place_holders;
     }
 
-    private function bind_values(PDOStatement $stmt, $placeholder_value_pairs) {
+    private function bindValues(PDOStatement $stmt, $placeholder_value_pairs) {
         foreach ($placeholder_value_pairs as $place_holder => $value){
             $stmt->bindValue($place_holder,$value);
         }
