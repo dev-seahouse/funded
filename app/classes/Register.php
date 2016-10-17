@@ -13,9 +13,6 @@ user-oriented messages for direct display
 */
 
 class Register {
-    const BACKER_ROLE = 1;
-    const ADMIN_ROLE = 2;
-
     private $output;
 
     public function __construct() {
@@ -23,7 +20,7 @@ class Register {
     }
 
     // returns Message object
-    public function register($role = self::BACKER_ROLE) {
+    public function register($role = User::BACKER_ROLE) {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST) {
             $data = $this->createUserData($role);
             if (!$this->isValidInput($data, $this->output)) return $this->output;
@@ -33,12 +30,12 @@ class Register {
                 $new_user = new User($data);
                 $user_db_access = new UserDAO();
                 $user_db_access->create($new_user);
-            }catch(DatabaseException $dbe){
-               $this->output->putErr($dbe);
-            }catch (DuplicateUserException $due){
+            } catch (DatabaseException $dbe) {
+                $this->output->putErr($dbe);
+            } catch (DuplicateUserException $due) {
                 $this->output->putErr($due->getMessage());
-            }catch (Exception $e){
-               $this->output->putHiddenErr($e->getMessage());
+            } catch (Exception $e) {
+                $this->output->putHiddenErr($e->getMessage());
             }
         }
         return $this->output;
@@ -48,12 +45,11 @@ class Register {
         // filter_input returns
         $isValid = true;
         foreach ($data as $row => $val) {
-            if ($val === "") {
-                $output-> putErr("Did you forget to fill in something?");
+            if ($val === '') {
+                $output->putErr("Did you forget to fill in something?");
                 $isValid = false;
-            }
-            else if ($val === null || $val === false) {
-                $output->putErr("We detected some naughty characters in the form. hmmm...");
+            } else if ($val === null || $val === false) {
+                $output->putErr("Did you mistyped something? ");
                 $isValid = false;
             }
         }
@@ -65,11 +61,12 @@ class Register {
      * @return array
      */
     private function createUserData($role) {
-        $user_name = trim(filter_input(INPUT_POST, "user_name", FILTER_SANITIZE_STRING));
-        $password = trim(filter_input(INPUT_POST, "password", FILTER_UNSAFE_RAW));
-        $email = trim(filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL));
-        $first_name = trim(filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_STRING));
-        $last_name = trim(filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_STRING));
+        // is there anyway to do this automatically in a loop ? how to determine which filter to use...errr
+        $user_name = (filter_input(INPUT_POST, "user_name", FILTER_SANITIZE_STRING));
+        $password = (filter_input(INPUT_POST, "password", FILTER_UNSAFE_RAW));
+        $email = (filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL));
+        $first_name = (filter_input(INPUT_POST, "first_name", FILTER_SANITIZE_STRING));
+        $last_name = (filter_input(INPUT_POST, "last_name", FILTER_SANITIZE_STRING));
         $role_id = $role;
         $variable_names = array("user_name", "first_name", "last_name", "email", "password", "role_id");
         $data = compact($variable_names);

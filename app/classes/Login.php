@@ -1,13 +1,15 @@
 <?php
 require_once("../_config/autoloader.php");
 
-class Login{
-    private $db_connection = null;
-    private $errs = array();
-    public $messages = array();
+class Login {
+    private $output;
 
-    public function __construct(){
-        session_start();
+    public function __construct() {
+        $this->output = new Message();
+
+    }
+
+    public function login(){
 
     }
 }

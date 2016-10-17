@@ -9,6 +9,9 @@ class User {
     private $lname;
     private $role_id;
 
+    const BACKER_ROLE = 1;
+    const ADMIN_ROLE = 2;
+
     public function __construct($data = null) {
         if (is_array($data)) {
 
@@ -22,7 +25,6 @@ class User {
             $this->password = $data['password'];
         }
     }
-
 
     public function getPassword(){
         return $this->password;

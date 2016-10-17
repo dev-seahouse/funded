@@ -8,7 +8,8 @@ var ADD_USER = (function (self, $) {
 
     // submit form function
     submit_form = function ($form, callbacks) {
-        data = $($form).serialize();
+        data = $($form).serializeArray();
+        data.push({name: 'register', value: 1});
         console.log('sending from javascript {' + data + '}');
         $.ajax({
             type: 'POST',
@@ -18,11 +19,11 @@ var ADD_USER = (function (self, $) {
                 if (callbacks.beforeSend) callbacks.beforeSend();
                 else console.log('sending ......');
             },
-            success: function (data) {
+            success: function (responseMessage) {
                 if (callbacks.success) {
-                    callbacks.success(data);
+                    callbacks.success(responseMessage);
                 } else {
-                    console.log('Response data: {\n' + data + '}\n');
+                    console.log('Response data: {\n' + responseMessage + '}\n');
                 }
             }
         });
@@ -85,16 +86,16 @@ $(function () {
      =      Registration scripts           =
      =====================================*/
 
-    var display_signup_result = function (data) {
-        console.log('Response data : \n' + data);
-        if(data.status){
-            console.log(data);
+    var display_signup_result = function (responseMsg) {
+        console.log('Response data : \n' + responseMsg);
+        if (responseMsg.status) {
+            console.log(responseMsg);
             $('#modal-sign-up').modal('hide');
             swal('Huray ..!', 'You are now a proud backer', 'success');
-        }else {
+        } else {
             swal(
                 'Oops...',
-                data.err[0],
+                responseMsg.err[0],
                 'error'
             )
         }

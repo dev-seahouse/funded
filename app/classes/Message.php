@@ -1,5 +1,4 @@
 <?php
-
 /*
  An Utility class to facilitate
  communication between objects/interfaces
@@ -39,7 +38,7 @@ class Message {
 
     public function putHiddenErr($msg){
         $this->setStatusFailure();
-        array_push($this->hidden_err);
+        array_push($this->hidden_err, $msg);
     }
 
     public function getInfoAsArray() {
@@ -65,7 +64,7 @@ class Message {
     }
 
     private function setStatusFailure() {
-        if ($this->status == self::SUCCESS) {
+        if ($this->status === self::SUCCESS) {
             $this->status = self::FAILURE;
         }
     }
