@@ -1,10 +1,10 @@
 <?php
-require_once("../_config/autoloader.php");
+require_once(dirname(__DIR__)."/_config/autoloader.php");
+include_once (dirname(__DIR__)."/_config/config.php");
 
 class Security {
     public function sec_session_start(){
         $session_name = 'sec_session_id';   // Set a custom session name
-
         session_name($session_name);
 
         $secure = true;

@@ -27,6 +27,7 @@ class Register {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST) {
             $data = $this->createUserData($role);
             if (!$this->isValidInput($data, $this->output)) return $this->output;
+
             $data["password"] = Security::hash($data["password"]);
             try {
                 $new_user = new User($data);
@@ -47,7 +48,10 @@ class Register {
         // filter_input returns
         $isValid = true;
         foreach ($data as $row => $val) {
-            if ($val === "") $output-> putErr("Did you forget to fill in something?");
+            if ($val === "") {
+                $output-> putErr("Did you forget to fill in something?");
+                $isValid = false;
+            }
             else if ($val === null || $val === false) {
                 $output->putErr("We detected some naughty characters in the form. hmmm...");
                 $isValid = false;
