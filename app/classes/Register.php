@@ -27,6 +27,7 @@ class Register {
         if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST) {
             $data = $this->createUserData($role);
             if (!$this->isValidInput($data, $this->output)) return $this->output;
+            $data["password"] = Security::hash($data["password"]);
             try {
                 $new_user = new User($data);
                 $user_db_access = new UserDAO();

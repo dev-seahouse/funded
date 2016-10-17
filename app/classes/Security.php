@@ -24,4 +24,14 @@ class Security {
         session_start();            // Start the PHP session
         session_regenerate_id(true);    // regenerated the session, delete the old one.
     }
+
+
+    public static function hash($password) {
+        return password_hash($password, PASSWORD_DEFAULT, ['cost' => 14]);
+    }
+
+    public static function verify($password, $hash) {
+        return password_verify($password, $hash);
+    }
+
 }
