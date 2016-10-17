@@ -18,10 +18,8 @@ class Register {
     public function __construct() {
         $this->output = new Message();
     }
-
     // returns Message object
     public function register($role = User::BACKER_ROLE) {
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && $_POST) {
             $data = $this->createUserData($role);
             if (!$this->isValidInput($data, $this->output)) return $this->output;
 
@@ -37,8 +35,7 @@ class Register {
             } catch (Exception $e) {
                 $this->output->putHiddenErr($e->getMessage());
             }
-        }
-        return $this->output;
+          return $this->output;
     }
 
     private function isValidInput($data, Message $output) {

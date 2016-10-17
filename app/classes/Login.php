@@ -6,10 +6,10 @@ class Login {
 
     public function __construct() {
         $this->output = new Message();
-
     }
 
     public function login(){
-
+      
     }
+
 }

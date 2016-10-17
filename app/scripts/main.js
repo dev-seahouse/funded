@@ -1,25 +1,25 @@
 ;
 /*=======================================
- =            Functionalities            =
+ =            Modules            =
  =======================================*/
-
-var ADD_USER = (function (self, $) {
-    var data, submit_form;
-
+var FormHandler = (() => {
+    var data, submit_form, url;
     // submit form function
-    submit_form = function ($form, callbacks) {
-        data = $($form).serializeArray();
+    submit_form = (form, callbacks) => {
+        url = $(form).attr('action');
+        data = $(form).serializeArray();
         data.push({name: 'register', value: 1});
         console.log('sending from javascript {' + data + '}');
+        console.log(form);
         $.ajax({
             type: 'POST',
-            url: './controllers/do_register.php',
+            url: url,
             data: data,
-            beforeSend: function () {
+            beforeSend: ()=> {
                 if (callbacks.beforeSend) callbacks.beforeSend();
                 else console.log('sending ......');
             },
-            success: function (responseMessage) {
+            success: (responseMessage) => {
                 if (callbacks.success) {
                     callbacks.success(responseMessage);
                 } else {
@@ -29,13 +29,10 @@ var ADD_USER = (function (self, $) {
         });
     };
     // end submit_form function
-
     return {
         submit: submit_form
     };
-
-})(ADD_USER || {}, jQuery);
-
+})();
 
 /*==============================================
  =            Document.ready            =
@@ -56,43 +53,39 @@ $(function () {
         center: true,
         autoWidth: true,
         loop: true
-        // "singleItem:true" is a shortcut for:
-        // items : 1,
-        // itemsDesktop : false,
-        // itemsDesktopSmall : false,
-        // itemsTablet: false,
-        // itemsMobile : false
     });
 
     /* Search trigger configuration */
 
-    $('.search-trigger').click(function () {
+    $('.search-trigger').click(() => {
         $('.search-bar').addClass('is-active');
         $('.search-bar-input').focus();
     });
 
-    $('.search-close').click(function (e) {
-        $('.search-bar').removeClass('is-active');
-    });
+    $('.search-close').click((e)=>
+        $('.search-bar').removeClass('is-active'));
 
     /* Checkbox theme configuration */
     $('input').iCheck({
         checkboxClass: 'icheckbox_square-orange',
         radioClass: 'iradio_square-orange',
-        increaseArea: '25%' // optional
+        increaseArea: '20%' // optional
     });
 
     /*=====================================
      =      Registration scripts           =
      =====================================*/
 
-    var display_signup_result = function (responseMsg) {
+
+    var display_signup_result = (responseMsg)=> {
         console.log('Response data : \n' + responseMsg);
         if (responseMsg.status) {
             console.log(responseMsg);
             $('#modal-sign-up').modal('hide');
+            // TODO: using a pop up to display is bad taste
             swal('Huray ..!', 'You are now a proud backer', 'success');
         } else {
+            // TODO: bad taste
             swal(
                 'Oops...',
                 responseMsg.err[0],
@@ -101,11 +94,24 @@ $(function () {
         }
     };
 
-    $('#form-user-signup').submit(function (event) {
+    $('#form-user-signup').submit(function () {
         event.preventDefault();
-        ADD_USER.submit(this, {
-            success: display_signup_result
-        });
+        FormHandler.submit(this, {success: display_signup_result});
+
     });
+
+    /*=====================================
+     =      Login Scripts           =
+     =====================================*/
+
+    var refreshPage = function () {
+
+    }
+    
+    $("#form-user-signin").submit(function (event) {
+        event.preventDefault();
+        FormHandler.submit(this, {success: refreshPage()});
+    });
+
 
 }); // do not remove this closing tag!
