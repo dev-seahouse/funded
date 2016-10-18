@@ -6,3 +6,4 @@ const _DB_NAME = "funded_db";
 const CAN_REGISTER = "any";
 const DEFAULT_ROLE =  "backer_role";
 const SECURE = FALSE;
+const DEBUG_ON = true;

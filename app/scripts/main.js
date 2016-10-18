@@ -10,7 +10,6 @@ var FormHandler = (() => {
         data = $(form).serializeArray();
         data.push({name: 'register', value: 1});
         console.log('sending from javascript {' + data + '}');
-        console.log(form);
         $.ajax({
             type: 'POST',
             url: url,
