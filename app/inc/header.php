@@ -16,13 +16,13 @@
                     <form id="form-user-signin" type="POST" action="controllers/do_login.php">
                         <div class="form-group">
                             <div>
-                                <input name="log" id="login-user" class="form-control input" size="20"
+                                <input name="login_id" id="login-user" class="form-control input" size="20"
                                        placeholder="Enter Username" type="text">
                             </div>
                         </div>
                         <div class="form-group">
                             <div>
-                                <input name="Password" id="login-password" class="form-control input" size="20"
+                                <input name="login_pass" id="login-password" class="form-control input" size="20"
                                        placeholder="Password" type="password">
                             </div>
                         </div>

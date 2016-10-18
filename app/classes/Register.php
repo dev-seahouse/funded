@@ -14,7 +14,6 @@ user-oriented messages for direct display
 
 class Register {
     private $output;
-
     public function __construct() {
         $this->output = new Message();
     }

@@ -1,6 +1,6 @@
 <?php
 require_once("../_config/autoloader.php");
-
+require_once ("../inc/utility.php");
 class Login {
   private $output;
 
@@ -10,9 +10,10 @@ class Login {
   // this class contains many early return points, bad
   // but necessary
   public function login($role = User::BACKER_ROLE) {
-    $user_name = (filter_input(INPUT_POST, "user_name", FILTER_SANITIZE_STRING));
-    $password = (filter_input(INPUT_POST, "password", FILTER_UNSAFE_RAW));
+    $user_name = (filter_input(INPUT_POST, "login_id", FILTER_SANITIZE_STRING));
+    $password = (filter_input(INPUT_POST, "login_pass", FILTER_UNSAFE_RAW));
     $data = compact("user_name", "password");
+
     if($this->isEmpty($data)) {
       $this->output->putFailure("Bad input");
       return $this->output;
@@ -25,10 +26,12 @@ class Login {
       $this->output->putFailure("Did you forget your login name or password?");
       return $this->output;
     }
-
     // verify password
-    if (!password_verify($password)) $this->output->putFailure("Did you forget your login name or password?");
-
+    if (!password_verify($password, $user->getPassword())) {
+      $this->output->putFailure("Did you forget your login name or password?");
+    }
+    $this->setSession($user);
+    $this->output->putinfo("Login sucessful");
     return $this->output;
   }
 
@@ -39,10 +42,22 @@ class Login {
    $var; (a variable declared, but without a value)
   ========================*/
     foreach ($data as $row => $val) {
-      if (empty($val)) return false;
+      if (empty($val)) return true;
     }
-    return true;
+    return false;
   }
 
-
+  /**
+   * @param $user
+   */
+  private function setSession($user) {
+    $user_browser = $_SERVER['HTTP_USER_AGENT'];
+    // XSS protection
+    $user_name = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $user->getUserName());
+    $user_id = preg_replace("/[^0-9]+/", "", $user->getId());
+    // set session variable
+    $_SESSION['user_name'] = $user_name;
+    $_SESSION['user_id'] = $user_id;
+    $_SESSION['login_key'] = hash('sha512', $user->getPassword(), $user_browser);
+  }
 }

@@ -1,5 +1,6 @@
 <?php
 require_once("../_config/autoloader.php");
+
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
   $login = new Login();
   $output = $login->login();

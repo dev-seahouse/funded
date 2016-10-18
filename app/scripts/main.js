@@ -30,16 +30,13 @@ var FormHandler = (() => {
     // end submit_form function
     return {submit: submit_form};
 })();
-
 /*==============================================
  =            Document.ready            =
  ==============================================*/
-
 $(function () {
     /*========================================
      =            Global functions            =
      ========================================*/
-
     /* Carousel module configuration */
     $('.owl-carousel').owlCarousel({
         items: 1,

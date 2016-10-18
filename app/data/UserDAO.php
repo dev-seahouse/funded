@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__) . "/inc/utility.php";
+require_once dirname(__DIR__) . "/inc/utility.php";
 require_once("../_config/autoloader.php");
 
 class UserDAO extends BaseDAO {
@@ -18,19 +18,26 @@ class UserDAO extends BaseDAO {
 
     public function getUserByNameOrEmail($name){
       try{
+
+        $sql = "SELECT COUNT(*) FROM {$this->table_name} 
+                WHERE user_name=:uname OR email=:uname";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":uname",$name);
+        if (!($stmt->execute())) throw new DatabaseException();
+        if (($count = $stmt->fetchColumn())!=1) {
+          debug_to_terminal("Something is wrong. getUserByNameOREmail did not return 1 result but ".$count ,LOG_WARNING );
+          return false;
+        }
+        // only if exist then fetch data. 2 queryes are needed because
+        // For most databases, PDOStatement::rowCount() does not return the number of rows affected by a SELECT statement.
         $sql =  "SELECT * FROM {$this->table_name} 
-                WHERE user_name=:uname || email=:uname";
+                WHERE user_name=:uname OR email=:uname";
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(":uname",$name);
 
         if (!($stmt->execute())) throw new DatabaseException();
-        if ($stmt->fetchColumn() !==1 ) {
-          debug_to_terminal("Something is wrong. getUserByNameOREmail did not return 1 result",LOG_WARNING );
-          return false;
-        }
         //return false on failure, object on success
-        $user = $stmt->fetchObject($this->DVO_name);
-        return $user;
+        return $stmt->fetchObject($this->DVO_name);
 
       }catch (PDOException $pdoe) {
         debug_to_terminal($pdoe->getMessage());
