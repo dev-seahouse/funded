@@ -14,7 +14,7 @@ class Login {
     $password = (filter_input(INPUT_POST, "password", FILTER_UNSAFE_RAW));
     $data = compact("user_name", "password");
     if($this->isEmpty($data)) {
-      $this->output->putErr("Bad input");
+      $this->output->putFailure("Bad input");
       return $this->output;
     }
     // try to retrieve user from database
@@ -22,10 +22,13 @@ class Login {
     $user = $user_dao->getUserByNameOrEmail($user_name);
     if (!$user) {
       // user does not exist
-      $this->output->putErr("Did you forget your login name or password?");
+      $this->output->putFailure("Did you forget your login name or password?");
       return $this->output;
     }
-    echo($user);
+
+    // verify password
+    if (!password_verify($password)) $this->output->putFailure("Did you forget your login name or password?");
+
     return $this->output;
   }
 

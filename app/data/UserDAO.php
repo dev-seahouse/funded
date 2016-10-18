@@ -96,7 +96,8 @@ class UserDAO extends BaseDAO {
         $stmt = $this->conn->prepare($sql);
         $stmt->bindParam(':uname', $uname);
         $stmt->bindParam(':email', $email);
-        $stmt->execute(); // return false on failure
+        // return false on failure
+        $stmt->execute();
         return ($stmt->fetchColumn() > 0);
     }
 

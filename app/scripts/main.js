@@ -28,9 +28,7 @@ var FormHandler = (() => {
         });
     };
     // end submit_form function
-    return {
-        submit: submit_form
-    };
+    return {submit: submit_form};
 })();
 
 /*==============================================

@@ -29,7 +29,7 @@ class Message {
         array_push($this->infos, $msg);
     }
 
-    public function putErr($msg) {
+    public function putFailure($msg) {
         // as soon as an error msg is encountered, auto change error status
         // violates SRP ? sometimes need to break rule for greater good
         $this->setStatusFailure();

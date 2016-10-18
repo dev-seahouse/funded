@@ -29,9 +29,9 @@ class Register {
                 $user_db_access = new UserDAO();
                 $user_db_access->create($new_user);
             } catch (DatabaseException $dbe) {
-                $this->output->putErr($dbe);
+                $this->output->putFailure($dbe);
             } catch (DuplicateUserException $due) {
-                $this->output->putErr($due->getMessage());
+                $this->output->putFailure($due->getMessage());
             } catch (Exception $e) {
                 $this->output->putHiddenErr($e->getMessage());
             }
@@ -43,10 +43,10 @@ class Register {
         $isValid = true;
         foreach ($data as $row => $val) {
             if ($val === '') {
-                $output->putErr("Did you forget to fill in something?");
+                $output->putFailure("Did you forget to fill in something?");
                 $isValid = false;
             } else if ($val === null || $val === false) {
-                $output->putErr("Did you mistyped something? ");
+                $output->putFailure("Did you mistyped something? ");
                 $isValid = false;
             }
         }
