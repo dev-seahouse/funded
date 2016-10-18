@@ -53,6 +53,10 @@ class Message {
         return $this->data;
     }
 
+    public function putData($item){
+      array_push($this->data, $item);
+    }
+
     private function makeMsgArr() {
         $messages = array(
             "status" => $this->status,

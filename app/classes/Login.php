@@ -3,7 +3,6 @@ require_once("../_config/autoloader.php");
 require_once ("../inc/utility.php");
 class Login {
   private $output;
-
   public function __construct() {
     $this->output = new Message();
   }
@@ -26,12 +25,19 @@ class Login {
       $this->output->putFailure("Did you forget your login name or password?");
       return $this->output;
     }
+
     // verify password
     if (!password_verify($password, $user->getPassword())) {
       $this->output->putFailure("Did you forget your login name or password?");
     }
-    $this->setSession($user);
+
+    $this->setSessionData($user);
     $this->output->putinfo("Login sucessful");
+    $this->output->putData($_SESSION['user_name']);
+    $this->output->putData($_SESSION['user_id']);
+
+      
+
     return $this->output;
   }
 
@@ -50,7 +56,7 @@ class Login {
   /**
    * @param $user
    */
-  private function setSession($user) {
+  private function setSessionData($user) {
     $user_browser = $_SERVER['HTTP_USER_AGENT'];
     // XSS protection
     $user_name = preg_replace("/[^a-zA-Z0-9_\-]+/", "", $user->getUserName());
