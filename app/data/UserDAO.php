@@ -16,9 +16,31 @@ class UserDAO extends BaseDAO {
         $this->conn = $this->get_connection();
     }
 
+    public function getUserByNameOrEmail($name){
+      try{
+        $sql =  "SELECT * FROM {$this->table_name} 
+                WHERE user_name=:uname || email=:uname";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bindParam(":uname",$name);
+
+        if (!($stmt->execute())) throw new DatabaseException();
+        if ($stmt->fetchColumn() !==1 ) {
+          debug_to_terminal("Something is wrong. getUserByNameOREmail did not return 1 result",LOG_WARNING );
+          return false;
+        }
+        //return false on failure, object on success
+        $user = $stmt->fetchObject($this->DVO_name);
+        return $user;
+
+      }catch (PDOException $pdoe) {
+        debug_to_terminal($pdoe->getMessage());
+        throw new DatabaseException();
+      }
+    }
+
     public function create(User $user) {
 
-        if ($this->isUserExit($user)) {
+        if ($this->isUserExist($user)) {
             throw new DuplicateUserException("The Username or Email has already been taken.");
         }
 
@@ -40,7 +62,7 @@ class UserDAO extends BaseDAO {
 
             $stmt = $this->conn->prepare($sql);
             $this->bindValues($stmt, $placeholder_value_pairs);
-            if (!($isQuerySuccess = $stmt->execute())) {
+            if (!($stmt->execute())) {
                 throw new DatabaseException("Sorry, we cannot create an account for you due to technical complexity.");
             }
 
@@ -53,7 +75,7 @@ class UserDAO extends BaseDAO {
             $stmt->bindParam(":uid", $inserted_uid, PDO::PARAM_INT);
             $stmt->bindValue(":rid", $user->getRoleId(), PDO::PARAM_INT);
 
-            if(!($isQuerySuccess = ($stmt->execute()))){
+            if(!($stmt->execute())){
                 throw new DatabaseException("Sorry, we cannot create an account for you due to technical difficulty.");
             }
 
@@ -65,7 +87,7 @@ class UserDAO extends BaseDAO {
         }
     }
 
-    private function isUserExit(User $user) {
+    private function isUserExist(User $user) {
         $uname = $user->getUserName();
         $email = $user->getEmail();
         $sql = "SELECT COUNT(*)

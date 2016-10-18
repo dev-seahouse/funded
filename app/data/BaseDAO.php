@@ -17,7 +17,7 @@ abstract class BaseDAO {
     public function get_connection(){
         return $this->con;
     }
-    // return false on failure, single User object on success
+    // return false on failure, single object on success
     public function fetch($id){
         $sql = "SELECT * 
                 FROM  {$this->table_name} 

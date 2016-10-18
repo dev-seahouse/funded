@@ -13,7 +13,7 @@
                     <h3 class="modal-title text-xs-center">Sign in now</h3>
                 </div>
                 <div class="modal-body">
-                    <form id="form-user-signin" type="POST" action="controllers/do_register.php">
+                    <form id="form-user-signin" type="POST" action="controllers/do_login.php">
                         <div class="form-group">
                             <div>
                                 <input name="log" id="login-user" class="form-control input" size="20"
@@ -26,6 +26,15 @@
                                        placeholder="Password" type="password">
                             </div>
                         </div>
+
+                      <div class="form-group" style="display:none">
+                        <div>
+                          <input name="email" class="form-control" size="20"
+                                 placeholder="Please leave this field empty"
+                                 type="text">
+                        </div>
+                      </div>
+                      <input type = "hidden" name = "login" value = "1" >
 
                         <div class="form-group">
                             <div>
@@ -79,7 +88,7 @@
                         </div>
                         <div class="form-group">
                             <div>
-                                <input name="user_name" class="form-control" size="20" placeholder="Enter Username"
+                                <input name="user_name" class="form-control" size="20" placeholder="Enter Username/Email"
                                        type="text">
                             </div>
                         </div>
@@ -102,8 +111,14 @@
                                        type="text">
                             </div>
                         </div>
-
-                        <?php // todo:honey pot for spam protection?>
+                       <div class="form-group" style="display:none">
+                         <div>
+                           <input name="address" class="form-control" size="20"
+                                 placeholder="Please leave this field empty"
+                                 type="text">
+                         </div>
+                       </div>
+                        <input type = "hidden" name="register" value="1">
                         <div class="form-group">
                             <div>
                                 <input class="btn btn-block btn-lg btn-primary" value="REGISTER" type="submit"
