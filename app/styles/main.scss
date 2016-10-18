@@ -29,8 +29,3 @@ $icon-font-path: '../fonts/';
 
 }
 
-/* Bug fixes */
-// fix sweet alert opacity
-.swal2-container.fade{
-  opacity: .9;
-}

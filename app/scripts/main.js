@@ -102,7 +102,7 @@ $(function () {
 
     }
     
-    $("#form-user-signin").submit(function (event) {
+    $('#form-user-signin').submit(function (event) {
         event.preventDefault();
         FormHandler.submit(this, {success: refreshPage()});
     });
