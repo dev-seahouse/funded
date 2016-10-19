@@ -1,10 +1,10 @@
 <?php
 //Define the paths to the directories holding class files
 $paths = array(
-    '../classes/',
-    '../data/',
-    '../models',
-    '../exceptions'
+    dirname(__DIR__).'/classes',
+    dirname(__DIR__).'/data',
+    dirname(__DIR__).'/models',
+    dirname(__DIR__).'/exceptions'
 );
 //Add the paths to the class directories to the include path.
 set_include_path(get_include_path() . PATH_SEPARATOR . implode(PATH_SEPARATOR, $paths));

@@ -1,8 +1,9 @@
 <?php
-require_once("../_config/autoloader.php");
-
+require_once dirname(__DIR__)."/_config/autoloader.php";
+$sec = new Security();
+$sec->sec_session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
-  $login = new Login();
+  $login = new Authentication();
   $output = $login->login();
   header('Content-type: application/json');
   echo $output->toJson();

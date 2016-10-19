@@ -1,5 +1,5 @@
 <?php
-require_once("../_config/autoloader.php");
+require_once(dirname(__DIR__)."/_config/autoloader.php");
 
 class User {
   private $user_name;
@@ -9,8 +9,6 @@ class User {
   private $last_name;
   private $role_id;
   private $last_login;
-
-
   private $id;
 
   const BACKER_ROLE = 1;

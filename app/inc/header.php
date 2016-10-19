@@ -1,4 +1,9 @@
 <?php
+
+include_once dirname(__DIR__)."/_config/autoloader.php";
+$auth = new Authentication();
+$sec = new Security();
+$sec->sec_session_start();
 /* Todos
 1. Indicate that user is on certain a page by adding active classes on the page
  */
@@ -166,6 +171,22 @@
           <a class="btn btn-link search-trigger" href="#"><i class="fa fa-search"> </i></a>
         </li>
         <div class="nav navbar-nav navbar-links pull-right" id="member_area">
+
+          <?php
+          if ($auth->isUserLoggedIn(1)) { ?>
+            <li class="nav-link">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 aria-expanded="false"> <i
+                    class="glyphicon glyphicon-log-in hide visible-xs "></i> Hi, <?=strtoupper($_SESSION["last_name"])?> <b
+                    class="caret"></b></a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-item"><a href="#"> Profile</a></li>
+                <li class="dropdown-item"><a href="#"> Backed Projects</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-item"><a href="controllers/do_logout.php" id="logoutBtn"> Log Out</a></li>
+              </ul>
+            </li>
+          <?php } else { ?>
           <li class="nav-item">
             <!-- Todo:  at small screen, show icon dropdown instead of text -->
             <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-login">Sign in</a>
@@ -173,19 +194,7 @@
           <li class="nav-item hidden-xs-down">
             <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-sign-up">Register</a>
           </li>
-          <?php
-          /*          <li class="nav-link"><a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                                              aria-expanded="false"> <i
-                                  class="glyphicon glyphicon-log-in hide visible-xs "></i> Hi, User <b
-                                  class="caret"></b></a>
-                            <ul class="dropdown-menu dropdown-menu-right">
-                              <li class="dropdown-item"><a href="#"> Profile</a></li>
-                              <li class="dropdown-item"><a href="#"> Backed Projects</a></li>
-                              <li class="divider"></li>
-                              <li class="dropdown-item"><a href="#"> Log Out</a></li>
-                            </ul>
-                          </li>*/
-          ?>
+          <?php }?>
         </div>
       </ul>
       <div class="search-bar text-right" id="#search-bar">

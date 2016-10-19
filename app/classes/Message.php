@@ -53,8 +53,8 @@ class Message {
         return $this->data;
     }
 
-    public function putData($item){
-      array_push($this->data, $item);
+    public function putData($key, $value){
+      $this->data[$key] = $value;
     }
 
     private function makeMsgArr() {

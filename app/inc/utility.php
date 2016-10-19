@@ -1,5 +1,5 @@
 <?php
-require dirname(__DIR__)."/_config/config.php";
+require_once dirname(__DIR__)."/_config/config.php";
 
 function debug_to_terminal( $data ,$log_type = LOG_INFO) {
   if ( is_array( $data ) )

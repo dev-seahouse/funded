@@ -1,6 +1,6 @@
 <?php
-require_once(dirname(__DIR__)."/_config/autoloader.php");
-include_once (dirname(__DIR__)."/_config/config.php");
+include_once dirname(__DIR__)."/_config/config.php";
+require_once dirname(__DIR__)."/_config/autoloader.php";
 
 class Security {
     public function sec_session_start(){
@@ -27,7 +27,7 @@ class Security {
 
 
     public static function hash($password) {
-        return password_hash($password, PASSWORD_DEFAULT, ['cost' => 14]);
+        return password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
     }
 
     public static function verify($password, $hash) {

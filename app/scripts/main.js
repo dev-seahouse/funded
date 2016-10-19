@@ -38,10 +38,10 @@ var FormHandler = (() => {
  */
 var AjaxLoader = (function () {
     var $loading_icon = $(
-        "<div class='spinner-content'>" +
-        "<i class=\'fa fa-circle-o-notch fa-spin fa-3x fa-fw\'>" +
-        "<span class=\'sr-only\'>Loading</span></i>" +
-        "</div>");
+        '<div class=\'spinner-content\'>' +
+        '<i class=\'fa fa-circle-o-notch fa-spin fa-3x fa-fw\'>' +
+        '<span class=\'sr-only\'>Loading</span></i>' +
+        '</div>');
     var $overlay = $('<div class="spinner-overlay in"></div>');
 
     var showLoader = function () {
@@ -126,6 +126,19 @@ $(function () {
             AjaxLoader.removeLoader();
             $('#modal-login').modal('hide');
             $('#member_area').empty();
+            $('#member_area').append(
+                '<li class="nav-link">'+
+                    '<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"> ' +
+                '<iclass="glyphicon glyphicon-log-in hide visible-xs "></i> Hi,'+ responseMsg.data.last_name.toUpperCase() +
+                '<b class="caret"></b></a>'+
+                    '<ul class="dropdown-menu dropdown-menu-right">'+
+                        '<li class="dropdown-item"><a href="#"> Profile</a></li>'+
+                        '<li class="dropdown-item"><a href="#"> Backed Projects</a></li>'+
+                        '<li class="divider"></li>'+
+                        '<li class="dropdown-item"><a href="controllers/do_logout.php" id="logoutBtn"> Log Out</a></li>'+
+                    '</ul>'+
+                '</li>'
+            );
 
 
         } else {
