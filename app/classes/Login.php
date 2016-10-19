@@ -25,7 +25,7 @@ class Login {
       $this->output->putFailure("Did you forget your login name or password?");
       return $this->output;
     }
-
+    
     // verify password
     if (!password_verify($password, $user->getPassword())) {
       $this->output->putFailure("Did you forget your login name or password?");
@@ -33,12 +33,26 @@ class Login {
 
     $this->setSessionData($user);
     $this->output->putinfo("Login sucessful");
-    $this->output->putData($_SESSION['user_name']);
-    $this->output->putData($_SESSION['user_id']);
-
-      
+    $this->output->putData(array('user_name' => $_SESSION['user_name']));
+    $this->output->putData(array('user_id' => $_SESSION['user_id']));
+    $this->output->putData(array('first_name' => $user->getFirstname()));
+    $this->output->putData(array('profile_pic' => $user->profile_pic));
 
     return $this->output;
+  }
+
+  public function isUserLoggedIn(){
+    if (isset($_SESSION['user_id'],
+        $_SESSION['user_name'],
+        $_SESSION['login_key'])) {
+
+      $user_id = $_SESSION['user_id'];
+      $login_key = $_SESSION['login_key'];
+      $user_name = $_SESSION['user_name'];
+      $user_browser = $_SERVER['HTTP_USER_AGENT'];
+
+
+    }
   }
 
   private function isEmpty($data) {

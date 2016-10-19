@@ -2,13 +2,13 @@
 /*=======================================
  =            Modules            =
  =======================================*/
+/* Form handler module */
 var FormHandler = (() => {
     var data, submit_form, url;
     // submit form function
     submit_form = (form, callbacks) => {
         url = $(form).attr('action');
         data = $(form).serializeArray();
-        data.push({name: 'register', value: 1});
         console.log('sending from javascript {' + data + '}');
         $.ajax({
             type: 'POST',
@@ -29,6 +29,34 @@ var FormHandler = (() => {
     };
     // end submit_form function
     return {submit: submit_form};
+})();
+
+/* Ajax loader module :
+ require:
+ - bootstrap 4 modal
+ - jquery 3
+ */
+var AjaxLoader = (function () {
+    var $loading_icon = $(
+        "<div class='spinner-content'>" +
+        "<i class=\'fa fa-circle-o-notch fa-spin fa-3x fa-fw\'>" +
+        "<span class=\'sr-only\'>Loading</span></i>" +
+        "</div>");
+    var $overlay = $('<div class="spinner-overlay in"></div>');
+
+    var showLoader = function () {
+        $overlay.append($loading_icon);
+        $('body').append($overlay);
+    };
+
+    var removeLoader = function () {
+        $overlay.hide();
+    };
+
+    return {
+        showLoader: showLoader,
+        removeLoader: removeLoader
+    }
 })();
 /*==============================================
  =            Document.ready            =
@@ -80,32 +108,37 @@ $(function () {
             swal('Huray ..!', 'You are now a proud backer', 'success');
         } else {
             // TODO: bad taste
-            swal(
-                'Oops...',
-                responseMsg.err[0],
-                'error'
-            )
+            swal('Oops...', responseMsg.err[0], 'error');
         }
     };
 
-    $('#form-user-signup').submit(function () {
+    $('#form-user-signup').submit(function (event) {
         event.preventDefault();
         FormHandler.submit(this, {success: display_signup_result});
-
     });
 
     /*=====================================
      =      Login Scripts           =
      =====================================*/
+    var displayUserMenu = (responseMsg) => {
+        if (responseMsg.status) {
+            console.log(responseMsg);
+            AjaxLoader.removeLoader();
+            $('#modal-login').modal('hide');
+            $('#member_area').empty();
 
-    var refreshPage = function () {
 
-    }
-    
+        } else {
+            swal('Ahh..', responseMsg.err[0], 'error');
+        }
+    };;
+
     $('#form-user-signin').submit(function (event) {
         event.preventDefault();
-        FormHandler.submit(this, {success: refreshPage()});
+        FormHandler.submit(this, {
+            beforeSend: AjaxLoader.showLoader,
+            success: displayUserMenu
+        });
     });
-
 
 }); // do not remove this closing tag!
