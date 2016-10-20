@@ -58,9 +58,17 @@ $currentPage = "browse"
           </div>
         </div>
       </div>
-      <div class="row p-y-1 p-x-1">
-        <p class="h3">Trending projects</p>
+      <div class="row p-t-3 p-x-2">
+        <h2>Trending Projects</h2>
+        <div class="col-xs-9">
+
+        </div>
+        <div class="col-xs-9">
+        </div>
+        <div class="col-xs-9">
+        </div>
       </div>
+
 
     </div>
     <!-- end main content -->
