@@ -1,9 +1,7 @@
 <?php
-
 include_once dirname(__DIR__)."/_config/autoloader.php";
 $auth = new Authentication();
-$sec = new Security();
-$sec->sec_session_start();
+
 /* Todos
 1. Indicate that user is on certain a page by adding active classes on the page
  */

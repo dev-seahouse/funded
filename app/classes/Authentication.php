@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__DIR__)."/_config/autoloader.php");
 require_once(dirname(__DIR__)."/inc/utility.php");
-require_once (dirname(__DIR__)."/data/UserDAO.php");
+require_once(dirname(__DIR__)."/data/UserDAO.php");
 
 class Authentication {
   private $output;

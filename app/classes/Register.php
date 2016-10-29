@@ -1,6 +1,5 @@
 <?php
 require_once("../_config/autoloader.php");
-
 /*
 This class make use of Message class
 for I/O of error/info/data
@@ -21,7 +20,6 @@ class Register {
     public function register($role = User::BACKER_ROLE) {
             $data = $this->createUserData($role);
             if (!$this->isValidInput($data, $this->output)) return $this->output;
-
             $data["password"] = Security::hash($data["password"]);
             try {
                 $new_user = new User($data);

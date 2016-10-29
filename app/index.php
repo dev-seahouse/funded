@@ -4,14 +4,14 @@ $pageTitle = "Home";
 $currentPage = "browse"
 /* End page specific variables */
 ?>
-<!doctype html>
+<?php include_once __DIR__."/inc/security.php";?>
 <html class="no-js" lang="">
-  <?php include __DIR__."/inc/head.php"?>
+  <?php include_once __DIR__."/inc/head.php";?>
   <body>
     <!--[if lt IE 10]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <?php include __DIR__."/inc/header.php";?>
+    <?php include_once __DIR__."/inc/header.php";?>
     <!-- start main content -->
     <div class="container-fluid">
       <div class="row gallery">

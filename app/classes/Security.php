@@ -1,6 +1,7 @@
 <?php
 include_once dirname(__DIR__)."/_config/config.php";
 require_once dirname(__DIR__)."/_config/autoloader.php";
+ob_start();
 
 class Security {
     public function sec_session_start(){
@@ -34,3 +35,4 @@ class Security {
         return password_verify($password, $hash);
     }
 }
+// ob_end_clean();
