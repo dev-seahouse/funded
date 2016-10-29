@@ -6,24 +6,11 @@ include "../data/DbConnection.php";
 
 <!-- Having difficulty connecting localhost, but works with 127.0.0.1 -->
 <?php 
-$dsn = "mysql:dbname=funded_db;host=127.0.0.1";
-$user = "root";
-$pass = "";
-
-try{
-$conn = new PDO($dsn, $user, $pass);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-} catch (PDOException $pdoe) {
-			echo $pdoe->getMessage(); // in real life never do this
-			echo "error!!!!!";
-} catch (Exception $e) {
-			echo $e->getMessage();
-}
+$conn = DbConnection::getInstance()->getConnection();
 
 //get categories
 include '../classes/category.php';
 $category = new Category($conn);
-
 ?>
 
 
