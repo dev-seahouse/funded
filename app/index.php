@@ -18,6 +18,8 @@ $conn = PDOConn::getPDO();
 // $client = &$clientFac->getClient($userName, $password);
 
 
+session_start();
+
 ?>
 <!doctype html>
 <html class="no-js" lang="">
@@ -45,6 +47,9 @@ $conn = PDOConn::getPDO();
           1. which projects are not active but marked as featured so that i can quickly clean up things?
           2. one click button to update all projects that does not have active status
           */
+          if(isset($_SESSION['uid'])) {
+            generate
+          }
           ?>
 
           <div class="carousel-cell">

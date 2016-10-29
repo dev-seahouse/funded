@@ -102,8 +102,15 @@ $(document).ready(function() {
     }
   }
 
+  // when user login success
   var display_login_result = function(data) {
-    console.log("Response data : \n" + data);
+    if(data === 'success'){
+      console.log("Response data : \n" + data);
+      $("#modal-login").modal('hide');  
+    } else {
+      alert("Your username and password does not match. Please try again.");
+    }
+    
   }
 
   $("#form-user-signup").submit(function(event) {

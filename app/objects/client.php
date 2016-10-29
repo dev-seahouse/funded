@@ -14,6 +14,7 @@ class Client{
 		if($client == null) {
 			throw new Exception("No such user exists.");
 		}
+		
 		return $client;
 	}
 

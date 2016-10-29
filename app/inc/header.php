@@ -1,6 +1,6 @@
-<?php
-?>
+
 <header>
+<!-- Greeting for users begin --> 
   <!-- Modal Sign in Begins -->
   <div class="modal" id="modal-login" tabindex="-1" role="dialog">
     <div class="modal-dialog small">
@@ -129,14 +129,21 @@
         </li>
       </ul>
       <!-- end header linkts -->
+      
       <ul class="nav navbar-nav navbar-links pull-right ">
         <li class="nav-item">
           <a class="btn btn-link search-trigger" href="#"><i class="fa fa-search"> </i></a>
         </li>
+        <?php if(!isset($_SESSION['uid'])){ ?>
         <li class="nav-item">
           <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-login">Sign in | Register</a>
           <!-- Todo:  at small screen, show icon dropdown instead of text -->
         </li>
+        <? } else { ?>
+          <li class = "nav-item">
+          <a class="nav-link" href="../controllers/home.php"><? echo "Hi! ".$_SESSION['user_name']?></a>
+          </li>
+        <? } ?>
       </ul>
       <div class="search-bar text-right" id="#search-bar">
         <a class="pull-right search-close" href="#">

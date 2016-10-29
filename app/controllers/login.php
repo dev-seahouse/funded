@@ -7,15 +7,19 @@
 // }catch(Exception $e){
 // 	echo $e.getMessage();
 // }
+  session_start();
 
   //Try to connect to database 
   require_once(__DIR__."/../objects/pdo.php");
   require_once(__DIR__."/../objects/client.php");
   try{
     $client = Client::getClient($_POST['username'],$_POST['password']);
-    var_dump($client);
+    
+    //set sesssions
+    $_SESSION['uid'] = $client['id'];
+    $_SESSION['user_name'] = $client['user_name'];
+    echo "success";
   } catch (Exception $e) {
     //Give error message
-    $message = "Your username and password does not match. Please try again.";
-    echo "<script type='text/javascript'>alert('$message');</script>";
+    echo "not success";
   }
