@@ -154,4 +154,34 @@ $(function () {
         });
     });
 
+
+    /*=====================================
+     =      Create Project Scripts           =
+     =====================================*/
+      var handle_create_project_result =(responseMsg)=> {
+        console.log('Response data : \n' + responseMsg);
+        if(responseMsg.status){
+            console.log(responseMsg);
+            AjaxLoader.removeLoader();
+            $('#modal-create-project').modal('hide');
+            // TODO: using a pop up to display is bad taste
+            swal('Huray ..!', 'Your fund is on its way', 'success');
+        } else {
+            // TODO: bad taste
+            console.log("here");
+            AjaxLoader.removeLoader();
+            swal('Oops...', responseMsg.err[0], 'error');
+        }
+    };
+
+    $('#form-create-project').submit(function(event) {
+        event.preventDefault();
+        FormHandler.submit(this, {
+            beforeSend: AjaxLoader.showLoader,
+            success: handle_create_project_result
+        });
+    });
+
+
+
 }); // do not remove this closing tag!

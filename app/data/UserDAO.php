@@ -1,6 +1,6 @@
 <?php
 include_once dirname(__DIR__)."/_config/autoloader.php";
-require_once dirname(__DIR__)."/models/User.php";
+
 
 class UserDAO extends BaseDAO {
   private $conn;
@@ -89,8 +89,8 @@ class UserDAO extends BaseDAO {
     $values = array(
         $user->getUserName(),
         $user->getPassword(),
-        $user->getFname(),
-        $user->getLname(),
+        $user->getFirstname(),
+        $user->getLastname(),
         $user->getEmail()
     );
 

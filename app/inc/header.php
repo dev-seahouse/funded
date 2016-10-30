@@ -1,14 +1,101 @@
 <?php
-
 include_once dirname(__DIR__)."/_config/autoloader.php";
 $auth = new Authentication();
-$sec = new Security();
-$sec->sec_session_start();
+$conn = DbConnection::getInstance()->getConnection();
+$projectDAO = new ProjectDAO();
+$category = CategoryDAO::getCategories($conn);
+
 /* Todos
 1. Indicate that user is on certain a page by adding active classes on the page
  */
 ?>
 <header>
+<!-- Modal Create Project Begins -->
+<div class="modal" id="modal-create-project" tabindex="-1" role="dialog">
+<div class="modal-dialog medium">
+<div class="modal-content">
+  <div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+    <h3 class="modal-title text-xs-center">Create Projects</h3>
+  </div>
+  <div class="modal-body">
+    <form id="form-create-project" type = "POST" action="controllers/create_project.php">
+      <div class="form-group">
+        <div>
+          <input type="text" name="title" class="form-control input" size="20" placeholder="Enter Project Title">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <input type="text" name="pledge_goal" class="form-control input" size="20" placeholder="How much money you want!">
+        </div>
+      </div>
+
+    <?php 
+      if($auth->isUserLoggedIn(1)){ ?>
+           <div class ="form-group" style="display:none">
+           <div>
+             <input type = "text" name = "creator_id" class ="form-control" value="<?php echo $_SESSION['user_id'];?>">
+           </div> 
+           </div>
+      <?php } else { ?>
+        <div class="form-group">
+        <div>
+        <input type="text" name="creator_id" class="form-control input" size="20" placeholder="Your unique ID">
+        </div>
+        </div>
+         <?php } ?>
+
+        <div class="form-group">
+        <div>
+          <input type="text" name="country" class="form-control input" size="20" placeholder="Your country or location">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <input type="text" name="email" class="form-control input" size="20" placeholder="Enter your preferred contact email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <select name= 'category' class="form-control">
+            <?php
+            foreach ($category as $row) {
+            echo $row['name'];
+            echo '<option name="' 
+                . $row['name']
+                . '"/>'
+                . $row['name']
+                . '</option>';
+             }?>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <textarea name="overview" class="form-control" cols = "10">
+          </textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+              <div>
+                <input class="btn btn-block btn-lg btn-primary" value="CREATE PROJECT" type="submit"
+                       id="submit-create-project">
+              </div>
+        </div>
+    </form>
+  </div>
+</div>
+  
+</div>
+  
+</div>
+
   <!-- Modal Sign in Begins -->
   <div class="modal" id="modal-login" tabindex="-1" role="dialog">
     <div class="modal-dialog small">
@@ -161,7 +248,7 @@ $sec->sec_session_start();
         </li>
 
         <li class="nav-item hidden-xs-down">
-          <a class="nav-link" href="../controllers/create_project.php">Create Projects</a>
+          <a class="nav-link" data-toggle="modal" data-target="#modal-create-project">Create Projects</a>
         </li>
       </ul>
       <!-- end header linkts -->
@@ -181,7 +268,7 @@ $sec->sec_session_start();
                     class="caret"></b></a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-item"><a href="#"> Profile</a></li>
-                <li class="dropdown-item"><a href="#"> Backed Projects</a></li>
+                <li class="dropdown-item"><a href="controllers/backed_projects.php"> Backed Projects</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-item"><a href="controllers/do_logout.php" id="logoutBtn"> Log Out</a></li>
               </ul>
