@@ -66,10 +66,47 @@ $currentPage = "browse"
 
         </div>
         <div class="col-xs-9">
+
         </div>
         <div class="col-xs-9">
+
         </div>
       </div>
+
+      <!-- Project card -->
+
+      <?php 
+  $projectFac = new ProjectDAO();
+  $requests = array('featured' => 1);
+  $fields = array('title', 'overview');
+
+  $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
+  $counter = 0;
+
+  foreach ($featuredProjects as $row) {
+    $counter++;
+
+    if($counter == 1){
+      echo "<div class='card-deck-wrapper'>
+      <div class='card-deck'>";
+    }
+
+    echo "<div class='card'>
+      <img class='card-img-top' src='...'' alt='Card image cap'>
+      <div class='card-block'>
+        <h4 class='card-title'>{$row['title']}</h4>
+        <p class='card-text'>{$row['overview']}</p>
+        <p class='card-text'><small class='text-muted'>Last updated 3 mins ago</small></p>
+      </div>
+    </div>";
+
+    if($counter == 4){
+      echo '</div></div>';
+      $counter = 0;
+    }
+  }
+?>
+      <!-- Project card ends -->
 
 
     </div>

@@ -26,18 +26,26 @@ class ProjectDAO extends BaseDAO
 	* $fields in the form of array(column, column, ..)
 	*/
 
-	function getProject($requests, $fields) {
+	function getProject($requests, $fields, $table = "project") {
 		$sql = "SELECT ".implode(",", $fields)."
-		FROM {$this->table_name} 
+		FROM {$table} 
 		WHERE ";
+
+		$keys = array_keys($requests);
+		$values = array_values($requests);
+		$placeholder = $this->makePlaceHolders($keys);
+		$placeholder_value_pairs = array_combine($placeholder, $values);
+		
+
 		for ($counter=0 ; $counter < count($requests); $counter++) { 
-			$sql .= ($counter === (count($requests)-1)) ? "? = ?" : "? = ? ,";
+			$sql .= ($counter === (count($requests)-1)) ? "{$keys[$counter]} = {$placeholder[$counter]}" : "{$keys[$counter]} = {$placeholder[$counter]},";
 		}
+		
 		$stmt = $this->conn->prepare($sql);
-		$counter = 1;
-		foreach ($requests as $key => $value) {
-				$stmt->bindValue($counter++, $key);
-				$stmt->bindValue($counter++, $value);
+		$this->bindValues($stmt, $placeholder_value_pairs);
+
+		if(!$stmt->execute()){
+			echo "failure";
 		}
 
 		return $stmt->fetchAll();
