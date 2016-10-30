@@ -10,14 +10,14 @@ $pdo = DbConnection::getInstance();
 $conn = $pdo->getConnection();
 
 ?>
-<!doctype html>
+<?php include_once __DIR__."/inc/security.php";?>
 <html class="no-js" lang="">
-  <?php include __DIR__."/inc/head.php"?>
+  <?php include_once __DIR__."/inc/head.php";?>
   <body>
     <!--[if lt IE 10]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <?php include __DIR__."/inc/header.php";?>
+    <?php include_once __DIR__."/inc/header.php";?>
     <!-- start main content -->
     <div class="container-fluid">
       <div class="row gallery">
@@ -36,6 +36,8 @@ $conn = $pdo->getConnection();
           1. which projects are not active but marked as featured so that i can quickly clean up things?
           2. one click button to update all projects that does not have active status
           */
+
+          // if(isset)
           ?>
           <div class="carousel-cell">
             <input type="hidden" value="project_id"/>
@@ -63,17 +65,19 @@ $conn = $pdo->getConnection();
             <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
           </div>
         </div>
-      </div> <!--  gcarousel allary ends -->
-
-
-      <div class="row p-y-1 p-x-1">
-        <p class="h3">Trending projects</p>
       </div>
-      <?php
-        include "./objects/gallery.php";
-        $gallery = new Gallery($conn);
-        $gallery->prepare();
-      ?>
+      <div class="row p-t-3 p-x-2">
+        <h2>Trending Projects</h2>
+        <div class="col-xs-9">
+
+        </div>
+        <div class="col-xs-9">
+        </div>
+        <div class="col-xs-9">
+        </div>
+      </div>
+
+
     </div>
     <!-- end main content -->
     <div class="footer">

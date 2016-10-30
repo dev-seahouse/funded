@@ -1,10 +1,11 @@
 <?php
-require_once("../_config/autoloader.php");
+include_once dirname(__DIR__)."/_config/config.php";
+require_once dirname(__DIR__)."/_config/autoloader.php";
+ob_start();
 
 class Security {
     public function sec_session_start(){
         $session_name = 'sec_session_id';   // Set a custom session name
-
         session_name($session_name);
 
         $secure = true;
@@ -24,4 +25,14 @@ class Security {
         session_start();            // Start the PHP session
         session_regenerate_id(true);    // regenerated the session, delete the old one.
     }
+
+
+    public static function hash($password) {
+        return password_hash($password, PASSWORD_DEFAULT, ['cost' => 10]);
+    }
+
+    public static function verify($password, $hash) {
+        return password_verify($password, $hash);
+    }
 }
+// ob_end_clean();

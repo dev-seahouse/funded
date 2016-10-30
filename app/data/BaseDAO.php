@@ -17,9 +17,10 @@ abstract class BaseDAO {
     public function get_connection(){
         return $this->con;
     }
-    // return false on failure, single User object on success
-    public function fetch($id){
-        $sql = "SELECT * 
+
+    // return false on failure, single object on success
+    public function fetch($id, $fields = "*"){
+        $sql =   "SELECT ".implode(",",$fields)."
                 FROM  {$this->table_name} 
                 WHERE {$this->primary_key} = :id";
         $stmt = $this->con->prepare($sql);
@@ -29,8 +30,8 @@ abstract class BaseDAO {
     }
 
     // return array of User object on success, false on failure
-    public function find($key, $value) {
-        $sql =  "SELECT * 
+    public function find($key, $value, $fields) {
+        $sql =  "SELECT ". implode(",",$fields)."
                 FROM  {$this->table_name} 
                 WHERE :key = :value";
         $stmt = $this->con->prepare($sql);
@@ -55,6 +56,8 @@ abstract class BaseDAO {
         $stmt->execute();
         return ($stmt->rowCount());//  ? "Update sucess" : "Update failed";
     }
+
+
 
         // TBD
     /*    public function count($key,$value, $fields = "*"){

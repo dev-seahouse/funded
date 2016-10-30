@@ -1,9 +1,101 @@
 <?php
+include_once dirname(__DIR__)."/_config/autoloader.php";
+$auth = new Authentication();
+$conn = DbConnection::getInstance()->getConnection();
+$projectDAO = new ProjectDAO();
+$category = CategoryDAO::getCategories($conn);
+
 /* Todos
 1. Indicate that user is on certain a page by adding active classes on the page
  */
 ?>
 <header>
+<!-- Modal Create Project Begins -->
+<div class="modal" id="modal-create-project" tabindex="-1" role="dialog">
+<div class="modal-dialog medium">
+<div class="modal-content">
+  <div class="modal-header">
+  <button type="button" class="close" data-dismiss="modal" aria-hidden="true"> &times; </button>
+    <h3 class="modal-title text-xs-center">Create Projects</h3>
+  </div>
+  <div class="modal-body">
+    <form id="form-create-project" type = "POST" action="controllers/create_project.php">
+      <div class="form-group">
+        <div>
+          <input type="text" name="title" class="form-control input" size="20" placeholder="Enter Project Title">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <input type="text" name="pledge_goal" class="form-control input" size="20" placeholder="How much money you want!">
+        </div>
+      </div>
+
+    <?php 
+      if($auth->isUserLoggedIn(1)){ ?>
+           <div class ="form-group" style="display:none">
+           <div>
+             <input type = "text" name = "creator_id" class ="form-control" value="<?php echo $_SESSION['user_id'];?>">
+           </div> 
+           </div>
+      <?php } else { ?>
+        <div class="form-group">
+        <div>
+        <input type="text" name="creator_id" class="form-control input" size="20" placeholder="Your unique ID">
+        </div>
+        </div>
+         <?php } ?>
+
+        <div class="form-group">
+        <div>
+          <input type="text" name="country" class="form-control input" size="20" placeholder="Your country or location">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <input type="text" name="email" class="form-control input" size="20" placeholder="Enter your preferred contact email">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <select name= 'category' class="form-control">
+            <?php
+            foreach ($category as $row) {
+            echo $row['name'];
+            echo '<option name="' 
+                . $row['name']
+                . '"/>'
+                . $row['name']
+                . '</option>';
+             }?>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <textarea name="overview" class="form-control" cols = "10">
+          </textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+              <div>
+                <input class="btn btn-block btn-lg btn-primary" value="CREATE PROJECT" type="submit"
+                       id="submit-create-project">
+              </div>
+        </div>
+    </form>
+  </div>
+</div>
+  
+</div>
+  
+</div>
+
   <!-- Modal Sign in Begins -->
   <div class="modal" id="modal-login" tabindex="-1" role="dialog">
     <div class="modal-dialog small">
@@ -13,37 +105,50 @@
           <h3 class="modal-title text-xs-center">Sign in now</h3>
         </div>
         <div class="modal-body">
-          <div class="form-group">
-            <div>
-              <input name="log" id="login-user" class="form-control input" size="20"
-              placeholder="Enter Username" type="text">
-            </div>
-          </div>
-          <div class="form-group">
-            <div>
-              <input name="Password" id="login-password" class="form-control input" size="20"
-              placeholder="Password" type="password">
-            </div>
-          </div>
-
-          <div class="form-group">
-            <div>
-              <div class="checkbox login-remember">
-                <input name="icheck remember-me" id="remember-me" value="forever" checked="checked" type="checkbox">
-                <label for="remember-me"> Remember Me </label>
+          <form id="form-user-signin" type="POST" action="controllers/do_login.php">
+            <div class="form-group">
+              <div>
+                <input name="login_id" id="login-user" class="form-control input" size="20"
+                       placeholder="Enter Username" type="text">
               </div>
             </div>
-          </div>
-          <div class="form-group">
-            <div>
-              <input name="submit" class="btn btn-block btn-lg btn-primary" value="LOGIN" type="submit">
+            <div class="form-group">
+              <div>
+                <input name="login_pass" id="login-password" class="form-control input" size="20"
+                       placeholder="Password" type="password">
+              </div>
             </div>
-          </div>
+
+            <div class="form-group" style="display:none">
+              <div>
+                <input name="email" class="form-control" size="20"
+                       placeholder="Please leave this field empty"
+                       type="text">
+              </div>
+            </div>
+            <input type="hidden" name="login" value="1">
+
+            <div class="form-group">
+              <div>
+                <div class="checkbox login-remember">
+                  <input name="icheck remember-me" id="remember-me" value="forever" checked="checked"
+                         type="checkbox">
+                  <label for="remember-me"> Remember Me </label>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div>
+                <input name="submit" class="btn btn-block btn-lg btn-primary" value="LOGIN"
+                       type="submit">
+              </div>
+            </div>
+          </form>
           <!--userForm-->
         </div>
         <div class="modal-footer">
           <p class="text-xs-center"> Not here before? <a data-toggle="modal" data-dismiss="modal"
-          href="#modal-sign-up"> Sign Up. </a> <br>
+                                                         href="#modal-sign-up"> Sign Up. </a> <br>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -60,55 +165,65 @@
           <h3 class="modal-title text-xs-center"> REGISTER </h3>
         </div>
         <div class="modal-body">
-          <form id="form-user-signup" type="POST" action="#">
+          <form id="form-user-signup" type="POST" action="controllers/do_register.php">
             <div class="form-group">
               <div>
                 <input name="first_name" class="form-control" size="20" placeholder="First Name"
-                type="text">
+                       type="text">
               </div>
             </div>
             <div class="form-group">
               <div>
                 <input name="last_name" class="form-control" size="20" placeholder="Last Name"
-                type="text">
+                       type="text">
               </div>
             </div>
             <div class="form-group">
               <div>
-                <input name="user_name" class="form-control" size="20" placeholder="Enter Username"
-                type="text">
+                <input name="user_name" class="form-control" size="20" placeholder="Enter Username/Email"
+                       type="text">
               </div>
             </div>
             <div class="form-group">
               <div>
                 <input name="password" class="form-control" size="20" placeholder="Password"
-                type="password">
+                       type="password">
               </div>
             </div>
             <div class="form-group">
               <div>
-                <input name="PasswordRepeat" id="login-password-repeat" class="form-control input" size="20"
+                <input name="password-repeat" id="login-password-repeat" class="form-control input"
+                       size="20"
                        placeholder="Please retype password" type="password">
               </div>
             </div>
             <div class="form-group">
               <div>
-                <input name="email" class="form-control" size="20" placeholder="Enter Email" type="text">
+                <input name="email" class="form-control" size="20" placeholder="Enter Email"
+                       type="text">
               </div>
             </div>
-
-            <?php // todo:honey pot for spam protection?>
+            <div class="form-group" style="display:none">
+              <div>
+                <input name="address" class="form-control" size="20"
+                       placeholder="Please leave this field empty"
+                       type="text">
+              </div>
+            </div>
+            <input type="hidden" name="register" value="1">
             <div class="form-group">
               <div>
-                <input class="btn btn-block btn-lg btn-primary" value="REGISTER" type="submit" id="submit-signup">
+                <input class="btn btn-block btn-lg btn-primary" value="REGISTER" type="submit"
+                       id="submit-signup">
               </div>
             </div>
           </form>
           <!--userForm-->
         </div>
         <div class="modal-footer">
-          <p class="text-xs-center"> Already member? <a data-toggle="modal" data-dismiss="modal" href="#modal-login">
-          Sign in </a></p>
+          <p class="text-xs-center"> Already member? <a data-toggle="modal" data-dismiss="modal"
+                                                        href="#modal-login">
+              Sign in </a></p>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -133,31 +248,51 @@
         </li>
 
         <li class="nav-item hidden-xs-down">
-          <a class="nav-link" href="../controllers/create_project.php">Create Projects</a>
+          <a class="nav-link" data-toggle="modal" data-target="#modal-create-project">Create Projects</a>
         </li>
       </ul>
       <!-- end header linkts -->
-      <ul class="nav navbar-nav navbar-links pull-right ">
+
+      <ul class="nav navbar-nav navbar-links pull-right">
         <li class="nav-item">
           <a class="btn btn-link search-trigger" href="#"><i class="fa fa-search"> </i></a>
         </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-sign-up">Register</a>
-        </li>
-        <li class="nav-item hidden-xs-down">
-          <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-login">Sign in</a>
-          <!-- Todo:  at small screen, show icon dropdown instead of text -->
-        </li>
+        <div class="nav navbar-nav navbar-links pull-right" id="member_area">
 
+          <?php
+          if ($auth->isUserLoggedIn(1)) { ?>
+            <li class="nav-link">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 aria-expanded="false"> <i
+                    class="glyphicon glyphicon-log-in hide visible-xs "></i> Hi, <?=strtoupper($_SESSION["last_name"])?> <b
+                    class="caret"></b></a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                <li class="dropdown-item"><a href="#"> Profile</a></li>
+                <li class="dropdown-item"><a href="controllers/backed_projects.php"> Backed Projects</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-item"><a href="controllers/do_logout.php" id="logoutBtn"> Log Out</a></li>
+              </ul>
+            </li>
+          <?php } else { ?>
+          <li class="nav-item">
+            <!-- Todo:  at small screen, show icon dropdown instead of text -->
+            <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-login">Sign in</a>
+          </li>
+          <li class="nav-item hidden-xs-down">
+            <a href="#" class="nav-link" data-toggle="modal" data-target="#modal-sign-up">Register</a>
+          </li>
+          <?php }?>
+        </div>
       </ul>
       <div class="search-bar text-right" id="#search-bar">
         <a class="pull-right search-close" href="#">
           <i class="fa fa-times-circle"></i>
         </a>
         <form action="#" class="search-bar-form">
-          <input type="search" class="search-bar-input" name="search-bar-input" placeholder="start typing and hit enter">
+          <input type="search" class="search-bar-input" name="search-bar-input"
+                 placeholder="start typing and hit enter">
           <button class="btn btn-link search-bar-btn" type="submit">
-          <i class="fa fa-search"> </i>
+            <i class="fa fa-search"> </i>
           </button>
         </form>
       </div>

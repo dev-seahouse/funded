@@ -1,5 +1,4 @@
 <?php
-
 /*
  An Utility class to facilitate
  communication between objects/interfaces
@@ -30,7 +29,7 @@ class Message {
         array_push($this->infos, $msg);
     }
 
-    public function putErr($msg) {
+    public function putFailure($msg) {
         // as soon as an error msg is encountered, auto change error status
         // violates SRP ? sometimes need to break rule for greater good
         $this->setStatusFailure();
@@ -39,7 +38,7 @@ class Message {
 
     public function putHiddenErr($msg){
         $this->setStatusFailure();
-        array_push($this->hidden_err);
+        array_push($this->hidden_err, $msg);
     }
 
     public function getInfoAsArray() {
@@ -54,6 +53,10 @@ class Message {
         return $this->data;
     }
 
+    public function putData($key, $value){
+      $this->data[$key] = $value;
+    }
+
     private function makeMsgArr() {
         $messages = array(
             "status" => $this->status,
@@ -65,7 +68,7 @@ class Message {
     }
 
     private function setStatusFailure() {
-        if ($this->status == self::SUCCESS) {
+        if ($this->status === self::SUCCESS) {
             $this->status = self::FAILURE;
         }
     }

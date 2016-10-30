@@ -11,6 +11,9 @@
     &.small {
     	@include rem(max-width, 460px);
     }
+    &.medium {
+        @include rem(max-width, 600px);
+    }
 }
 
 .modal-header {
