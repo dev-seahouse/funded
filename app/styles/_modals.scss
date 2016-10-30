@@ -11,6 +11,9 @@
     &.small {
     	@include rem(max-width, 460px);
     }
+    &.medium {
+        @include rem(max-width, 600px);
+    }
 }
 
 .modal-header {
@@ -39,4 +42,6 @@
     border-top: 1px solid #E5E5E5;
     padding: 10px 20px;
 }
+
+
 

@@ -12,7 +12,7 @@ $icon-font-path: '../fonts/';
 @import "modals";
 @import "buttons";
 @import "forms";
-
+@import 'ajaxloader';
 
 .browserupgrade {
   margin: 0.2em 0;
@@ -26,6 +26,7 @@ $icon-font-path: '../fonts/';
   padding-top: 19px;
   color: $gray-dark;
   border-top: 1px solid $brand-bg-color;
-
 }
+
+
 

@@ -1,0 +1,25 @@
+/*.modal-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1040;
+  background-color: #000;
+}*/
+
+.spinner-overlay {
+  @extend .modal-backdrop;
+  z-index: $zindex-modal-bg + 10; // verylay on top of bootstrap modal
+  text-align: center;
+}
+
+.spinner-content {
+  @extend .modal;
+  z-index: $zindex_modal + 10; // on top of exisiting modal
+  display: block;
+  position: fixed;
+  margin-top: -50px;
+  height: 200px;
+  top: 30%;
+}
