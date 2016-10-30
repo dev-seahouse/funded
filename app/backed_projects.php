@@ -1,13 +1,25 @@
-<?php 
-$pageTitle = "Funded Project";
-require_once dirname(__DIR__)."/_config/autoloader.php";
-//include_once dirname(__DIR__)."/inc/header.php";
-?>
+<?php
+/* Page specific variables */
+$pageTitle = "Backed Project";
+$currentPage = "backed_projects";
 
+?>
+<?php include_once __DIR__."/inc/security.php";?>
+<html class="no-js" lang="">
+  <?php include_once __DIR__."/inc/head.php";?>
+  <body>
+    <!--[if lt IE 10]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <?php include_once __DIR__."/inc/header.php";?>
 <?php 
-//$user_id = $_SESSION['user_id'];
-//having trouble retrieving session info
-$user_id = 3;
+if(!isset($_SESSION['user_id'])){
+    echo "<script type='text/javascript'>
+    window.location = 'index.php';
+    </script>";
+}
+
+$user_id = $_SESSION['user_id'];
 
 $projectDAO = new ProjectDAO();
  
@@ -58,6 +70,13 @@ else{
     echo "<div>No projects funded.</div>";
 }
 ?>
+<!-- Google Analytics -->
+  <?php require('./inc/analytics.php'); ?>
+  <!-- Javascript builds -->
+  <?php require('./inc/tail.php'); ?>
+</body>
+</html>
+
 
 
 \

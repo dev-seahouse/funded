@@ -75,6 +75,19 @@ $category = CategoryDAO::getCategories($conn);
         </div>
       </div>
 
+
+     <div class="form-group">
+        <div>
+          <input type="text" name="img_l" class="form-control input" size="20" placeholder="Big awesome picture for your project">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div>
+          <input type="text" name="img_s" class="form-control input" size="20" placeholder="Thumbnail image">
+        </div>
+      </div>
+
       <div class="form-group">
         <div>
           <textarea name="overview" class="form-control" cols = "10">
@@ -83,9 +96,7 @@ $category = CategoryDAO::getCategories($conn);
       </div>
 
       <div class="form-group">
-              <div>
-                <input class="btn btn-block btn-lg btn-primary" value="CREATE PROJECT" type="submit"
-                       id="submit-create-project">
+                <input class="btn btn-block btn-lg btn-primary" value="CREATE PROJECT" type="submit" id="submit-create-project">
               </div>
         </div>
     </form>
@@ -147,8 +158,7 @@ $category = CategoryDAO::getCategories($conn);
           <!--userForm-->
         </div>
         <div class="modal-footer">
-          <p class="text-xs-center"> Not here before? <a data-toggle="modal" data-dismiss="modal"
-                                                         href="#modal-sign-up"> Sign Up. </a> <br>
+          <p class="text-xs-center"> Not here before? <a data-toggle="modal" data-dismiss="modal" href="#modal-sign-up"> Sign Up. </a> <br>
         </div>
       </div>
       <!-- /.modal-content -->
@@ -268,7 +278,7 @@ $category = CategoryDAO::getCategories($conn);
                     class="caret"></b></a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-item"><a href="#"> Profile</a></li>
-                <li class="dropdown-item"><a href="controllers/backed_projects.php"> Backed Projects</a></li>
+                <li class="dropdown-item"><a href="./backed_projects.php">Backed Projects</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-item"><a href="controllers/do_logout.php" id="logoutBtn"> Log Out</a></li>
               </ul>
@@ -285,13 +295,13 @@ $category = CategoryDAO::getCategories($conn);
         </div>
       </ul>
       <div class="search-bar text-right" id="#search-bar">
-        <a class="pull-right search-close" href="#">
+        <a class="pull-right search-close" href="">
           <i class="fa fa-times-circle"></i>
         </a>
-        <form action="#" class="search-bar-form">
+        <form action="./search.php" class="search-bar-form" method="post">
           <input type="search" class="search-bar-input" name="search-bar-input"
                  placeholder="start typing and hit enter">
-          <button class="btn btn-link search-bar-btn" type="submit">
+          <button class="btn btn-link search-bar-btn" type="submit" name="search">
             <i class="fa fa-search"> </i>
           </button>
         </form>

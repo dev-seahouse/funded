@@ -26,18 +26,26 @@ class ProjectDAO extends BaseDAO
 	* $fields in the form of array(column, column, ..)
 	*/
 
-	function getProject($requests, $fields) {
+	function getProject($requests, $fields, $table = "project") {
 		$sql = "SELECT ".implode(",", $fields)."
-		FROM {$this->table_name} 
+		FROM {$table} 
 		WHERE ";
+
+		$keys = array_keys($requests);
+		$values = array_values($requests);
+		$placeholder = $this->makePlaceHolders($keys);
+		$placeholder_value_pairs = array_combine($placeholder, $values);
+		
+
 		for ($counter=0 ; $counter < count($requests); $counter++) { 
-			$sql .= ($counter === (count($requests)-1)) ? "? = ?" : "? = ? ,";
+			$sql .= ($counter === (count($requests)-1)) ? "{$keys[$counter]} = {$placeholder[$counter]}" : "{$keys[$counter]} = {$placeholder[$counter]},";
 		}
+		
 		$stmt = $this->conn->prepare($sql);
-		$counter = 1;
-		foreach ($requests as $key => $value) {
-				$stmt->bindValue($counter++, $key);
-				$stmt->bindValue($counter++, $value);
+		$this->bindValues($stmt, $placeholder_value_pairs);
+
+		if(!$stmt->execute()){
+			echo "failure";
 		}
 
 		return $stmt->fetchAll();
@@ -89,6 +97,49 @@ class ProjectDAO extends BaseDAO
 		}
 	}
 
+	//assume only one key word for now
+	public function search($keywords) {
+
+		$sql = "SELECT * FROM {$this->table_name} WHERE title LIKE '%{$keywords}%' OR overview LIKE '%{$keywords}%'";
+
+		$stmt = $this->conn->query($sql);
+		return $stmt->fetchAll();
+	}
+
+
+	//an array of 
+	//	key : form input 
+	//  value : user chosen value 
+	public function find($requests) {
+		var_dump($requests);
+		
+		$sql = "SELECT * FROM project WHERE id IN (SELECT p.id FROM project AS p, project_tag AS pt, tag AS t WHERE p.id = pt.project_id AND t.id = pt.tag_id AND (";
+
+		//prepare for tag and
+		$tags = explode(" ", $requests['tag']);
+		$max = count($tags);
+		$i = 1;
+		foreach ($tags as $key => $value) {
+			$sql .= ($i < $max) ? "t.name = '{$value}' OR" : "t.name = '{$value}') ";
+			$i++;
+		}
+
+		//prepare pledge num
+		if(isset($requests['min-amount'])){
+			$sql .= " AND p.suml_pledged > {$requests['min-amount']}";
+		}
+		if(isset($requests['max-amount'])) {
+			$sql .= " AND p.suml_pledged < {$requests['max-amount']}";
+		}
+
+		$sql .= ")";
+
+		$stmt = $this->conn->query($sql);
+		$projects = $stmt->fetchAll();
+
+		return $projects;
+
+	}
 
 	private function bindValues(PDOStatement $stmt, $placeholder_value_pairs) {
     foreach ($placeholder_value_pairs as $place_holder => $value) {
