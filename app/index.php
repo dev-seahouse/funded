@@ -78,7 +78,7 @@ $currentPage = "browse"
       <?php 
   $projectFac = new ProjectDAO();
   $requests = array('featured' => 1);
-  $fields = array('title', 'overview');
+  $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal');
 
   $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
   $counter = 0;
@@ -96,7 +96,8 @@ $currentPage = "browse"
       <div class='card-block'>
         <h4 class='card-title'>{$row['title']}</h4>
         <p class='card-text'>{$row['overview']}</p>
-        <p class='card-text'><small class='text-muted'>Last updated 3 mins ago</small></p>
+        <p class='card-text'><span class='label label-info'>Amount Raised</span>{$row['suml_pledged']}</p>
+        <p class='card-text'><span class='label label-info'>Target</span>{$row['pledge_goal']}</p>
       </div>
     </div>";
 

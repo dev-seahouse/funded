@@ -82,6 +82,15 @@ class ProjectDAO extends BaseDAO
 		}
 	}
 
+	//assume only one key word for now
+	public function search($keywords) {
+
+		$sql = "SELECT * FROM {$this->table_name} WHERE title LIKE '%{$keywords}%' OR overview LIKE '%{$keywords}%'";
+
+		$stmt = $this->conn->query($sql);
+		return $stmt->fetchAll();
+	}
+
 
 	private function bindValues(PDOStatement $stmt, $placeholder_value_pairs) {
     foreach ($placeholder_value_pairs as $place_holder => $value) {

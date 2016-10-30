@@ -285,13 +285,13 @@ $category = CategoryDAO::getCategories($conn);
         </div>
       </ul>
       <div class="search-bar text-right" id="#search-bar">
-        <a class="pull-right search-close" href="#">
+        <a class="pull-right search-close" href="">
           <i class="fa fa-times-circle"></i>
         </a>
-        <form action="#" class="search-bar-form">
+        <form action="./search.php" class="search-bar-form" method="post">
           <input type="search" class="search-bar-input" name="search-bar-input"
                  placeholder="start typing and hit enter">
-          <button class="btn btn-link search-bar-btn" type="submit">
+          <button class="btn btn-link search-bar-btn" type="submit" name="search">
             <i class="fa fa-search"> </i>
           </button>
         </form>

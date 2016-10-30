@@ -11,6 +11,9 @@
     <link rel="stylesheet" href="/bower_components/owl.carousel/dist/assets/owl.carousel.css" />
     <link rel="stylesheet" href="/bower_components/sweetalert2/dist/sweetalert2.css" />
     <link rel="stylesheet" href="/bower_components/flickity/css/flickity.css" />
+    <!-- boostrap:css -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- endboostrap -->
     <!-- endbower -->
     <!-- endbuild -->
 
