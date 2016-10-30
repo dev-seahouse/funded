@@ -43,6 +43,21 @@ class ProjectDAO extends BaseDAO
 		return $stmt->fetchAll();
 	}
 
+	function getProjectByBacker($backer_id, $fields) {
+		$query = "SELECT ".implode(",", $fields)."
+				 FROM project, backer_project
+           		 WHERE backer_project.backer_id = :backer_id
+				 AND project.id = backer_project.project_id";
+ 
+	    $stmt = $this->conn->prepare($query);
+	    $stmt->bindParam(":backer_id", $backer_id);
+
+
+	    $stmt->execute();
+	 
+	    return $stmt;
+	}
+
 
 	function createProject(Project $project) {
 		try {
