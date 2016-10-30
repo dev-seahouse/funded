@@ -168,7 +168,7 @@ $(function () {
             swal('Huray ..!', 'Your fund is on its way', 'success');
         } else {
             // TODO: bad taste
-            console.log("here");
+            console.log('here');
             AjaxLoader.removeLoader();
             swal('Oops...', responseMsg.err[0], 'error');
         }
@@ -180,8 +180,7 @@ $(function () {
             beforeSend: AjaxLoader.showLoader,
             success: handle_create_project_result
         });
-    });
-
+    });     
 
 
 }); // do not remove this closing tag!

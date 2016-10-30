@@ -60,17 +60,9 @@ $currentPage = "browse"
           </div>
         </div>
       </div>
-      <div class="row p-t-3 p-x-2">
+      <hr>
+      <div class="container-fluid section">
         <h2>Trending Projects</h2>
-        <div class="col-xs-9">
-
-        </div>
-        <div class="col-xs-9">
-
-        </div>
-        <div class="col-xs-9">
-
-        </div>
       </div>
 
       <!-- Project card -->
@@ -78,7 +70,7 @@ $currentPage = "browse"
       <?php 
   $projectFac = new ProjectDAO();
   $requests = array('featured' => 1);
-  $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal');
+  $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_s');
 
   $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
   $counter = 0;
@@ -92,15 +84,17 @@ $currentPage = "browse"
     }
 
     echo "<div class='card'>
-      <img class='card-img-top' src='...'' alt='Card image cap'>
-      <div class='card-block'>
-        <h4 class='card-title'>{$row['title']}</h4>
-        <p class='card-text'>{$row['overview']}</p>
-        <p class='card-text'><span class='label label-info'>Amount Raised</span>{$row['suml_pledged']}</p>
-        <p class='card-text'><span class='label label-info'>Target</span>{$row['pledge_goal']}</p>
+      <img class='card-img-top img-thumbnail' src={$row['img_s']} alt='Card image cap'>
+      <div class='card-block' height = '300px'>
+        <h6 class='card-title'>{$row['title']}</h6>
+        <p class='card-text small'>{$row['overview']}</p>
       </div>
-    </div>";
-
+      <div class = 'card-footer'>
+        <p class='card-text bottom-align-text'><span class='label label-info'>Amount Raised</span>{$row['suml_pledged']}</p>
+        <p class='card-text bottom-align-text'><span class='label label-info'>Target</span>{$row['pledge_goal']}</p>
+      </div>
+        </div>
+      ";
     if($counter == 4){
       echo '</div></div>';
       $counter = 0;

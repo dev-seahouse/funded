@@ -107,6 +107,40 @@ class ProjectDAO extends BaseDAO
 	}
 
 
+	//an array of 
+	//	key : form input 
+	//  value : user chosen value 
+	public function find($requests) {
+		var_dump($requests);
+		
+		$sql = "SELECT * FROM project WHERE id IN (SELECT p.id FROM project AS p, project_tag AS pt, tag AS t WHERE p.id = pt.project_id AND t.id = pt.tag_id AND (";
+
+		//prepare for tag and
+		$tags = explode(" ", $requests['tag']);
+		$max = count($tags);
+		$i = 1;
+		foreach ($tags as $key => $value) {
+			$sql .= ($i < $max) ? "t.name = '{$value}' OR" : "t.name = '{$value}') ";
+			$i++;
+		}
+
+		//prepare pledge num
+		if(isset($requests['min-amount'])){
+			$sql .= " AND p.suml_pledged > {$requests['min-amount']}";
+		}
+		if(isset($requests['max-amount'])) {
+			$sql .= " AND p.suml_pledged < {$requests['max-amount']}";
+		}
+
+		$sql .= ")";
+
+		$stmt = $this->conn->query($sql);
+		$projects = $stmt->fetchAll();
+
+		return $projects;
+
+	}
+
 	private function bindValues(PDOStatement $stmt, $placeholder_value_pairs) {
     foreach ($placeholder_value_pairs as $place_holder => $value) {
       $stmt->bindValue($place_holder, $value);
