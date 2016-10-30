@@ -268,7 +268,7 @@ $category = CategoryDAO::getCategories($conn);
                     class="caret"></b></a>
               <ul class="dropdown-menu dropdown-menu-right">
                 <li class="dropdown-item"><a href="#"> Profile</a></li>
-                <li class="dropdown-item"><a href="#"> Backed Projects</a></li>
+                <li class="dropdown-item"><a href="controllers/backed_projects.php"> Backed Projects</a></li>
                 <li class="divider"></li>
                 <li class="dropdown-item"><a href="controllers/do_logout.php" id="logoutBtn"> Log Out</a></li>
               </ul>
