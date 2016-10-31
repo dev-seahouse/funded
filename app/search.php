@@ -26,10 +26,10 @@ $currentPage = "search";
   }
 
 
-  //for more advanced find
-  if(isset($_POST["find"])) {
+  //for more advanced findProjects
+  if(isset($_POST["findProjects"])) {
     $requests = $_POST;
-    $projects = $projectFac->find($requests);
+    $projects = $projectFac->findProjects($requests);
   }
  ?>
 <div class="container">
