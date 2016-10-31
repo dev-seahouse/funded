@@ -5,7 +5,7 @@ require_once dirname(__DIR__)."/_config/autoloader.php";
 
 $projectDAO= new ProjectDAO();
 if($_SERVER["REQUEST_METHOD"] === "POST" && $_POST){
-     
+
     $project = new Project($_POST);
     $message = new Message();
 
