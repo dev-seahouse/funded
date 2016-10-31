@@ -30,7 +30,7 @@ abstract class BaseDAO {
     }
 
     // return array of User object on success, false on failure
-    public function findProjects($key, $value, $fields) {
+    public function find($key, $value, $fields) {
         $sql =  "SELECT ". implode(",",$fields)."
                 FROM  {$this->table_name} 
                 WHERE :key = :value";
