@@ -6,7 +6,7 @@
  * $results = $conn->query("SELECT * FROM Table");
  *
  */
-require_once dirname(__DIR__) . "/_config/config.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/_config/config.php";
 
 Class DbConnection {
 

@@ -1,4 +1,4 @@
-<?php 
+<?php
 $pageTitle = "Create Project";
 require_once dirname(__DIR__)."/_config/autoloader.php";
 

@@ -1,8 +1,14 @@
 <?php
 /* Page specific variables */
 $pageTitle = "Home";
-$currentPage = "browse"
+$currentPage = "browse";
 /* End page specific variables */
+
+include "./data/DbConnection.php";
+
+$pdo = DbConnection::getInstance();
+$conn = $pdo->getConnection();
+
 ?>
 <?php include_once __DIR__."/inc/security.php";?>
 <html class="no-js" lang="">
