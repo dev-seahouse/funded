@@ -1,4 +1,6 @@
 <?php
+
+
 /* Page specific variables */
 $pageTitle = "Home";
 $currentPage = "project";
@@ -9,9 +11,9 @@ if(isset($_POST['projectId'])){
         $projectTarget = $_POST['project'];
       } else {
         echo "not set";
-  }
+}
 ?>
-
+<?php include_once __DIR__."/inc/security.php";?>
 <html class="no-js" lang="">
   <?php include_once __DIR__."/inc/head.php";?>
   <body>
@@ -27,6 +29,7 @@ if(isset($_POST['projectId'])){
       $projectDetailsDAO= new ProjectDetailsDAO();
       $result = $projectDetailsDAO->getProjectById($projectTarget);
 
+
       // var_dump($result); #for debug purpose
       ?>
 
@@ -40,7 +43,7 @@ if(isset($_POST['projectId'])){
      ?></button></h6>
       <div class="row">
         <div class="col-md-8">
-          <img alt="" width="100%" height="100%" src="<?php
+          <img alt="" width="80%" height="80%" src="<?php
              echo $result[0]["img_l"];
              ?>"></br></br>
           <?php
@@ -69,8 +72,20 @@ if(isset($_POST['projectId'])){
                  <h6>days to go</h6><br/>
                  <form id="form-backup" method="post" action="controllers/backup.php">
                  <input type="hidden" name="projectId" value="<? echo $result[0]['project_id']; ?>">
+                <? if(isset($_SESSION['user_id'])){
+                    if($projectDetailsDAO->isBackedByUser($result[0]['project_id'], $_SESSION['user_id']) == 0) { ?>
                  <input type="text" name="backAmount" placeholder="Enter the amount">
+                 <input type="hidden" name="backerId" value="<? echo $_SESSION['user_id']?>">
                  <input class="btn btn-lg btn-primary" value="BACK PROJECT" type="submit" name="newProject">
+                 <? } else { ?>
+                  <h6> Backed Amount : $ <? echo $projectDetailsDAO->getBackAmount($_SESSION['user_id'], $result[0]['project_id']) ?> </h6><br/>
+                  <input type="text" name="newAmount" placeholder="Show more support?">
+                  <input type="hidden" name="backerId" value="<? echo $_SESSION['user_id']?>">
+                  <input class="btn btn-lg btn-primary" value="UPDATE AMOUNT" type="submit" name="updateProject">
+                  <? } }else { ?>
+                    <input type="text" name="backAmount" placeholder="Enter the amount">
+                    <input class="btn btn-lg btn-primary" value="BACK PROJECT" type="submit" name="newProject">
+                    <? } ?>
                  </form>
                  <!-- <?php
                  $tagsRs = $projectDetailsDAO->getProjectTagsById($projectTarget);

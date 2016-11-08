@@ -55,6 +55,30 @@ class ProjectDetailsDAO extends ProjectDAO
 		return $stmt->fetchAll();
 	}
 
+	function isBackedByUser($projectId, $userId) {
+		$query = "SELECT * 
+		FROM project p 
+		WHERE p.id = {$projectId} AND p.id IN 
+		(SELECT bp.project_id FROM backer_project bp
+		WHERE bp.backer_id = {$userId})
+		";
+
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+
+		return $stmt->rowCount();
+	}
+
+	function getBackAmount($userId, $projectId) {
+		$query = "SELECT amount_pledged FROM backer_project WHERE backer_id = {$userId} AND project_id = {$projectId}";
+
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+		$amount = $stmt->fetch();
+		return $amount['amount_pledged'];
+	}
+
+
 
 
 }
