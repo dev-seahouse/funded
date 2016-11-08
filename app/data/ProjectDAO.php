@@ -110,7 +110,7 @@ class ProjectDAO extends BaseDAO
 	//an array of 
 	//	key : form input 
 	//  value : user chosen value 
-	public function find($requests) {
+	public function findProjects($requests) {
 		var_dump($requests);
 		
 		$sql = "SELECT * FROM project WHERE id IN (SELECT p.id FROM project AS p, project_tag AS pt, tag AS t WHERE p.id = pt.project_id AND t.id = pt.tag_id AND (";
