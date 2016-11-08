@@ -24,52 +24,61 @@ $user_id = $_SESSION['user_id'];
 $projectDAO = new ProjectDAO();
  
 // query products
-$fields =array("project.id as id, project.title as project", "project.overview as description", "project.category", "backer_project.amount_pledged as amount");
-$stmt = $projectDAO->getProjectByBacker($user_id, $fields);
-$num = $stmt->rowCount();
+$fields =array("project.id as id, project.title as project", "project.overview as description", "project.category", "backer_project.amount_pledged as amount", "project.img_l as img");
+$result = $projectDAO->getProjectByBacker($user_id, $fields);
+$num = $result->rowCount(); 
+?>
+
+      <?php
+      if($num>0){
+      echo "<table align = 'center' class='table table-hover table-responsive table-bordered'>";
+
  
-// display the projects backed by the user
-if($num>0){
-    echo "<table align = 'center' border = '1' class='table table-hover table-responsive table-bordered'>";
-        echo "<tr>";
-            echo "<th>Project</th>";
-            echo "<th>Description</th>";
-            echo "<th>Category</th>";
-            echo "<th>Amount Pledged</th>";
-            echo "<th></th>";
-        echo "</tr>";
- 
-        while ($row = $stmt->fetch(PDO::FETCH_ASSOC)){
+        while ($row = $result->fetch(PDO::FETCH_ASSOC)){
  
             extract($row);
- 
-            echo "<tr>";
-                echo "<td>{$project}</td>";
-                echo "<td>{$description}</td>";
-                echo "<td>{$category}</td>";
-                echo "<td>{$amount}</td>";		 
-                echo "<td>";
-				    // view project button
-                	//link to be inserted after implementing read projects
-				    echo "<a href='' class='btn btn-primary left-margin'>";
-				        echo "<span class='glyphicon glyphicon-list'></span> More Details";
-				    echo "</a>";
-				 
-				    
-				echo "</td>";
- 
-            echo "</tr>";
- 
+      ?>
+        <div class="container" style="padding-top: 5%;">
+          <div class="row" height="30%">
+            <div class="col-md-3">
+              <img alt="" width="100%" height="30%" src= <?php echo "{$img} "?>>
+            </div>
+            <div class="col-md-7">
+              <div class="container">
+               <div>
+                 <h4><?php
+                   echo "{$project}"
+                 ?></h4>
+                 <p><?php
+                   echo "{$description}"
+                 ?></p>
+                 <h6>Amount Pledged: $ <?php
+                    echo "{$amount}"
+                  ?></h6>
+              </div>
+            </div>
+            </div>
+            <div class="col-md-2">
+              <a href='' class='btn btn-primary left-margin'>
+                     <span class='glyphicon glyphicon-list'></span> More Details</a>
+            </div>
+          </div>
+        </div>
+<?php 
         }
  
     echo "</table>";
-}
- 
-// tell the user there are no projects funded
-else{
+    }
+    else{
     echo "<div>No projects funded.</div>";
-}
-?>
+    }?>
+
+    <!-- end main content -->
+    <div class="footer">
+      <p>♥ from dev-seahouse</p>
+    </div>
+  </div>
+
 <!-- Google Analytics -->
   <?php require('./inc/analytics.php'); ?>
   <!-- Javascript builds -->
@@ -77,9 +86,6 @@ else{
 </body>
 </html>
 
-
-
-\
 
 
 
