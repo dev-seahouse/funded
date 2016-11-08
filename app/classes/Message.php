@@ -13,9 +13,13 @@ class Message {
     private $hidden_err; // internal errs not meant to show client
     private $data;
     private $status;
+    private $code;
 
     const FAILURE = false;
     const SUCCESS = true;
+    const LOGIN_REQUIRED = 1;
+    const INVALID_INPUT = 2;
+    const DEFAULT_VALUE = 0;
 
     public function __construct() {
         $this->infos = array();
@@ -23,6 +27,7 @@ class Message {
         $this->hidden_err = array();
         $this->data = array();
         $this->status = self::SUCCESS;
+        $this->code = self::DEFAULT_VALUE;
     }
 
     public function putinfo($msg) {
@@ -39,6 +44,10 @@ class Message {
     public function putHiddenErr($msg){
         $this->setStatusFailure();
         array_push($this->hidden_err, $msg);
+    }
+
+    public function setCode($codeValue) {
+        $this->code = $codeValue;
     }
 
     public function getInfoAsArray() {
@@ -62,7 +71,8 @@ class Message {
             "status" => $this->status,
             "info" => $this->infos,
             'err' => $this->errs,
-            'data' => $this->data
+            'data' => $this->data,
+            'code' => $this->code
         );
         return $messages;
     }
