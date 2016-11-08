@@ -39,30 +39,32 @@ $num = $result->rowCount();
             extract($row);
       ?>
         <div class="container" style="padding-top: 5%;">
+        <form action='project.php' method="post">
+        <input type="hidden" name="project" value= <?php echo $row['id']?>>
           <div class="row" height="30%">
             <div class="col-md-3">
-              <img alt="" width="100%" height="30%" src= <?php echo "{$img} "?>>
+              <img alt="" width="100%" height="30%" src= <?php echo $row['img']?>>
             </div>
             <div class="col-md-7">
               <div class="container">
                <div>
                  <h4><?php
-                   echo "{$project}"
+                   echo $row['project']
                  ?></h4>
                  <p><?php
-                   echo "{$description}"
+                   echo $row['description']
                  ?></p>
                  <h6>Amount Pledged: $ <?php
-                    echo "{$amount}"
+                    echo $row['amount']
                   ?></h6>
               </div>
             </div>
             </div>
             <div class="col-md-2">
-              <a href='' class='btn btn-primary left-margin'>
-                     <span class='glyphicon glyphicon-list'></span> More Details</a>
+        		<button class="btn btn-primary" type="submit" name="projectId">More Details</button>
             </div>
           </div>
+          </form>
         </div>
 <?php 
         }
