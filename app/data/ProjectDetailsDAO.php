@@ -32,6 +32,7 @@ class ProjectDetailsDAO extends ProjectDAO
 		 	FROM project p, project_status s, user u 
 		 	WHERE p.status = s.id AND p.id = {$id} AND p.creator_id = u.id";
 		 
+		var_dump($sql);
 		$stmt = $this->conn->prepare($sql);
 		$stmt->execute();
 		return $stmt->fetchAll();
@@ -39,7 +40,7 @@ class ProjectDetailsDAO extends ProjectDAO
 
 	function getProjectTagsById($id) {
 		$sql = "SELECT t.name
-		 FROM project p, tag t, project_tag pt WHERE p.id=$id and p.id=pt.project_id and t.id=pt.tag_id";
+		 FROM project p, tag t, project_tag pt WHERE p.id={$id} and p.id=pt.project_id and t.id=pt.tag_id";
 
 		$stmt = $this->conn->prepare($sql);
 		$stmt->execute();

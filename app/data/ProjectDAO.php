@@ -26,19 +26,32 @@ class ProjectDAO extends BaseDAO
 	* $fields in the form of array(column, column, ..)
 	*/
 
-	function getProject($requests, $fields, $table = "project") {
+	function getProject($requests, $fields, $table = "project", $sorting = "") {
 		$sql = "SELECT ".implode(",", $fields)."
 		FROM {$table} 
 		WHERE ";
 
+		//check selection criteria
 		$keys = array_keys($requests);
 		$values = array_values($requests);
 		$placeholder = $this->makePlaceHolders($keys);
 		$placeholder_value_pairs = array_combine($placeholder, $values);
 		
-
+		//binding collection critiera
 		for ($counter=0 ; $counter < count($requests); $counter++) { 
 			$sql .= ($counter === (count($requests)-1)) ? "{$keys[$counter]} = {$placeholder[$counter]}" : "{$keys[$counter]} = {$placeholder[$counter]},";
+		}
+
+		//sequence 
+		if(!empty($sorting)) {
+			$columns = array_keys($sorting);
+			$seq = array_values($sorting);
+
+			for($counter = 0; $counter <count($sorting); $counter++) {
+				$sql .= " ORDER BY ";
+				$sql .= "{$columns[$counter]} ";
+				$sql .= ($counter === (count($sorting) -1))? "{$seq[$counter]}" : "{$seq[$counter]},";
+			}
 		}
 		
 		$stmt = $this->conn->prepare($sql);
