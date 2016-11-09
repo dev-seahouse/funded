@@ -43,7 +43,12 @@ include_once __DIR__."/inc/security.php";?>
             <td>New Target</td>
             <td><input type='text' name='pledge_goal' class='form-control' /></td>
         </tr>
- 
+
+        <tr>
+            <td>Featured</td>
+            <td><input type='checkbox' name='featured' class='form-control' /></td>
+        </tr>
+
         <tr height='230px'>
             <td>Description</td>
             <td><textarea name='overview' class='form-control' rows="8" ></textarea></td>
@@ -81,10 +86,11 @@ if($_POST){
     $title = $_POST['title'];
     $overview = $_POST['overview'];
     $amount = $_POST['pledge_goal'];
+    $featured = isset($_POST['featured']) ? 1 : 0;
 
     // update the project
     
-    if($projectDAO->updateProject($projectId, $title, $overview, $amount)){
+    if($projectDAO->updateProject($projectId, $title, $overview, $amount, $featured)){
         echo "<div class=\"alert alert-success alert-dismissable\">";
             echo "<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>";
             echo "Project was updated.";

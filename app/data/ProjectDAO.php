@@ -39,7 +39,7 @@ class ProjectDAO extends BaseDAO
 		
 		//binding collection critiera
 		for ($counter=0 ; $counter < count($requests); $counter++) { 
-			$sql .= ($counter === (count($requests)-1)) ? "{$keys[$counter]} = {$placeholder[$counter]}" : "{$keys[$counter]} = {$placeholder[$counter]},";
+			$sql .= ($counter === (count($requests)-1)) ? "{$keys[$counter]} = {$placeholder[$counter]}" : "{$keys[$counter]} = {$placeholder[$counter]}, ";
 		}
 
 		//sequence 
@@ -99,11 +99,12 @@ class ProjectDAO extends BaseDAO
 		return $stmt->execute();
 	}
 
-	function updateProject($projectId,$title,$overview,$pledge_goal) {
+	function updateProject($projectId,$title,$overview,$pledge_goal, $featured) {
 		$sql = "UPDATE project
 		SET pledge_goal = :pledge_goal ,
 		title = :title, 
-		overview = :overview
+		overview = :overview,
+		featured = :featured
 		WHERE id = :id ";
 
 		try {
@@ -113,6 +114,7 @@ class ProjectDAO extends BaseDAO
 		$stmt->bindParam(":overview", $overview);
 		$stmt->bindParam(":id", $projectId);
 		$stmt->bindParam(":title", $title);
+		$stmt->bindParam(":featured", $featured);
 
 		//error in inserting 
 		if(!($stmt->execute())) {
