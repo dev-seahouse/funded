@@ -34,8 +34,6 @@
       // verify password
       if (!password_verify($password, $user->getPassword())) {
         $this->output->putFailure("Did you forget your login name or password?");
-        return $this->output;
-
       }
 
       $this->setSessionData($user);
@@ -67,7 +65,7 @@
 
   // Destroy session
       session_destroy();
-      // header(dirname(__DIR__) . "/index.php");
+      header(dirname(__DIR__) . "/index.php");
     }
 
   //for PHP version below 5.6, which does not support hash_equals.

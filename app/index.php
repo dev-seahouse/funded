@@ -65,43 +65,39 @@ $currentPage = "browse";
     <h2>Trending Projects</h2>
   </div>
 
+  <!-- Project card -->
+  <div class='card-deck-wrapper'>
+    <div class='card-deck'>
+      <?php
+      $projectFac = new ProjectDAO();
+      $requests = array('featured' => 1);
+      $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
 
-      <!-- Project card -->
-
-      <?php 
-  $projectFac = new ProjectDAO();
-  $requests = array('featured' => 1);
-  $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_s', 'id');
-  $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
-  $counter = 0;
-  foreach ($featuredProjects as $row) {
-    $counter++;
-    if($counter == 1){ ?>
-      <div class='card-deck-wrapper'>
-      <div class='card-deck'>
-    <?} ?>
-
-    <div class='card col-md-3 col-sm-6 col-xs-12'>
-      <form action='project.php' method="post">
-      <input type="hidden" name="project" value="<?php echo $row['id'];?>"/>
-      <img class='card-img-top img-thumbnail' src='<?php echo $row['img_s']?>' alt='Card image cap'></a>
-      <div class='card-block' height = '100%' >
-        <h6 class='card-title'><?php echo $row['title']?></h6>
-        <p class='card-text small'><?php echo $row['overview']?></p>
-      </div>
-      <div class = 'card-footer'>
-        <p class='card-text bottom-align-text small'>Amount Raised: $<?php echo $row['suml_pledged']?></p>
-        <p class='card-text bottom-align-text small'> Target: $<?php $row['pledge_goal']?></p>
-        <button class="btn btn-link" type="submit" name="projectId">Details</button>
-      </div>
-      </form>
+      $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
+      foreach ($featuredProjects as $row) {
+        ?>
+        <div class='card'>
+          <form action='project.php' method="post">
+            <input type="hidden" name="project" value="<?php echo $row['id']; ?>"/>
+            <img class='card-img-top img-thumbnail' src='<?php echo $row['img_l'] ?>' alt='Card image cap'></a>
+            <div class='card-block' height='300px'>
+              <h6 class='card-title'><?php echo $row['title'] ?></h6>
+              <p class='card-text small'><?php echo $row['overview'] ?></p>
+            </div>
+            <div class='card-footer'>
+              <p class='card-text bottom-align-text'><span
+                    class='label label-info'>Amount Raised</span><?php echo $row['suml_pledged'] ?></p>
+              <p class='card-text bottom-align-text'><span
+                    class='label label-info'>Target</span><?php $row['pledge_goal'] ?>
+              </p>
+              <button class="btn btn-link " type="submit" name="projectId">Details</button>
+            </div>
+          </form>
         </div>
-
-    <?php if($counter == 4){ ?>
-      </div></div>
-      <?php $counter = 0;
-    }
-  } ?>
+      <?php } ?>
+    </div>
+  </div>
+  <!-- Project card ends -->
 
 
 </div>
