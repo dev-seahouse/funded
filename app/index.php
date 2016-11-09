@@ -56,8 +56,8 @@ $currentPage = "browse";
 ?>
       <!-- Project card -->
 
-      <?php 
-  
+      <?php
+
   $requests = array('featured' => 1);
   $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
   $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
@@ -74,12 +74,12 @@ $currentPage = "browse";
       <input type="hidden" name="project" value="<?php echo $row['id'];?>"/>
       <img class='card-img-top img-thumbnail' src='<?php echo $row['img_l']?>' alt='Card image cap'></a>
       <div class='card-block' height = '100%' >
-        <h6 class='card-title'><?php echo $row['title']?></h6>
+        <p><button class="btn btn-link offset-md-8 offset-sx-8 offset-sm-8" type="submit" name="projectId" style=" color:#000000;margin:-20;white-space: normal"><b><?php echo $row['title']?></b></button></p><br/>
         <p class='card-text small'><?php echo $row['overview']?></p>
       </div>
       <div class = 'card-footer'>
-        <p class='card-text bottom-align-text small'> <span class="tag tag-pill tag-info">Amount Raised</span> $<?php echo $row['suml_pledged']?></p>
-        <p class='card-text bottom-align-text small'> <span class="tag tag-pill tag-info">Target</span> $<?php $row['pledge_goal']?></p>
+        <p class='card-text bottom-align-text small'> <span class="tag tag-pill tag-info">Amount Raised</span> $<?php echo number_format($row['suml_pledged'],2)?></p>
+        <p class='card-text bottom-align-text small'> <span class="tag tag-pill tag-info">Target</span> $<?php echo number_format($row['pledge_goal'],2)?></p>
         <button class="btn btn-link offset-md-8 offset-sx-8 offset-sm-8" type="submit" name="projectId">Details</button>
       </div>
       </form>
