@@ -46,7 +46,14 @@ $currentPage = "browse";
     <h1 class="text-primary text-center">Trending Projects</h1>
   </div>
 
-
+  <!-- Project card -->
+  <div class='card-deck-wrapper'>
+    <div class='card-deck'>
+      <?php
+      $projectFac = new ProjectDAO();
+      $requests = array('featured' => 1);
+      $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
+?>
       <!-- Project card -->
 
       <?php 
@@ -77,12 +84,10 @@ $currentPage = "browse";
       </div>
       </form>
         </div>
-
-    <?php if($counter == 4){ ?>
-      </div></div>
-      <?php $counter = 0;
-    }
-  } ?>
+      <?php } ?>
+    </div>
+  </div>
+  <!-- Project card ends -->
 
 
 </div>

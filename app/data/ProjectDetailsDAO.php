@@ -32,8 +32,11 @@ class ProjectDetailsDAO extends ProjectDAO
 		 	FROM project p, project_status s, user u 
 		 	WHERE p.status = s.id AND p.id = {$id} AND p.creator_id = u.id";
 		 
-		var_dump($sql);
+		
 		$stmt = $this->conn->prepare($sql);
+
+		$stmt->bindParam(":id", $id);
+
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}

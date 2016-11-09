@@ -261,7 +261,7 @@ $category = CategoryDAO::getCategories($conn);
           <a class="nav-link" data-toggle="modal" data-target="#modal-create-project">Create Projects</a>
         </li>
       </ul>
-      <!-- end header linkts -->
+      <!-- end header links -->
 
       <ul class="nav navbar-nav navbar-links pull-right">
         <li class="nav-item">
@@ -283,6 +283,19 @@ $category = CategoryDAO::getCategories($conn);
                 <li class="dropdown-item"><a href="controllers/do_logout.php" id="logoutBtn"> Log Out</a></li>
               </ul>
             </li>
+          <?php } else if ($auth->isUserLoggedIn(2)) { ?> 
+            <li class="nav-link">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                 aria-expanded="false"> <i
+                    class="glyphicon glyphicon-log-in hide visible-xs "></i> Hi, <?=strtoupper($_SESSION["last_name"])?> <b
+                    class="caret"></b></a>
+              <ul class="dropdown-menu dropdown-menu-right">
+                
+                <li class="dropdown-item"><a href="./manage_projects.php">Manage Projects</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-item"><a href="controllers/do_logout.php" id="logoutBtn"> Log Out</a></li>
+              </ul>
+            </li> 
           <?php } else { ?>
           <li class="nav-item">
             <!-- Todo:  at small screen, show icon dropdown instead of text -->
