@@ -295,7 +295,6 @@ CREATE TABLE IF NOT EXISTS `user_role` (
 --
 -- Structure for view `featured_project`
 --
-DROP VIEW IF EXISTS `featured_project`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `featured_project`  AS  select `project`.`id` AS `id`,`project`.`title` AS `title`,`project`.`start_date` AS `start_date`,`project`.`end_date` AS `end_date`,`project`.`created_on` AS `created_on`,`project`.`pledge_goal` AS `pledge_goal`,`project`.`status` AS `status`,`project`.`suml_pledged` AS `suml_pledged`,`project`.`category` AS `category`,`project`.`backer_count` AS `backer_count`,`project`.`like_count` AS `like_count`,`project`.`creator_id` AS `creator_id`,`project`.`country` AS `country`,`project`.`web_link` AS `web_link`,`project`.`email` AS `email`,`project`.`video_link` AS `video_link`,`project`.`overview` AS `overview`,`project`.`view_count` AS `view_count`,`project`.`img_s` AS `img_s`,`project`.`img_l` AS `img_l`,`project`.`pitch` AS `pitch`,`project`.`featured` AS `featured`,`project`.`challenges` AS `challenges` from `project` where (`project`.`featured` = 1) WITH CASCADED CHECK OPTION ;
 
 ----------------------------------------------------------
