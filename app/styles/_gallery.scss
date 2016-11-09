@@ -27,6 +27,23 @@
     @include rem(max-height, 600px);
     @include rem(height, 500px); 
   }
+
+  .cell-content {
+    position: absolute;
+    vertical-align: middle;
+    text-align: left;
+    top:20%;
+    left: 10%;
+  }
+
+  .cell-title{
+    display: inline-block;
+    padding:1rem 2rem;
+    background-color: #fff;
+    background-color: rgba(255,255,255,0.7);
+    color: $brand-bg-color;
+  }
+
 }
 
 /* fade in image when loaded */
@@ -39,3 +56,4 @@
 .carousel-cell-image.flickity-lazyerror {
   opacity: 1;
 }
+

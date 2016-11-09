@@ -15,9 +15,6 @@ $currentPage = "browse";
 <?php include_once __DIR__ . "/inc/header.php"; ?>
 <!-- start main content -->
 
-<div class="jumbotron">
-  <h1 class="text-primary text-center">Top 5 Most Funded Projects</h1>
-</div>
 <div class="container-fluid">
   <div id="carouselBlock" class="carousel js-flickity">
 
@@ -31,24 +28,26 @@ $currentPage = "browse";
 
     for ($i = 0; $i < 5; $i++) { ?>
       <div class="carousel-cell">
-        <form action='project.php' method="post">
-          <input type="hidden" name="project" value="<?php echo $galleryProjects[$i]['id'] ?>"/>
-          <button class="btn btn-block btn-primary" type="submit"
-                  name="popProject"><?php echo $galleryProjects[$i]['title']; ?></button>
-        </form>
+        <div class="cell-content">
+          <h2 class="cell-title"><?php echo $galleryProjects[$i]['title']; ?></h2>
+          <form action='project.php' method="post">
+            <input type="hidden" name="project" value="<?php echo $galleryProjects[$i]['id'] ?>"/>
+            <!-- <button class="btn btn-block btn-primary" type="submit"
+                    name="popProject"><?php /*echo $galleryProjects[$i]['title']; */ ?></button>-->
+
+          </form>
+        </div>
         <img src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15); ?>">
       </div>
     <?php } ?>
   </div>
 </div>
 
-<hr>
 
-<div class="jumbotron">
-  <h1 class="text-primary text-center">Trending Projects</h1>
-</div>
+  <h1 class="h1">Trending Projects</h1>
 
 <!-- Project card -->
+<div class="row">
 <div class='card-deck-wrapper'>
   <div class='card-deck'>
     <?php
@@ -63,14 +62,7 @@ $currentPage = "browse";
     $requests = array('featured' => 1);
     $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
     $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
-    $counter = 0;
-    foreach ($featuredProjects as $row) {
-    $counter++;
-    if ($counter == 1){ ?>
-    <div class='card-deck-wrapper'>
-      <div class='card-deck'>
-        <?php } ?>
-
+    foreach ($featuredProjects as $row) { ?>
         <div class='card col-md-3 col-sm-6 col-xs-12'>
           <form action='project.php' method="post">
             <input type="hidden" name="project" value="<?php echo $row['id']; ?>"/>
@@ -89,17 +81,18 @@ $currentPage = "browse";
             </div>
           </form>
         </div>
-        <?php } ?>
-      </div>
-    </div>
-    <!-- Project card ends -->
+    <?php } ?>
+  </div>
+  </div>
+</div>
+<!-- Project card ends -->
 
 
-  </div>
-  <!-- end main content -->
-  <div class="footer">
-    <p>♥ from dev-seahouse</p>
-  </div>
+</div>
+<!-- end main content -->
+<div class="footer">
+  <p>♥ from dev-seahouse</p>
+</div>
 </div>
 <!-- Google Analytics -->
 <?php require('./inc/analytics.php'); ?>
