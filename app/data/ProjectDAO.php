@@ -1,7 +1,7 @@
 <?php
 
 /**
-* 
+*
 */
 class ProjectDAO extends BaseDAO
 {
@@ -10,7 +10,7 @@ class ProjectDAO extends BaseDAO
   	protected $table_name;
   	protected $DVO_name;
   	private $output;
-  	
+
 	function __construct()
 	{
 		BaseDAO::__construct();
@@ -28,19 +28,19 @@ class ProjectDAO extends BaseDAO
 
 	function getProject($requests, $fields, $table = "project") {
 		$sql = "SELECT ".implode(",", $fields)."
-		FROM {$table} 
+		FROM {$table}
 		WHERE ";
 
 		$keys = array_keys($requests);
 		$values = array_values($requests);
 		$placeholder = $this->makePlaceHolders($keys);
 		$placeholder_value_pairs = array_combine($placeholder, $values);
-		
 
-		for ($counter=0 ; $counter < count($requests); $counter++) { 
+
+		for ($counter=0 ; $counter < count($requests); $counter++) {
 			$sql .= ($counter === (count($requests)-1)) ? "{$keys[$counter]} = {$placeholder[$counter]}" : "{$keys[$counter]} = {$placeholder[$counter]},";
 		}
-		
+
 		$stmt = $this->conn->prepare($sql);
 		$this->bindValues($stmt, $placeholder_value_pairs);
 
@@ -56,13 +56,13 @@ class ProjectDAO extends BaseDAO
 				 FROM project, backer_project
            		 WHERE backer_project.backer_id = :backer_id
 				 AND project.id = backer_project.project_id";
- 
+
 	    $stmt = $this->conn->prepare($query);
 	    $stmt->bindParam(":backer_id", $backer_id);
 
 
 	    $stmt->execute();
-	 
+
 	    return $stmt;
 	}
 
@@ -71,7 +71,7 @@ class ProjectDAO extends BaseDAO
 		//$sql = "UPDATE project SET status = 1 WHERE id = '{$projectId}'";
 		//alternative: delete record from project table
 		$sql = "DELETE from project WHERE id = :id";
-		
+
 
 		try {
 
@@ -94,7 +94,7 @@ class ProjectDAO extends BaseDAO
 			$placeholder = $this->makePlaceHolders($keys);
 			$placeholder_value_pairs = array_combine($placeholder, $values);
 
-			$sql = 
+			$sql =
 			"INSERT INTO {$this->table_name} ("
 			.implode(', ', $keys)
 			.") VALUES ("
@@ -134,7 +134,7 @@ class ProjectDAO extends BaseDAO
 		try {
 		$stmt = $this->conn->prepare($sql);
 
-		//error in inserting 
+		//error in inserting
 			if(!($stmt->execute())) {
 			$this->output->putFailure("Please check the amount you put in.");
 			$this->output->setCode(Message::INVALID_INPUT);
@@ -142,6 +142,26 @@ class ProjectDAO extends BaseDAO
 	} catch (PDOException $pdoe) {
 		throw new DatabaseException("Projects cannot be found!");
 	}
+		$this->output->putinfo("Success");
+		return $this->output;
+	}
+
+	public function updateLikeCount($projectId, $newLikeCount) {
+		$sql = "UPDATE project
+		SET like_count = {$newLikeCount}
+		WHERE id = {$projectId}";
+
+		try {
+		  $stmt = $this->conn->prepare($sql);
+
+		  //error in inserting
+			if(!($stmt->execute())) {
+			  $this->output->putFailure("Like failed");
+			  $this->output->setCode(Message::INVALID_INPUT);
+		  }
+	  } catch (PDOException $pdoe) {
+		  throw new DatabaseException("Projects cannot be found!");
+	  }
 		$this->output->putinfo("Success");
 		return $this->output;
 	}
@@ -152,7 +172,7 @@ class ProjectDAO extends BaseDAO
 		try{
 		$stmt = $this->conn->prepare($sql);
 
-		//error in inserting 
+		//error in inserting
 			if(!($stmt->execute())) {
 			$this->output->putFailure("Please check the amount you put in.");
 			$this->output->setCode(Message::INVALID_INPUT);
@@ -165,12 +185,12 @@ class ProjectDAO extends BaseDAO
 	}
 
 
-	//an array of 
-	//	key : form input 
-	//  value : user chosen value 
+	//an array of
+	//	key : form input
+	//  value : user chosen value
 	public function findProjects($requests) {
 		var_dump($requests);
-		
+
 		$sql = "SELECT * FROM project WHERE id IN (SELECT p.id FROM project AS p, project_tag AS pt, tag AS t WHERE p.id = pt.project_id AND t.id = pt.tag_id AND (";
 
 		//prepare for tag and
@@ -207,7 +227,7 @@ class ProjectDAO extends BaseDAO
 
   	private function makePlaceHolders($field_list) {
     $place_holders = array();
-   
+
     foreach ($field_list as $item) {
       $place_holders[] = ":{$item}";
     }

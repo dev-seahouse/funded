@@ -12,7 +12,9 @@ if(isset($_POST['projectId'])){
       } else {
         echo "not set";
 }
+
 ?>
+
 <?php include_once __DIR__."/inc/security.php";?>
 <html class="no-js" lang="">
   <?php include_once __DIR__."/inc/head.php";?>
@@ -69,7 +71,46 @@ if(isset($_POST['projectId'])){
                  <h3> <?php
                     echo $result[0]["days_to_go"];
                   ?></h3>
-                 <h6>days to go</h6><br/>
+                 <h6>days to go</h6>
+
+                 <!--<span class="likebtn-wrapper" data-theme="disk" data-identifier="likebtn" data-dislike_enabled="false" data-icon_dislike_show="false"></span>
+                 <script>
+                 (function(d,e,s){if(d.getElementById("likebtn"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");
+               </script>-->
+
+                <div id="like-count" class="number" title="Like this project!" onClick='addlike()'>
+                  <img id="pic" style="width:35;height:25" src =
+                  "http://www.psdgraphics.com/file/heart-shape-icon.jpg">
+                <?php
+                  echo $result[0]["like_count"];
+                ?> Likes
+                </div>
+
+                <script>
+                  var liked = false;
+
+                  function addlike() {
+                    var like_change = liked ? -1 : 1;
+                    liked = !liked;
+                    var new_like_count = parseInt($('.number').text()) + like_change;
+                    // TODO: change the projectid to be dynamic
+                    $.post("controllers/update_project.php", {projectId: 2150121, likecount: new_like_count});
+
+                    document.getElementById("like-count").innerHTML = '<img style="width:35;height:25" src=\'http://www.psdgraphics.com/file/heart-shape-icon.jpg\'>' + new_like_count + " Likes";
+
+                    document.getElementById("like-count").title =
+                    liked ? "Unlike this project" : "Like this project!";
+
+                    /*document.getElementById("pic").innerHTML =
+                    liked ? <img id="pic" style="width:50;height:40" src =
+                    "http://www.psdgraphics.com/file/heart-shape-icon.jpg"> : <img id="pic" style="width:50;height:40" src =
+                    "http://www.free-icons-download.net/images/heart-shape-icon-71468.png">;*/
+
+                    // Note: If refresh, unlike will change to like!!
+                  }
+                </script>
+                 <br/><br/>
+
                  <form id="form-backup" method="post" action="controllers/backup.php">
                  <input type="hidden" name="projectId" value="<? echo $result[0]['project_id']; ?>">
                 <? if(isset($_SESSION['user_id'])){
@@ -145,9 +186,6 @@ if(isset($_POST['projectId'])){
 
       </div>
     </div>
-
-
-
 
 
     <!-- end main content -->
