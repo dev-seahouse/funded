@@ -71,29 +71,24 @@ $currentPage = "browse";
       <?php
       $projectFac = new ProjectDAO();
       $requests = array('featured' => 1);
-      $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_s', 'id');
+      $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
 
       $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
-      $counter = 0;
-
       foreach ($featuredProjects as $row) {
-        $counter++;
-
         ?>
-
         <div class='card'>
           <form action='project.php' method="post">
-            <input type="hidden" name="project" value="<? echo $row['id']; ?>"/>
-            <img class='card-img-top img-thumbnail' src='<? echo $row['img_s'] ?>' alt='Card image cap'></a>
+            <input type="hidden" name="project" value="<?php echo $row['id']; ?>"/>
+            <img class='card-img-top img-thumbnail' src='<?php echo $row['img_l'] ?>' alt='Card image cap'></a>
             <div class='card-block' height='300px'>
-              <h6 class='card-title'><? echo $row['title'] ?></h6>
-              <p class='card-text small'><? echo $row['overview'] ?></p>
+              <h6 class='card-title'><?php echo $row['title'] ?></h6>
+              <p class='card-text small'><?php echo $row['overview'] ?></p>
             </div>
             <div class='card-footer'>
               <p class='card-text bottom-align-text'><span
-                    class='label label-info'>Amount Raised</span><? echo $row['suml_pledged'] ?></p>
+                    class='label label-info'>Amount Raised</span><?php echo $row['suml_pledged'] ?></p>
               <p class='card-text bottom-align-text'><span
-                    class='label label-info'>Target</span><? $row['pledge_goal'] ?>
+                    class='label label-info'>Target</span><?php $row['pledge_goal'] ?>
               </p>
               <button class="btn btn-link " type="submit" name="projectId">Details</button>
             </div>
