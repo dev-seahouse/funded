@@ -14,6 +14,14 @@ $icon-font-path: '../fonts/';
 @import "forms";
 @import 'ajaxloader';
 
+.jumbotron {
+    background-size: 100%;
+    background-position-y: center;
+    padding-top:30px;
+    background-size:cover;
+    background-image: url('/img/background.jpg');
+}
+
 .browserupgrade {
   margin: 0.2em 0;
   background: $gray-light;
