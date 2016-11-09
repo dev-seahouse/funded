@@ -96,10 +96,15 @@ if(isset($_POST['projectId'])){
                     // TODO: change the projectid to be dynamic
                     $.post("controllers/update_project.php", {projectId: 2150121, likecount: new_like_count});
 
+                    if(liked){
                     document.getElementById("like-count").innerHTML = '<img style="width:35;height:25" src=\'http://www.psdgraphics.com/file/heart-shape-icon.jpg\'>' + new_like_count + " Likes";
+                  }else{
+                    document.getElementById("like-count").innerHTML = '<img style="width:35;height:30" src=\'http://www.free-icons-download.net/images/heart-shape-icon-71468.png\'>' + new_like_count + " Likes";
+                  }
 
                     document.getElementById("like-count").title =
                     liked ? "Unlike this project" : "Like this project!";
+
 
                     /*document.getElementById("pic").innerHTML =
                     liked ? <img id="pic" style="width:50;height:40" src =
