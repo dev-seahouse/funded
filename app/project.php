@@ -7,7 +7,7 @@ $currentPage = "project";
 /* End page specific variables */
 
 
-if(isset($_POST['projectId'])){
+if(isset($_POST['projectId']) || isset($_POST['popProject'])){
         $projectTarget = $_POST['project'];
       } else {
         echo "not set";

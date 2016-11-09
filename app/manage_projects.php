@@ -37,8 +37,7 @@ $currentPage = "browse";
          foreach ($allProjects as $row) {
       ?>
         <div class="container" style="padding-top: 5%;">
-          <form action='./controllers/delete_project.php' method="post">
-          <input type="hidden" name="project" value= <?php echo $row['id']?>>
+          
           <div class="row" height="30%">
             <div class="col-md-3">
               <img alt="" width="100%" height="30%" src= <?php echo $row['img'];?>>
@@ -56,20 +55,27 @@ $currentPage = "browse";
             </div>
             </div>
             <div class="col-md-2">
-            	<!--div class="row" style="padding-top: 5%;">
-            		<a href='' class='btn btn-primary left-margin'>
-                     <span class='glyphicon glyphicon-list'></span> More Details</a>
-            	</div-->
-
-            	<div class="row" style="padding-top: 5%;">
-                <a href ='' class="btn btn-primary" style="width:100px">Update</a>
+              <!--form action='/project.php' method="post">
+              <input type="hidden" name="project" value= <?php echo $row['id']?>>
+            	<div class="row" style="padding-top: 2%;">
+            		<input type="submit" class="btn btn-primary" value = 'View' name="projectId" style="width:100px">
             	</div>
-            	<div class="row" style="padding-top: 5%;">         		
+              </form-->
+              <form action='/update_project.php' method="post">
+              <input type="hidden" name="project" value= <?php echo $row['id']?>>
+            	<div class="row" style="padding-top: 2%;">
+                <input type="submit" class="btn btn-primary" value = 'Update' name="projectId" style="width:100px">
+            	</div>
+              </form>
+              <form action='/controllers/delete_project.php' method="post">
+              <input type="hidden" name="project" value= <?php echo $row['id']?>>
+            	<div class="row" style="padding-top: 2%;">    	
             		<input type="submit" class='btn btn-danger' value = 'Delete' name="projectId" style="width:100px">
-            	</div>              
+            	</div>  
+              </form>            
             </div>
           </div>
-          </form>
+          
         </div>
     <?php 
         }

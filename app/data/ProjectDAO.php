@@ -26,21 +26,34 @@ class ProjectDAO extends BaseDAO
 	* $fields in the form of array(column, column, ..)
 	*/
 
-	function getProject($requests, $fields, $table = "project") {
+	function getProject($requests, $fields, $table = "project", $sorting = "") {
 		$sql = "SELECT ".implode(",", $fields)."
 		FROM {$table}
 		WHERE ";
 
+		//check selection criteria
 		$keys = array_keys($requests);
 		$values = array_values($requests);
 		$placeholder = $this->makePlaceHolders($keys);
 		$placeholder_value_pairs = array_combine($placeholder, $values);
-
-
-		for ($counter=0 ; $counter < count($requests); $counter++) {
+		
+		//binding collection critiera
+		for ($counter=0 ; $counter < count($requests); $counter++) { 
 			$sql .= ($counter === (count($requests)-1)) ? "{$keys[$counter]} = {$placeholder[$counter]}" : "{$keys[$counter]} = {$placeholder[$counter]},";
 		}
 
+		//sequence 
+		if(!empty($sorting)) {
+			$columns = array_keys($sorting);
+			$seq = array_values($sorting);
+
+			for($counter = 0; $counter <count($sorting); $counter++) {
+				$sql .= " ORDER BY ";
+				$sql .= "{$columns[$counter]} ";
+				$sql .= ($counter === (count($sorting) -1))? "{$seq[$counter]}" : "{$seq[$counter]},";
+			}
+		}
+		
 		$stmt = $this->conn->prepare($sql);
 		$this->bindValues($stmt, $placeholder_value_pairs);
 
@@ -86,6 +99,32 @@ class ProjectDAO extends BaseDAO
 		return $stmt->execute();
 	}
 
+	function updateProject($projectId,$title,$overview,$pledge_goal) {
+		$sql = "UPDATE project
+		SET pledge_goal = :pledge_goal ,
+		title = :title, 
+		overview = :overview
+		WHERE id = :id ";
+
+		try {
+		$stmt = $this->conn->prepare($sql);
+
+		$stmt->bindParam(":pledge_goal", $pledge_goal);
+		$stmt->bindParam(":overview", $overview);
+		$stmt->bindParam(":id", $projectId);
+		$stmt->bindParam(":title", $title);
+
+		//error in inserting 
+		if(!($stmt->execute())) {
+			$this->output->putFailure("Unable to update project.");
+			$this->output->setCode(Message::INVALID_INPUT);
+		}
+		} catch (PDOException $pdoe) {
+			throw new DatabaseException("Projects cannot be found!");
+		}
+			$this->output->putinfo("Success");
+			return $this->output;
+	}
 
 	function createProject(Project $project) {
 		try {

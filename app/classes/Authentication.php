@@ -34,8 +34,6 @@
       // verify password
       if (!password_verify($password, $user->getPassword())) {
         $this->output->putFailure("Did you forget your login name or password?");
-        return $this->output;
-
       }
 
       $this->setSessionData($user);
