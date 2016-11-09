@@ -13,7 +13,8 @@
     "sweetalert2": "^5.3.3",
     "flickity": "^2.0.3",
     "iCheck": "icheck#^1.0.2",
-    "jQuery.dotdotdot": "dotdotdot#^1.8.3"
+    "jQuery.dotdotdot": "dotdotdot#^1.8.3",
+    "progressbar.js": "^1.0.1"
   },
   "overrides": {
     "bootstrap-sass": {
