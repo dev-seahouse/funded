@@ -86,9 +86,9 @@ $currentPage = "browse";
             </div>
             <div class='card-footer'>
               <p class='card-text bottom-align-text'><span
-                    class='label label-info'>Amount Raised</span><?php echo $row['suml_pledged'] ?></p>
+                    class='label label-info'>Amount Raised:&nbsp;$</span><?php echo number_format($row['suml_pledged'],2) ?></p>
               <p class='card-text bottom-align-text'><span
-                    class='label label-info'>Target</span><?php $row['pledge_goal'] ?>
+                    class='label label-info'>Target:&nbsp;$</span><?php echo number_format($row['pledge_goal'],2) ?>
               </p>
               <button class="btn btn-link " type="submit" name="projectId">Details</button>
             </div>

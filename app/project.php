@@ -56,15 +56,15 @@ if(isset($_POST['projectId'])){
               <div class="row">
                <div class="col-md-10">
                  <h3><?php
-                   echo $result[0]["backer_count"];
+                   echo number_format($result[0]["backer_count"],2) ;
                  ?></h3>
                  <h6>backers</h6><br/>
                  <h3>$<?php
-                   echo $result[0]["suml_pledged"];
+                   echo number_format($result[0]["suml_pledged"],2);
                  ?></h3>
                  <h6>pledged of $
                    <?php
-                     echo $result[0]["pledge_goal"];
+                     echo number_format($result[0]["pledge_goal"],2);
                    ?>
                     goal</h6></br>
                  <h3> <?php
