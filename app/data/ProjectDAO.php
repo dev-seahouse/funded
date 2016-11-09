@@ -130,6 +130,7 @@ class ProjectDAO extends BaseDAO
 	public function backProject($projectId, $backerId, $backAmount) {
 		$sql = "INSERT INTO backer_project (backer_id, project_id, amount_pledged, date_pledged) VALUES ({$backerId}, {$projectId}, {$backAmount}, CURDATE())";
 
+		// var_dump($sql);
 		try{
 		$stmt = $this->conn->prepare($sql);
 

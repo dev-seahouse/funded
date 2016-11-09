@@ -65,7 +65,7 @@
 
   // Destroy session
       session_destroy();
-      header(dirname(__DIR__) . "/index.php");
+      // header(dirname(__DIR__) . "/index.php");
     }
 
   //for PHP version below 5.6, which does not support hash_equals.
