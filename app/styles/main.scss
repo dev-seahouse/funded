@@ -36,9 +36,10 @@ $icon-font-path: '../fonts/';
   border-top: 1px solid $brand-bg-color;
 }
 
-.container-fluid .section {
-	margin-bottom: 50px;
-	margin-top: 100px;
+.section-title{
+  margin: 32px 15px;
+  font-size: 24px;
+  color:$brand-bg-color;
 }
 
 .card-block {
