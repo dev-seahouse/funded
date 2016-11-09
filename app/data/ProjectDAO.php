@@ -67,6 +67,7 @@ class ProjectDAO extends BaseDAO
 	}
 
 
+
 	function createProject(Project $project) {
 		try {
 			$keys = $this->getKeys($project);
@@ -104,6 +105,44 @@ class ProjectDAO extends BaseDAO
 
 		$stmt = $this->conn->query($sql);
 		return $stmt->fetchAll();
+	}
+
+	public function updateBackAmount($projectId, $backerId, $backAmount) {
+		$sql = "UPDATE backer_project
+		SET amount_pledged = {$backAmount}
+		WHERE project_id = {$projectId} AND backer_id = {$backerId}";
+
+		try {
+		$stmt = $this->conn->prepare($sql);
+
+		//error in inserting 
+			if(!($stmt->execute())) {
+			$this->output->putFailure("Please check the amount you put in.");
+			$this->output->setCode(Message::INVALID_INPUT);
+		}
+	} catch (PDOException $pdoe) {
+		throw new DatabaseException("Projects cannot be found!");
+	}
+		$this->output->putinfo("Success");
+		return $this->output;
+	}
+
+	public function backProject($projectId, $backerId, $backAmount) {
+		$sql = "INSERT INTO backer_project (backer_id, project_id, amount_pledged, date_pledged) VALUES ({$backerId}, {$projectId}, {$backAmount}, CURDATE())";
+
+		try{
+		$stmt = $this->conn->prepare($sql);
+
+		//error in inserting 
+			if(!($stmt->execute())) {
+			$this->output->putFailure("Please check the amount you put in.");
+			$this->output->setCode(Message::INVALID_INPUT);
+		}
+	} catch (PDOException $pdoe) {
+		throw new DatabaseException("Projects cannot be found!");
+	}
+		$this->output->putinfo("Success");
+		return $this->output;
 	}
 
 

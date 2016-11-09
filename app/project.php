@@ -1,15 +1,19 @@
 <?php
+
+
 /* Page specific variables */
 $pageTitle = "Home";
-$currentPage = "browse";
+$currentPage = "project";
 /* End page specific variables */
 
-include "./data/DbConnection.php";
 
-$pdo = DbConnection::getInstance();
-$conn = $pdo->getConnection();
+if(isset($_POST['projectId'])){
+        $projectTarget = $_POST['project'];
+      } else {
+        echo "not set";
+}
 ?>
-
+<?php include_once __DIR__."/inc/security.php";?>
 <html class="no-js" lang="">
   <?php include_once __DIR__."/inc/head.php";?>
   <body>
@@ -20,71 +24,26 @@ $conn = $pdo->getConnection();
     <!-- start main content -->
 
     <?php
+
+
       $projectDetailsDAO= new ProjectDetailsDAO();
-      $result = $projectDetailsDAO->getProjectById(2);
-      //var_dump($result); #for debug purpose
+      $result = $projectDetailsDAO->getProjectById($projectTarget);
+
+
+      // var_dump($result); #for debug purpose
       ?>
 
     <div class="container">
-  <!--    <div class="row gallery">
-        <div class="carousel" data-flickity='{ "autoPlay": 2500 , "wrapAround": true, "resize":true, "watchCSS" :false}'>
-          <?php
-          /* todo:
-          -Tip: views can be created to simply sql statements
-          -fetch top 10 projects from project table where
-          1. marked as featured by admin
-          2. is active
-          3. sort by number of likes followed by view counts
-          -append project id inside hidden input box(for redirection)
-          -add a link of project to redirect to project details page
-          -append img url from database and place inside src
-          For admins: (optional)
-          1. which projects are not active but marked as featured so that i can quickly clean up things?
-          2. one click button to update all projects that does not have active status
-          */
-
-          // if(isset)
-          ?>
-          <div class="carousel-cell">
-            <input type="hidden" value="project_id"/>
-            <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
-          </div>
-          <div class="carousel-cell">
-            <input type="hidden" value="project_id"/>
-            <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
-          </div>
-          <div class="carousel-cell">
-            <input type="hidden" value="project_id"/>
-            <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
-          </div>
-          <div class="carousel-cell">
-            <input type="hidden" value="project_id"/>
-            <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
-          </div>
-          <div class="carousel-cell">
-            <input type="hidden" value="project_id"/>
-            <div class="carousel-caption">Project Title</div>
-            <img class="carousel-image" src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15);?>">
-          </div>
-        </div>
-      </div>
-
-  --><h2><?php
+      <h2><?php
      echo $result[0]["title"];
      ?></h2>
   <h6>by
-
     <button type="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#creatorProfile"><?php
      echo $result[0]["user_name"];
-     ?></button>
-</h6>
+     ?></button></h6>
       <div class="row">
         <div class="col-md-8">
-          <img alt="" width="100%" height="100%" src="<?php
+          <img alt="" width="80%" height="80%" src="<?php
              echo $result[0]["img_l"];
              ?>"></br></br>
           <?php
@@ -111,9 +70,25 @@ $conn = $pdo->getConnection();
                     echo $result[0]["days_to_go"];
                   ?></h3>
                  <h6>days to go</h6><br/>
-                 <button type="button" class="btn btn-success">Back This Project</button><br/><br/>
-                 <?php
-                 $tagsRs = $projectDetailsDAO->getProjectTagsById(2);
+                 <form id="form-backup" method="post" action="controllers/backup.php">
+                 <input type="hidden" name="projectId" value="<? echo $result[0]['project_id']; ?>">
+                <? if(isset($_SESSION['user_id'])){
+                    if($projectDetailsDAO->isBackedByUser($result[0]['project_id'], $_SESSION['user_id']) == 0) { ?>
+                 <input type="text" name="backAmount" placeholder="Enter the amount">
+                 <input type="hidden" name="backerId" value="<? echo $_SESSION['user_id']?>">
+                 <input class="btn btn-lg btn-primary" value="BACK PROJECT" type="submit" name="newProject">
+                 <? } else { ?>
+                  <h6> Backed Amount : $ <? echo $projectDetailsDAO->getBackAmount($_SESSION['user_id'], $result[0]['project_id']) ?> </h6><br/>
+                  <input type="text" name="newAmount" placeholder="Show more support?">
+                  <input type="hidden" name="backerId" value="<? echo $_SESSION['user_id']?>">
+                  <input class="btn btn-lg btn-primary" value="UPDATE AMOUNT" type="submit" name="updateProject">
+                  <? } }else { ?>
+                    <input type="text" name="backAmount" placeholder="Enter the amount">
+                    <input class="btn btn-lg btn-primary" value="BACK PROJECT" type="submit" name="newProject">
+                    <? } ?>
+                 </form>
+                 <!-- <?php
+                 $tagsRs = $projectDetailsDAO->getProjectTagsById($projectTarget);
                    foreach ($tagsRs as $tag) {
                   ?>
                       <span class="tag tag-pill tag-default">
@@ -124,7 +99,7 @@ $conn = $pdo->getConnection();
 
                 <?php
                    }
-                 ?>
+                 ?> -->
                </div>
 
                 <div class="col-md-2">
@@ -179,7 +154,7 @@ $conn = $pdo->getConnection();
     <div class="footer">
       <p>♥ from dev-seahouse</p>
     </div>
-  </div>
+
   <!-- Google Analytics -->
   <?php require('./inc/analytics.php'); ?>
   <!-- Javascript builds -->

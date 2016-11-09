@@ -140,6 +140,12 @@ $(function () {
                 '</li>'
             );
 
+            if( $('#form-backup').length) {
+                $('#form-backup').append(
+                    '<input type="hidden" name="backerId" value="' + responseMsg.data.user_id + '">'
+                    );
+            }
+
 
         } else {
             swal('Ahh..', responseMsg.err[0], 'error');
@@ -168,9 +174,10 @@ $(function () {
             swal('Huray ..!', 'Your fund is on its way', 'success');
         } else {
             // TODO: bad taste
-            console.log('here');
+            console.log(responseMsg);
             AjaxLoader.removeLoader();
             swal('Oops...', responseMsg.err[0], 'error');
+
         }
     };
 
@@ -180,7 +187,31 @@ $(function () {
             beforeSend: AjaxLoader.showLoader,
             success: handle_create_project_result
         });
-    });     
+    });
+
+    /*=====================================
+     =      Back Project Scripts           =
+     =====================================*/
+     var handle_backup_result =(responseMsg)=> {
+        console.log('Response data : \n' + responseMsg);
+        if(responseMsg.code == 1) {
+            AjaxLoader.removeLoader();
+            swal('Oops...', responseMsg.err[0], 'error');
+            $('#modal-login').modal('show');
+        } else {
+            console.log(responseMsg);
+            AjaxLoader.removeLoader();
+            swal('Huray ..!', 'Thank you for your support!', 'success');
+        }
+    };
+
+    $('#form-backup').submit(function(event) {
+        event.preventDefault();
+        FormHandler.submit(this, {
+            beforeSend: AjaxLoader.showLoader,
+            success: handle_backup_result
+        });
+    });
 
 
 }); // do not remove this closing tag!

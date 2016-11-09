@@ -27,9 +27,11 @@ class ProjectDetailsDAO extends ProjectDAO
 	*/
 
 	function getProjectById($id) {
-		$sql = "SELECT title,overview,img_l,backer_count,pledge_goal,suml_pledged,DATEDIFF(end_date,CURDATE()) AS days_to_go, u.user_name,u.id
-		 FROM project p, project_status s, user u WHERE p.id = s.id and p.id=$id and p.creator_id = u.id";
-
+		$sql = "SELECT p.id AS project_id, title,overview,img_l,backer_count,pledge_goal,suml_pledged,DATEDIFF(end_date,CURDATE()) 
+			AS days_to_go, u.user_name,u.id
+		 	FROM project p, project_status s, user u 
+		 	WHERE p.status = s.id AND p.id = {$id} AND p.creator_id = u.id";
+		 
 		$stmt = $this->conn->prepare($sql);
 		$stmt->execute();
 		return $stmt->fetchAll();
@@ -52,6 +54,30 @@ class ProjectDetailsDAO extends ProjectDAO
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+
+	function isBackedByUser($projectId, $userId) {
+		$query = "SELECT * 
+		FROM project p 
+		WHERE p.id = {$projectId} AND p.id IN 
+		(SELECT bp.project_id FROM backer_project bp
+		WHERE bp.backer_id = {$userId})
+		";
+
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+
+		return $stmt->rowCount();
+	}
+
+	function getBackAmount($userId, $projectId) {
+		$query = "SELECT amount_pledged FROM backer_project WHERE backer_id = {$userId} AND project_id = {$projectId}";
+
+		$stmt = $this->conn->prepare($query);
+		$stmt->execute();
+		$amount = $stmt->fetch();
+		return $amount['amount_pledged'];
+	}
+
 
 
 
