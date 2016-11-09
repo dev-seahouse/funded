@@ -47,8 +47,7 @@ $currentPage = "browse";
   <h1 class="h1">Trending Projects</h1>
 
 <!-- Project card -->
-<div class="row">
-<div class='card-deck-wrapper'>
+<div>
   <div class='card-deck'>
     <?php
     $projectFac = new ProjectDAO();
@@ -63,7 +62,7 @@ $currentPage = "browse";
     $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
     $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
     foreach ($featuredProjects as $row) { ?>
-        <div class='card col-md-3 col-sm-6 col-xs-12'>
+        <div class='card col-md-3 col-sm-5 col-xs-11'>
           <form action='project.php' method="post">
             <input type="hidden" name="project" value="<?php echo $row['id']; ?>"/>
             <img class='card-img-top img-thumbnail' src='<?php echo $row['img_l'] ?>' alt='Card image cap'></a>
@@ -82,7 +81,6 @@ $currentPage = "browse";
           </form>
         </div>
     <?php } ?>
-  </div>
   </div>
 </div>
 <!-- Project card ends -->
