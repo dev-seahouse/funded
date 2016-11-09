@@ -22,20 +22,26 @@ $currentPage = "browse";
     $projectFac = new ProjectDAO();
     // most popular 5 projects
     $requests = array('status' => 3);
-    $fields = array('title', 'img_l', 'id');
+    $fields = array('title', 'img_l', 'id','overview');
     $sorting = array('backer_count' => 'DESC');
     $galleryProjects = $projectFac->getProject($requests, $fields, 'project', $sorting);
 
     for ($i = 0; $i < 5; $i++) { ?>
       <div class="carousel-cell">
         <div class="cell-content">
-          <h2 class="cell-title"><?php echo $galleryProjects[$i]['title']; ?></h2>
-          <form action='project.php' method="post">
-            <input type="hidden" name="project" value="<?php echo $galleryProjects[$i]['id'] ?>"/>
-            <!-- <button class="btn btn-block btn-primary" type="submit"
-                    name="popProject"><?php /*echo $galleryProjects[$i]['title']; */ ?></button>-->
+          <h2 class="cell-title"><?php echo trim($galleryProjects[$i]['title']); ?></h2>
+          <div class="cell-desc dot-ellipsis dot-resize-update dot-height-50">
+            <?php echo trim($galleryProjects[$i]['overview']) ?>
+          </div>
+          <div class="cell-submit">
+            <form action='project.php' method="post">
+              <input type="hidden" name="project" value="<?php echo $galleryProjects[$i]['id'] ?>"/>
+              <button class="btn btn-hollow" type="submit"
+                    name="popProject">Back me!</button>
 
-          </form>
+            </form>
+          </div>
+
         </div>
         <img src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15); ?>">
       </div>
