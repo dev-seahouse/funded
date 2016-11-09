@@ -86,6 +86,32 @@ class ProjectDAO extends BaseDAO
 		return $stmt->execute();
 	}
 
+	function updateProject($projectId,$title,$overview,$pledge_goal) {
+		$sql = "UPDATE project
+		SET pledge_goal = :pledge_goal ,
+		title = :title, 
+		overview = :overview
+		WHERE id = :id ";
+
+		try {
+		$stmt = $this->conn->prepare($sql);
+
+		$stmt->bindParam(":pledge_goal", $pledge_goal);
+		$stmt->bindParam(":overview", $overview);
+		$stmt->bindParam(":id", $projectId);
+		$stmt->bindParam(":title", $title);
+
+		//error in inserting 
+		if(!($stmt->execute())) {
+			$this->output->putFailure("Unable to update project.");
+			$this->output->setCode(Message::INVALID_INPUT);
+		}
+		} catch (PDOException $pdoe) {
+			throw new DatabaseException("Projects cannot be found!");
+		}
+			$this->output->putinfo("Success");
+			return $this->output;
+	}
 
 	function createProject(Project $project) {
 		try {

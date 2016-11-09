@@ -30,9 +30,12 @@ class ProjectDetailsDAO extends ProjectDAO
 		$sql = "SELECT p.id AS project_id, title,overview,img_l,backer_count,pledge_goal,suml_pledged,DATEDIFF(end_date,CURDATE()) 
 			AS days_to_go, u.user_name,u.id
 		 	FROM project p, project_status s, user u 
-		 	WHERE p.status = s.id AND p.id = {$id} AND p.creator_id = u.id";
-		 
+		 	WHERE p.status = s.id AND p.id = :id AND p.creator_id = u.id";
+		
 		$stmt = $this->conn->prepare($sql);
+
+		$stmt->bindParam(":id", $id);
+
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
