@@ -13,6 +13,7 @@ $icon-font-path: '../fonts/';
 @import "buttons";
 @import "forms";
 @import 'ajaxloader';
+@import 'projects';
 
 .jumbotron {
     background-size: 100%;
@@ -36,13 +37,15 @@ $icon-font-path: '../fonts/';
   border-top: 1px solid $brand-bg-color;
 }
 
-.container-fluid .section {
-	margin-bottom: 50px;
-	margin-top: 100px;
+.section-title{
+  margin: 32px 15px;
+  margin-bottom: 5px;
+  font-size: 24px;
+  color:$brand-bg-color;
 }
 
 .card-block {
-	margin-bottom: 30%;
+	margin-bottom: 10rem;
 	height: 200px;
 }
 
