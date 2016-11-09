@@ -4,7 +4,11 @@ $sec = new Security();
 $sec->sec_session_start();
 if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["login"])) {
   $login = new Authentication();
-  $output = $login->login();
+  if(isset($_POST['admin'])) {
+  	$output = $login->login(2);	
+  } else {
+  	$output = $login->login();
+  }
   header('Content-type: application/json');
   echo $output->toJson();
 } else {

@@ -18,8 +18,9 @@ $currentPage = "browse";
 <div class="jumbotron">
     <h1 class="text-primary text-center">Top 5 Most Funded Projects</h1>
   </div>
-<div class="container-fluid">
-  <div id ="carouselBlock"class="carousel js-flickity">
+  <div class="container-fluid">
+<div class="col-md-8 offset-md-2">
+  <div id ="carouselBlock" class="carousel js-flickity">
 
       <?php
       $projectFac = new ProjectDAO();
@@ -34,9 +35,10 @@ $currentPage = "browse";
         <form action='project.php' method="post">
         <input type="hidden"  name = "project" value="<?php echo $galleryProjects[$i]['id']?>"/>
         <button class="btn btn-block btn-primary" type="submit" name="popProject"><?php echo $galleryProjects[$i]['title'];?></button></form>
-        <img src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15); ?>">
+        <img class="carousel-cell-image" src="<?php echo $galleryProjects[$i]['img_l']; ?>">
       </div>
       <?php } ?>
+  </div>
   </div>
   </div>
 
@@ -51,15 +53,12 @@ $currentPage = "browse";
     <div class='card-deck'>
       <?php
       $projectFac = new ProjectDAO();
-      $requests = array('featured' => 1);
-      $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
 ?>
       <!-- Project card -->
 
-      <?php
-
+      <?php 
   $requests = array('featured' => 1);
-  $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
+  $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id', 'pledge_goal');
   $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
   $counter = 0;
   foreach ($featuredProjects as $row) {
@@ -67,7 +66,7 @@ $currentPage = "browse";
     if($counter == 1){ ?>
       <div class='card-deck-wrapper'>
       <div class='card-deck'>
-    <?} ?>
+    <?php } ?>
 
     <div class='card col-md-3 col-sm-6 col-xs-12'>
       <form action='project.php' method="post">

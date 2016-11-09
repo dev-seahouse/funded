@@ -148,6 +148,17 @@ $category = CategoryDAO::getCategories($conn);
                 </div>
               </div>
             </div>
+
+            <div class="form-group">
+              <div>
+                <div class="checkbox login-admin">
+                <input class="form-check-input" type="checkbox" name="admin" id="admin">
+              <label for="admin">I am an Admin</label>
+                </div>
+              </div>
+            </div>
+
+
             <div class="form-group">
               <div>
                 <input name="submit" class="btn btn-block btn-lg btn-primary" value="LOGIN"

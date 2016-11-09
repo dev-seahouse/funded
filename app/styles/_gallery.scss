@@ -25,14 +25,15 @@
 
   @include media-breakpoint-up(md){
     @include rem(max-height, 600px);
-    @include rem(height, 500px); 
+    @include rem(height, 400px); 
   }
 }
+
 
 /* fade in image when loaded */
 .carousel-cell-image {
   transition: opacity 0.4s;
-  opacity: 0;
+  opacity: 1;
 }
 
 .carousel-cell-image.flickity-lazyloaded,

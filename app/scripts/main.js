@@ -213,9 +213,4 @@ $(function () {
         });
     });
 
-    $('#carouselBlock').flickity( {
-        autoplay:200,
-        pauseAutoPlayOnHover: true
-    });
-
 }); // do not remove this closing tag!
