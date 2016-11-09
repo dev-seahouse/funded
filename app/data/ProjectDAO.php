@@ -66,6 +66,25 @@ class ProjectDAO extends BaseDAO
 	    return $stmt;
 	}
 
+	function deleteProject($id) {
+		//set project status to 'cancelled' upon delete
+		//$sql = "UPDATE project SET status = 1 WHERE id = '{$projectId}'";
+		//alternative: delete record from project table
+		$sql = "DELETE from project WHERE id = :id";
+		
+
+		try {
+
+			$stmt = $this->conn->prepare($sql);
+			$stmt->bindParam(":id", $id);
+
+		} catch (PDOException $pdoe) {
+			throw new DatabaseException("Projects cannot be found!");
+		}
+
+
+		return $stmt->execute();
+	}
 
 
 	function createProject(Project $project) {
