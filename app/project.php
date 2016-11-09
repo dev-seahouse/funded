@@ -31,7 +31,6 @@ if(isset($_POST['projectId'])){
       $projectDetailsDAO= new ProjectDetailsDAO();
       $result = $projectDetailsDAO->getProjectById($projectTarget);
 
-
       // var_dump($result); #for debug purpose
       ?>
 
@@ -73,11 +72,6 @@ if(isset($_POST['projectId'])){
                   ?></h3>
                  <h6>days to go</h6>
 
-                 <!--<span class="likebtn-wrapper" data-theme="disk" data-identifier="likebtn" data-dislike_enabled="false" data-icon_dislike_show="false"></span>
-                 <script>
-                 (function(d,e,s){if(d.getElementById("likebtn"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");
-               </script>-->
-
                 <div id="like-count" class="number" title="Like this project!" onClick='addlike()'>
                   <img id="pic" style="width:35;height:25" src =
                   "http://www.psdgraphics.com/file/heart-shape-icon.jpg">
@@ -85,32 +79,26 @@ if(isset($_POST['projectId'])){
                   echo $result[0]["like_count"];
                 ?> Likes
                 </div>
+                <div id="projID" style="display:none;"><?php echo $projectTarget; ?></div>
 
                 <script>
                   var liked = false;
 
                   function addlike() {
+                    var pID = parseInt(document.getElementById("projID").innerHTML);
                     var like_change = liked ? -1 : 1;
                     liked = !liked;
                     var new_like_count = parseInt($('.number').text()) + like_change;
-                    // TODO: change the projectid to be dynamic
-                    $.post("controllers/update_project.php", {projectId: 2150121, likecount: new_like_count});
+                    $.post("controllers/update_project.php", {projectId: pID, likecount: new_like_count});
 
                     if(liked){
                     document.getElementById("like-count").innerHTML = '<img style="width:35;height:25" src=\'http://www.psdgraphics.com/file/heart-shape-icon.jpg\'>' + new_like_count + " Likes";
-                  }else{
+                    }else{
                     document.getElementById("like-count").innerHTML = '<img style="width:35;height:30" src=\'http://www.free-icons-download.net/images/heart-shape-icon-71468.png\'>' + new_like_count + " Likes";
-                  }
+                    }
 
                     document.getElementById("like-count").title =
                     liked ? "Unlike this project" : "Like this project!";
-
-
-                    /*document.getElementById("pic").innerHTML =
-                    liked ? <img id="pic" style="width:50;height:40" src =
-                    "http://www.psdgraphics.com/file/heart-shape-icon.jpg"> : <img id="pic" style="width:50;height:40" src =
-                    "http://www.free-icons-download.net/images/heart-shape-icon-71468.png">;*/
-
                     // Note: If refresh, unlike will change to like!!
                   }
                 </script>
