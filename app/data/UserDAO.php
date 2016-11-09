@@ -19,6 +19,7 @@ class UserDAO extends BaseDAO {
   public function getUserById($uid, $role_id = 1,
                               $fields =array("user.*", "role.id as role_id'")){
 
+
     try{
       $sql = "SELECT ".implode(",", $fields).
              " FROM user, role, user_role 
@@ -26,10 +27,10 @@ class UserDAO extends BaseDAO {
               AND role.id = user_role.role_id
               AND role.id = :role_id
               AND user.id = :user_id";
-
       $stmt = $this->conn->prepare($sql);
       $stmt->bindParam(":role_id", $role_id,PDO::PARAM_INT);
       $stmt->bindParam(":user_id", $uid, PDO::PARAM_INT);
+        
 
       if (!$stmt->execute()) throw new DatabaseException();
 

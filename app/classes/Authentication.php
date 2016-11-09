@@ -37,6 +37,7 @@
       }
 
       $this->setSessionData($user);
+      $this->output->setCode($role);
       $this->output->putinfo("Login sucessful");
       $this->output->putData('user_name' , $_SESSION['user_name']);
       $this->output->putData('user_id', $_SESSION['user_id']);
@@ -97,6 +98,7 @@
         debug_to_terminal("Login key in session is ".$login_key);
         $user_browser = $_SERVER['HTTP_USER_AGENT'];
         $user = $this->user_dao->getUserById($user_id, $role_id,array("user.id", "user.password"));
+
         if (!$user) {
           debug_to_terminal("unkonwn user in session");
           return false;
