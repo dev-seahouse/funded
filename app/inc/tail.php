@@ -18,6 +18,7 @@
 <script src="/bower_components/unidragger/unidragger.js"></script>
 <script src="/bower_components/flickity/js/index.js"></script>
 <script src="/bower_components/iCheck/icheck.min.js"></script>
+<script src="/bower_components/jQuery.dotdotdot/src/jquery.dotdotdot.min.umd.js"></script>
 <!-- endbower -->
 <!-- endbuild -->
 

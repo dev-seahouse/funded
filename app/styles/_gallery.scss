@@ -27,7 +27,54 @@
     @include rem(max-height, 600px);
     @include rem(height, 500px); 
   }
+  /* cell module */
+
+
+  .cell-content {
+    position: absolute;
+    vertical-align: middle;
+    text-align: left;
+    width: 75%;
+    height: 100%;
+    top:0;
+    right:0;
+    background-color: rgba(0,0,0,0.3);
+
+
+  }
+
+  .cell-title{
+    width: 60%;
+    position: relative;
+    margin-top:15%;
+    display: inline-block;
+    padding:1rem 2rem;
+    color: $brand-fg-color;
+    @include media-breakpoint-up(xs){
+          @include rem(font-size, 22px);
+        }
+    @include media-breakpoint-up(md){
+      @include rem(font-size, 36px);
+    }
+  }
 }
+
+.cell-desc{
+  padding: 0 2rem;
+  color : darken($brand-fg-color,10%);
+  max-width: 85%;
+}
+
+.cell-submit {
+  margin-top:1rem;
+  padding: 1rem 2rem;
+  .btn.btn-hollow{
+    padding:15px 30px;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+}
+/* end cell module */
 
 /* fade in image when loaded */
 .carousel-cell-image {
@@ -39,3 +86,4 @@
 .carousel-cell-image.flickity-lazyerror {
   opacity: 1;
 }
+

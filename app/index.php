@@ -15,9 +15,6 @@ $currentPage = "browse";
 <?php include_once __DIR__ . "/inc/header.php"; ?>
 <!-- start main content -->
 
-<div class="jumbotron">
-  <h1 class="text-primary text-center">Top 5 Most Funded Projects</h1>
-</div>
 <div class="container-fluid">
   <div id="carouselBlock" class="carousel js-flickity">
 
@@ -25,31 +22,38 @@ $currentPage = "browse";
     $projectFac = new ProjectDAO();
     // most popular 5 projects
     $requests = array('status' => 3);
-    $fields = array('title', 'img_l', 'id');
+    $fields = array('title', 'img_l', 'id','overview');
     $sorting = array('backer_count' => 'DESC');
     $galleryProjects = $projectFac->getProject($requests, $fields, 'project', $sorting);
 
     for ($i = 0; $i < 5; $i++) { ?>
       <div class="carousel-cell">
-        <form action='project.php' method="post">
-          <input type="hidden" name="project" value="<?php echo $galleryProjects[$i]['id'] ?>"/>
-          <button class="btn btn-block btn-primary" type="submit"
-                  name="popProject"><?php echo $galleryProjects[$i]['title']; ?></button>
-        </form>
+        <div class="cell-content">
+          <h2 class="cell-title"><?php echo trim($galleryProjects[$i]['title']); ?></h2>
+          <div class="cell-desc dot-ellipsis dot-resize-update dot-height-50">
+            <?php echo trim($galleryProjects[$i]['overview']) ?>
+          </div>
+          <div class="cell-submit">
+            <form action='project.php' method="post">
+              <input type="hidden" name="project" value="<?php echo $galleryProjects[$i]['id'] ?>"/>
+              <button class="btn btn-hollow" type="submit"
+                    name="popProject">Back me!</button>
+
+            </form>
+          </div>
+
+        </div>
         <img src="https://unsplash.it/1200/500/?random&&<?php echo rand(5, 15); ?>">
       </div>
     <?php } ?>
   </div>
 </div>
 
-<hr>
 
-<div class="jumbotron">
-  <h1 class="text-primary text-center">Trending Projects</h1>
-</div>
+  <h1 class="h1">Trending Projects</h1>
 
 <!-- Project card -->
-<div class='card-deck-wrapper'>
+<div>
   <div class='card-deck'>
     <?php
     $projectFac = new ProjectDAO();
@@ -63,15 +67,8 @@ $currentPage = "browse";
     $requests = array('featured' => 1);
     $fields = array('title', 'overview', 'suml_pledged', 'pledge_goal', 'img_l', 'id');
     $featuredProjects = $projectFac->getProject($requests, $fields, 'featured_project');
-    $counter = 0;
-    foreach ($featuredProjects as $row) {
-    $counter++;
-    if ($counter == 1){ ?>
-    <div class='card-deck-wrapper'>
-      <div class='card-deck'>
-        <?php } ?>
-
-        <div class='card col-md-3 col-sm-6 col-xs-12'>
+    foreach ($featuredProjects as $row) { ?>
+        <div class='card col-md-3 col-sm-5 col-xs-11'>
           <form action='project.php' method="post">
             <input type="hidden" name="project" value="<?php echo $row['id']; ?>"/>
             <img class='card-img-top img-thumbnail' src='<?php echo $row['img_l'] ?>' alt='Card image cap'></a>
@@ -89,17 +86,17 @@ $currentPage = "browse";
             </div>
           </form>
         </div>
-        <?php } ?>
-      </div>
-    </div>
-    <!-- Project card ends -->
+    <?php } ?>
+  </div>
+</div>
+<!-- Project card ends -->
 
 
-  </div>
-  <!-- end main content -->
-  <div class="footer">
-    <p>♥ from dev-seahouse</p>
-  </div>
+</div>
+<!-- end main content -->
+<div class="footer">
+  <p>♥ from dev-seahouse</p>
+</div>
 </div>
 <!-- Google Analytics -->
 <?php require('./inc/analytics.php'); ?>
