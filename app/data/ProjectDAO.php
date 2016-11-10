@@ -217,25 +217,34 @@ class ProjectDAO extends BaseDAO
 
 		
 		//prepare for tag and
-		$tags = explode(" ", $requests['tag']);
-		$max = count($tags);
-		$i = 1;
-		foreach ($tags as $key => $value) {
-			$query .= ($i < $max) ? "t.name = '{$value}' OR" : "t.name = '{$value}') ";
-			$i++;
-		}
+		if(strlen($requests['tag'])!=0) {
+			$tags = explode(" ", $requests['tag']);
+			$max = count($tags);
+			$i = 1;
+			foreach ($tags as $key => $value) {
+				$query .= ($i < $max) ? "t.name = '{$value}' OR" : "t.name = '{$value}') ";
+				$i++;
+			}
+		}	
 
 		//prepare pledge num
-		if(isset($requests['min-amount'])){
+		if(strlen($requests['min-amount'])!=0){
 			$query .= " AND p.suml_pledged > {$requests['min-amount']}";
 		}
-		if(isset($requests['max-amount'])) {
+		if(strlen($requests['max-amount'])!=0) {
 			$query .= " AND p.suml_pledged < {$requests['max-amount']}";
 		}
 
-		$query .= ")";
+		if(strlen($requests['min-backer'])!=0){
+			$query .= " AND p.backer_count > {$requests['min-backer']}";
+		}
+		if(strlen($requests['max-backer'])!=0) {
+			$query .= " AND p.backer_count < {$requests['max-backer']}";
+		}
 
+		$query .= ")";
 		
+
 		$stmt = $this->conn->query($query);
 		$projects = $stmt->fetchAll();
 
