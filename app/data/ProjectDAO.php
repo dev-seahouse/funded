@@ -210,28 +210,43 @@ class ProjectDAO extends BaseDAO
 	//	key : form input 
 	//  value : user chosen value 
 	public function findProjects($requests) {
-		var_dump($requests);
+		//var_dump($requests);
 		
-		$sql = "SELECT * FROM project WHERE id IN (SELECT p.id FROM project AS p, project_tag AS pt, tag AS t WHERE p.id = pt.project_id AND t.id = pt.tag_id AND (";
+		$sql = "SELECT * FROM project WHERE id IN (SELECT p.id FROM project AS p WHERE ";
+		//sql = id IN (SELECT p.id FROM project AS p, project_tag AS pt, tag AS t WHERE p.id = pt.project_id AND t.id = pt.tag_id AND
+		//prepare for category
+		$category = $requests['category'];
+		$sql .= "p.category = '{$category}'";
 
 		//prepare for tag and
-		$tags = explode(" ", $requests['tag']);
-		$max = count($tags);
-		$i = 1;
-		foreach ($tags as $key => $value) {
-			$sql .= ($i < $max) ? "t.name = '{$value}' OR" : "t.name = '{$value}') ";
-			$i++;
-		}
+		if(strlen($requests['tag'])!=0) {
+			$tags = explode(" ", $requests['tag']);
+			$max = count($tags);
+			$i = 1;
+			foreach ($tags as $key => $value) {
+				$sql .= ($i < $max) ? "t.name = '{$value}' OR" : "t.name = '{$value}') ";
+				$i++;
+			}
+		}	
 
 		//prepare pledge num
-		if(isset($requests['min-amount'])){
+		if(strlen($requests['min-amount'])!=0){
+			echo $requests['min-amount'].'fasdfsdf';
 			$sql .= " AND p.suml_pledged > {$requests['min-amount']}";
 		}
-		if(isset($requests['max-amount'])) {
+		if(strlen($requests['max-amount'])!=0) {
 			$sql .= " AND p.suml_pledged < {$requests['max-amount']}";
 		}
 
+		if(strlen($requests['min-backer'])!=0){
+			$sql .= " AND p.backer_count > {$requests['min-backer']}";
+		}
+		if(strlen($requests['max-backer'])!=0) {
+			$sql .= " AND p.backer_count < {$requests['max-backer']}";
+		}
+
 		$sql .= ")";
+		var_dump($sql);
 
 		$stmt = $this->conn->query($sql);
 		$projects = $stmt->fetchAll();

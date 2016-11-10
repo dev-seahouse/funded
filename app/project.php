@@ -2,7 +2,7 @@
 
 
 /* Page specific variables */
-$pageTitle = "Home";
+$pageTitle = "Project";
 $currentPage = "project";
 /* End page specific variables */
 
@@ -76,15 +76,15 @@ if(isset($_POST['projectId']) || isset($_POST['popProject'])){
                     if($projectDetailsDAO->isBackedByUser($result[0]['project_id'], $_SESSION['user_id']) == 0) { ?>
                  <input type="text" name="backAmount" placeholder="Enter the amount">
                  <input type="hidden" name="backerId" value="<? echo $_SESSION['user_id']?>">
-                 <input class="btn btn-lg btn-primary" value="BACK PROJECT" type="submit" name="newProject">
+                 <input class="btn btn-lg btn-primary" style="margin-top: 20px;" value="BACK PROJECT" type="submit" name="newProject">
                  <? } else { ?>
                   <h6> Backed Amount : $ <? echo $projectDetailsDAO->getBackAmount($_SESSION['user_id'], $result[0]['project_id']) ?> </h6><br/>
                   <input type="text" name="newAmount" placeholder="Show more support?">
                   <input type="hidden" name="backerId" value="<? echo $_SESSION['user_id']?>">
-                  <input class="btn btn-lg btn-primary" value="UPDATE AMOUNT" type="submit" name="updateProject">
+                  <input class="btn btn-lg btn-primary" style="margin-top: 20px;" value="UPDATE AMOUNT" type="submit" name="updateProject">
                   <? } }else { ?>
                     <input type="text" name="backAmount" placeholder="Enter the amount">
-                    <input class="btn btn-lg btn-primary" value="BACK PROJECT" type="submit" name="newProject">
+                    <input class="btn btn-lg btn-primary" style="margin-top: 20px;" value="BACK PROJECT" type="submit" name="newProject">
                     <? } ?>
                  </form>
                  <!-- <?php

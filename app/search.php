@@ -14,7 +14,7 @@ $currentPage = "search";
     <![endif]-->
     <?php include_once __DIR__."/inc/header.php";?>
     <!-- start main content -->
-    <<?php 
+    <?php 
   $projectFac = new ProjectDAO();
 	$conn = DbConnection::getInstance()->getConnection();
   $category = CategoryDAO::getCategories($conn);
@@ -28,7 +28,10 @@ $currentPage = "search";
 
   //for more advanced findProjects
   if(isset($_POST["findProjects"])) {
+
+    //var_dump($_POST);
     $requests = $_POST;
+    //var_dump($requests);
     $projects = $projectFac->findProjects($requests);
   }
  ?>
@@ -82,7 +85,7 @@ $currentPage = "search";
                         </div> <!-- form group [order by] --> 
 
                         <div class="form-group">    
-                            <button type="submit" class="btn btn-default filter-col" name="find">
+                            <button type="submit" class="btn btn-default filter-col" name="findProjects">
                                 <span class="glyphicon glyphicon-record"></span> Find Projects
                             </button>  
                         </div>
@@ -120,10 +123,15 @@ $currentPage = "search";
 					<li><i class='glyphicon glyphicon-tags'></i> <span>{$row['category']}</span></li>
 				</ul>
 			</div>
-			<div class='col-xs-12 col-sm-12 col-md-7 excerpet'>
+			<div class='col-xs-12 col-sm-12 col-md-6 excerpet'>
 				<h6><a href='#' title=''>{$row['title']}</a></h6>
-				<p class='small'>{$row['overview']}</p>						
+				<p class='small'>{$row['overview']}</p>		    				
 			</div>
+      <div class='col-xs-12 col-sm-12 col-md-1 excerpet'>
+        <form method = 'post' action='./project.php'>
+        <input type='hidden' name='project' value = {$row['id']}>
+        <input class='btn btn-link' type='submit' name='projectId' value = 'Details'>
+      </div>
 			<span class='clearfix borda'></span>
 		</article>";
     	}
