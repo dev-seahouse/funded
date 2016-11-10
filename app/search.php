@@ -27,7 +27,7 @@ $currentPage = "search";
 
 
   //for more advanced findProjects
-  if(isset($_POST["findProjects"])) {
+  if(isset($_POST["find"])) {
     $requests = $_POST;
     $projects = $projectFac->findProjects($requests);
   }

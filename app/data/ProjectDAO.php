@@ -210,30 +210,33 @@ class ProjectDAO extends BaseDAO
 	//	key : form input 
 	//  value : user chosen value 
 	public function findProjects($requests) {
-		var_dump($requests);
 		
-		$sql = "SELECT * FROM project WHERE id IN (SELECT p.id FROM project AS p, project_tag AS pt, tag AS t WHERE p.id = pt.project_id AND t.id = pt.tag_id AND (";
+		$query = "SELECT * FROM project 
+		WHERE id IN 
+		(SELECT p.id FROM project AS p, project_tag AS pt, tag AS t WHERE p.id = pt.project_id AND t.id = pt.tag_id AND (";
 
+		
 		//prepare for tag and
 		$tags = explode(" ", $requests['tag']);
 		$max = count($tags);
 		$i = 1;
 		foreach ($tags as $key => $value) {
-			$sql .= ($i < $max) ? "t.name = '{$value}' OR" : "t.name = '{$value}') ";
+			$query .= ($i < $max) ? "t.name = '{$value}' OR" : "t.name = '{$value}') ";
 			$i++;
 		}
 
 		//prepare pledge num
 		if(isset($requests['min-amount'])){
-			$sql .= " AND p.suml_pledged > {$requests['min-amount']}";
+			$query .= " AND p.suml_pledged > {$requests['min-amount']}";
 		}
 		if(isset($requests['max-amount'])) {
-			$sql .= " AND p.suml_pledged < {$requests['max-amount']}";
+			$query .= " AND p.suml_pledged < {$requests['max-amount']}";
 		}
 
-		$sql .= ")";
+		$query .= ")";
 
-		$stmt = $this->conn->query($sql);
+		
+		$stmt = $this->conn->query($query);
 		$projects = $stmt->fetchAll();
 
 		return $projects;

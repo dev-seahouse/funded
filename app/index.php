@@ -77,8 +77,8 @@ $currentPage = "browse";
         <p class='card-text small'><?php echo $row['overview']?></p>
       </div>
       <div class = 'card-footer'>
-        <p class='card-text bottom-align-text small'> <span class="tag tag-pill tag-info">Amount Raised</span> $<?php echo $row['suml_pledged']?></p>
-        <p class='card-text bottom-align-text small'> <span class="tag tag-pill tag-info">Amount Raised</span>$<?php echo $row['pledge_goal'];?></p>
+        <p class='card-text bottom-align-text small'> <span class="tag tag-pill tag-info">Amount Raised</span>   $<?php echo $row['suml_pledged']?></p>
+        <p class='card-text bottom-align-text small'> <span class="tag tag-pill tag-info">Target</span>  $<?php echo $row['pledge_goal'];?></p>
         
         <button class="btn btn-link offset-md-8 offset-sx-8 offset-sm-8" type="submit" name="projectId">Details</button>
       </div>
